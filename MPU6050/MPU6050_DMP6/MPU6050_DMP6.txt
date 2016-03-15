@@ -1,0 +1,329 @@
+//輸出控制:
+
+// 實際在四元組件[W，X，Y，Z]格式
+#define OUTPUT_READABLE_QUATERNION
+
+// 歐拉角
+#define OUTPUT_READABLE_EULER
+
+// 偏航/俯仰/滾動角（以度為單位）
+#define OUTPUT_READABLE_YAWPITCHROLL
+
+//加速度，扣除重力影響
+#define OUTPUT_READABLE_REALACCEL
+
+// 加速度，扣除重力影響+參照偏航
+#define OUTPUT_READABLE_WORLDACCEL
+
+//輸出航向 HMC5883L
+#define OUTPUT_HMC5883L
+
+//程式耗時，剩餘記憶體數查詢
+#define OUTPUT_TIME_AND_MemoryFree
+
+//BMP085
+#define OUTPUT_BMP085
+
+/*---------------------輸出控制 end---------------------------------*/
+
+
+//MPU6050:
+
+// I2Cdev和MPU6050必須安裝的庫
+#include "I2Cdev.h"
+#include "MPU6050_6Axis_MotionApps20.h"
+#include "Wire.h"
+
+MPU6050 mpu;// AD0 low = 0x68
+//MPU6050 mpu(0x69); // <-- use for AD0 high
+
+/*
+科普：
+按照posix標準，一般整形對應的*_t類型為：
+1位元組 uint8_t 近似於 byte
+2位元組 uint16_t 近似於 int
+4位元組 uint32_t
+8位元組 uint64_t
+*/
+
+// 控制/狀態
+bool dmpReady = false; // 設置為true，如果DMP初始化成功
+//uint8_t mpuIntStatus; //持有MPU的實際中斷狀態位元組
+uint8_t devStatus; // 每個設備運行後返回的狀態（0=成功 非0=錯誤）
+uint16_t packetSize; // 預計DMP資料包大小（預設為42位元組）
+uint16_t fifoCount; // 計算當前FIFO中的所有位元組
+uint8_t fifoBuffer[64]; // FIFO存儲緩衝器
+
+// 方向/運動
+Quaternion q; // [w, x, y, z] 四元數
+VectorInt16 aa; // [x, y, z] 加速度感測器測量
+VectorInt16 aaReal; // [x, y, z] 無重力加速度感測器的測量
+VectorInt16 aaWorld; // [x, y, z] 世界框架加速度感測器測量
+VectorFloat gravity; // [x, y, z] 重力向量
+float euler[3]; // [psi, theta, phi] 歐拉角容器
+float ypr[3]; // [yaw, pitch, roll] 偏航/俯仰/滾動容器和重力向量
+
+/*---------------------MPU6050 end---------------------------------*/
+ 
+
+//HMC5883L
+
+#include "HMC5883L.h"
+// class default I2C address is 0x1E
+// specific I2C addresses may be passed as a parameter here
+// this device only supports one I2C address (0x1E)
+HMC5883L mag;
+int16_t mx, my, mz;
+
+/*---------------------HMC5883L end---------------------------------*/
+
+//BMP180 用的是BMP085的庫，實際最小解析度只有後者的一半
+#include "BMP085.h"
+BMP085 barometer;
+float temperature;
+float pressure;
+float altitude;
+int32_t lastMicros;
+/*---------------------BMP085 end---------------------------------*/
+
+
+//程式耗時，剩餘記憶體數查詢
+unsigned long jsq6x;
+#include //剩餘記憶體查詢
+/*---------------------程式耗時，剩餘記憶體數查詢 end---------------------------------*/
+
+// ================================================================
+// === 初始設置 ===
+// ================================================================
+
+void setup() {
+
+
+
+// 加入I2C匯流排（I2Cdev庫沒有自動執行此操作）
+
+Wire.begin();
+TWBR = 24; // 400kHz的I2C時鐘（200kHz的，如果CPU為8MHz）
+
+
+//初始化串列通信 串列傳輸速率115200
+Serial.begin(9600);
+
+// 初始化設備
+mpu.initialize();
+
+
+// 載入和配置DMP
+devStatus = mpu.dmpInitialize();
+
+//提供自己的陀螺儀偏置在這裡，對於規模最小靈敏度
+mpu.setXGyroOffset(220);
+mpu.setYGyroOffset(76);
+mpu.setZGyroOffset(-85);
+mpu.setZAccelOffset(1788); // 1688出廠預設為我的測試晶片
+
+// 確保它的工作（返回0，如果這樣）
+if (devStatus == 0) {
+
+// 打開DMP，現在，它已經準備好
+mpu.setDMPEnabled(true);
+
+// 設置我們的DMP Ready標誌使主迴圈（）函數 知道它的好來使用它
+dmpReady = true;
+
+// 獲得預期的DMP資料包大小為以後進行比較
+packetSize = mpu.dmpGetFIFOPacketSize();
+} else {
+//錯誤！
+//1=初始記憶體載入失敗
+//2= DMP配置更新失敗
+//（如果它要打破，通常的代碼為1）
+Serial.print(F("DMP Initialization failed (code "));
+Serial.print(devStatus);
+Serial.println(F(")"));
+}
+
+/////////////////////////////////////////HMC5883L
+    mag.initialize();
+
+    // verify connection
+    Serial.println("Testing device connections...");
+    Serial.println(mag.testConnection() ? "HMC5883L connection successful" : "HMC5883L connection failed");
+
+//////////////////////////////////////////BMP085
+    barometer.initialize();
+
+    // verify connection
+    Serial.println("Testing device connections...");
+    Serial.println(barometer.testConnection() ? "BMP085 connection successful" : "BMP085 connection failed");
+ 
+}
+
+
+
+// ================================================================
+// === 主程序迴圈 ===
+// ================================================================
+
+void loop() {
+
+#ifdef OUTPUT_TIME_AND_MemoryFree
+jsq6x=millis();
+#endif
+
+
+// 如果程式設計失敗，不要嘗試做任何事情
+if (!dmpReady) return;
+
+//mpuIntStatus = mpu.getIntStatus();
+
+//等待正確可用的資料的長度，應該是一個非常短暫的等待
+while (fifoCount < packetSize)fifoCount = mpu.getFIFOCount();
+
+//讀取FIFO中的資料包
+mpu.getFIFOBytes(fifoBuffer, packetSize);
+
+//軌道先進先出算在這裡萬一有>1包可
+//（這讓我們馬上瞭解更多，而無需等待中斷）
+fifoCount -= packetSize;
+
+
+#ifdef OUTPUT_READABLE_QUATERNION
+// 顯示四元素 in easy matrix form: w x y z
+mpu.dmpGetQuaternion(&q, fifoBuffer);
+Serial.print("quat\t");
+Serial.print(q.w);
+Serial.print("\t");
+Serial.print(q.x);
+Serial.print("\t");
+Serial.print(q.y);
+Serial.print("\t");
+Serial.println(q.z);
+#endif
+
+#ifdef OUTPUT_READABLE_EULER
+// 顯示歐拉角的度數
+mpu.dmpGetQuaternion(&q, fifoBuffer);
+mpu.dmpGetEuler(euler, &q);
+Serial.print("euler\t");
+Serial.print(euler[0] * 180/M_PI);
+Serial.print("\t");
+Serial.print(euler[1] * 180/M_PI);
+Serial.print("\t");
+Serial.println(euler[2] * 180/M_PI);
+#endif
+
+#ifdef OUTPUT_READABLE_YAWPITCHROLL
+//偏航/ 從四元數來計算俯仰/滾動角（以度為單位）
+mpu.dmpGetQuaternion(&q, fifoBuffer);
+mpu.dmpGetGravity(&gravity, &q);
+mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
+Serial.print("ypr\t");
+Serial.print(ypr[0] * 180/M_PI);
+Serial.print("\t");
+Serial.print(ypr[1] * 180/M_PI);
+Serial.print("\t");
+Serial.println(ypr[2] * 180/M_PI);
+#endif
+
+#ifdef OUTPUT_READABLE_REALACCEL
+// 顯示真正的加速，調整，去掉重力
+mpu.dmpGetQuaternion(&q, fifoBuffer);
+mpu.dmpGetAccel(&aa, fifoBuffer);
+mpu.dmpGetGravity(&gravity, &q);
+mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
+Serial.print("areal\t");
+Serial.print(aaReal.x);
+Serial.print("\t");
+Serial.print(aaReal.y);
+Serial.print("\t");
+Serial.println(aaReal.z);
+#endif
+
+#ifdef OUTPUT_READABLE_WORLDACCEL
+//顯示最初的世界框架的加速，調整以扣除地心引力
+//和旋轉的基礎上，從四元數已知的方向
+mpu.dmpGetQuaternion(&q, fifoBuffer);
+mpu.dmpGetAccel(&aa, fifoBuffer);
+mpu.dmpGetGravity(&gravity, &q);
+mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
+mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
+Serial.print("aworld\t");
+Serial.print(aaWorld.x);
+Serial.print("\t");
+Serial.print(aaWorld.y);
+Serial.print("\t");
+Serial.println(aaWorld.z);
+#endif
+
+
+
+#ifdef OUTPUT_HMC5883L
+// 輸出航向
+// read raw heading measurements from device
+mag.getHeading(&mx, &my, &mz);
+
+// To calculate heading in degrees. 0 degree indicates North
+float heading = atan2(my, mx);
+if(heading < 0)
+heading += 2 * M_PI;
+Serial.print("heading:\t");
+Serial.println(heading * 180/M_PI);
+#endif
+
+
+#ifdef OUTPUT_BMP085
+
+
+    barometer.setControl(BMP085_MODE_TEMPERATURE);
+    
+    // wait appropriate time for conversion (4.5ms delay)
+    lastMicros = micros();
+    while (micros() - lastMicros < barometer.getMeasureDelayMicroseconds());
+
+    // read calibrated temperature value in degrees Celsius
+    temperature = barometer.getTemperatureC();
+
+    // request pressure (3x oversampling mode, high detail, 23.5ms delay)
+    barometer.setControl(BMP085_MODE_PRESSURE_3);
+    while (micros() - lastMicros < barometer.getMeasureDelayMicroseconds());
+
+    // read calibrated pressure value in Pascals (Pa)
+    pressure = barometer.getPressure();
+
+    // calculate absolute altitude in meters based on known pressure
+    // (may pass a second "sea level pressure" parameter here,
+    // otherwise uses the standard value of 101325 Pa)
+    altitude = barometer.getAltitude(pressure);
+
+    // display measured values if appropriate
+    Serial.print("T/P/A\t");
+    Serial.print(temperature); Serial.print("\t");
+    Serial.print(pressure); Serial.print("\t");
+    Serial.print(altitude);
+    Serial.println("");
+#endif
+
+
+#ifdef OUTPUT_TIME_AND_MemoryFree
+jsq6x=millis()-jsq6x;
+Serial.print("jsq6x=");
+Serial.print(jsq6x);
+Serial.println("ms");
+Serial.print("freeMemory()=");
+Serial.println(freeMemory());
+Serial.println("/*******************************************/");
+Serial.println();
+Serial.println();
+#endif
+
+
+// 獲取當前FIFO計數
+//fifoCount = mpu.getFIFOCount();
+//重置，以便我們能繼續乾淨
+mpu.resetFIFO();
+
+
+
+} 
+
