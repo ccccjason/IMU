@@ -200,9 +200,6 @@ int16_t tempCount;   // Stores the real internal chip temperature in degrees Cel
 float temperature;
 float SelfTest[6];
 
-uint32_t delt_t = 0; // used to control display output rate
-uint32_t count = 0;  // used to control display output rate
-
 // parameters for 6 DoF sensor fusion calculations
 float GyroMeasError = PI * (40.0f /
                             180.0f);     // gyroscope measurement error in rads/s (start at 60 deg/s), then reduce after ~10 s to 3
@@ -223,7 +220,7 @@ float q[4] = {1.0f, 0.0f, 0.0f, 0.0f};            // vector to hold quaternion
 void setup()
 {
     Wire.begin();
-    Serial.begin(38400);
+    Serial.begin(115200);
 
     // Set up the interrupt pin, its set as active high, push-pull
     pinMode(intPin, INPUT);
@@ -231,52 +228,9 @@ void setup()
     pinMode(blinkPin, OUTPUT);
     digitalWrite(blinkPin, HIGH);
 
-#if 0
-    display.begin(); // Initialize the display
-    display.setContrast(50); // Set the contrast
-    display.setRotation(
-        2); //  0 or 2) width = width, 1 or 3) width = height, swapped etc.
-
-
-    // Start device display with ID of sensor
-    display.clearDisplay();
-    display.setTextSize(2);
-    display.setCursor(0, 0);
-    display.print("MPU6050");
-    display.setTextSize(1);
-    display.setCursor(0, 20);
-    display.print("6-DOF 16-bit");
-    display.setCursor(0, 30);
-    display.print("motion sensor");
-    display.setCursor(20, 40);
-    display.print("60 ug LSB");
-    display.display();
-    delay(1000);
-
-    // Set up for data display
-    display.setTextSize(1); // Set text size to normal, 2 is twice normal etc.
-    display.setTextColor(BLACK); // Set pixel color; 1 on the monochrome screen
-    display.clearDisplay();   // clears the screen and buffer
-#endif
-
     // Read the WHO_AM_I register, this is a good test of communication
     uint8_t c = readByte(MPU6050_ADDRESS,
                          WHO_AM_I_MPU6050);  // Read WHO_AM_I register for MPU-6050
-
-#if 0
-    display.setCursor(20, 0);
-    display.print("MPU6050");
-    display.setCursor(0, 10);
-    display.print("I AM");
-    display.setCursor(0, 20);
-    display.print(c, HEX);
-    display.setCursor(0, 30);
-    display.print("I Should Be");
-    display.setCursor(0, 40);
-    display.print(0x68, HEX);
-    display.display();
-    delay(1000);
-#endif
 
     if (c == 0x68) { // WHO_AM_I should always be 0x68
         Serial.println("MPU6050 is online...");
@@ -292,46 +246,8 @@ void setup()
         if (SelfTest[0] < 1.0f && SelfTest[1] < 1.0f && SelfTest[2] < 1.0f &&
             SelfTest[3] < 1.0f && SelfTest[4] < 1.0f && SelfTest[5] < 1.0f) {
 
-#if 0
-            display.clearDisplay();
-            display.setCursor(0, 30);
-            display.print("Pass Selftest!");
-            display.display();
-            delay(1000);
-#endif
-
             calibrateMPU6050(gyroBias,
                              accelBias); // Calibrate gyro and accelerometers, load biases in bias registers
-
-#if 0
-            display.clearDisplay();
-
-            display.setCursor(20, 0);
-            display.print("MPU6050 bias");
-            display.setCursor(0, 8);
-            display.print(" x   y   z  ");
-
-            display.setCursor(0,  16);
-            display.print((int)(1000 * accelBias[0]));
-            display.setCursor(24, 16);
-            display.print((int)(1000 * accelBias[1]));
-            display.setCursor(48, 16);
-            display.print((int)(1000 * accelBias[2]));
-            display.setCursor(72, 16);
-            display.print("mg");
-
-            display.setCursor(0,  24);
-            display.print(gyroBias[0], 1);
-            display.setCursor(24, 24);
-            display.print(gyroBias[1], 1);
-            display.setCursor(48, 24);
-            display.print(gyroBias[2], 1);
-            display.setCursor(66, 24);
-            display.print("o/s");
-
-            display.display();
-            delay(1000);
-#endif
 
             initMPU6050();
             Serial.println("MPU6050 initialized for active data mode...."); // Initialize device for active mode read of acclerometer, gyroscope, and temperature
@@ -384,94 +300,46 @@ void loop()
     MadgwickQuaternionUpdate(ax, ay, az, gx * PI / 180.0f, gy * PI / 180.0f,
                              gz * PI / 180.0f);
 
-    // Serial print and/or display at 0.5 s rate independent of data rates
-    delt_t = millis() - count;
 
-    if (delt_t > 500) { // update LCD once per half-second independent of read rate
-        digitalWrite(blinkPin, blinkOn);
-        /*
-            Serial.print("ax = "); Serial.print((int)1000*ax);
-            Serial.print(" ay = "); Serial.print((int)1000*ay);
-            Serial.print(" az = "); Serial.print((int)1000*az); Serial.println(" mg");
+    digitalWrite(blinkPin, blinkOn);
+    /*
+        Serial.print("ax = "); Serial.print((int)1000*ax);
+        Serial.print(" ay = "); Serial.print((int)1000*ay);
+        Serial.print(" az = "); Serial.print((int)1000*az); Serial.println(" mg");
 
-            Serial.print("gx = "); Serial.print( gx, 1);
-            Serial.print(" gy = "); Serial.print( gy, 1);
-            Serial.print(" gz = "); Serial.print( gz, 1); Serial.println(" deg/s");
+        Serial.print("gx = "); Serial.print( gx, 1);
+        Serial.print(" gy = "); Serial.print( gy, 1);
+        Serial.print(" gz = "); Serial.print( gz, 1); Serial.println(" deg/s");
 
-            Serial.print("q0 = "); Serial.print(q[0]);
-            Serial.print(" qx = "); Serial.print(q[1]);
-            Serial.print(" qy = "); Serial.print(q[2]);
-            Serial.print(" qz = "); Serial.println(q[3]);
-        */
-        // Define output variables from updated quaternion---these are Tait-Bryan angles, commonly used in aircraft orientation.
-        // In this coordinate system, the positive z-axis is down toward Earth.
-        // Yaw is the angle between Sensor x-axis and Earth magnetic North (or true North if corrected for local declination, looking down on the sensor positive yaw is counterclockwise.
-        // Pitch is angle between sensor x-axis and Earth ground plane, toward the Earth is positive, up toward the sky is negative.
-        // Roll is angle between sensor y-axis and Earth ground plane, y-axis up is positive roll.
-        // These arise from the definition of the homogeneous rotation matrix constructed from quaternions.
-        // Tait-Bryan angles as well as Euler angles are non-commutative; that is, the get the correct orientation the rotations must be
-        // applied in the correct order which for this configuration is yaw, pitch, and then roll.
-        // For more see http://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles which has additional links.
-        yaw   = atan2(2.0f * (q[1] * q[2] + q[0] * q[3]),
-                      q[0] * q[0] + q[1] * q[1] - q[2] * q[2] - q[3] * q[3]);
-        pitch = -asin(2.0f * (q[1] * q[3] - q[0] * q[2]));
-        roll  = atan2(2.0f * (q[0] * q[1] + q[2] * q[3]),
-                      q[0] * q[0] - q[1] * q[1] - q[2] * q[2] + q[3] * q[3]);
-        pitch *= 180.0f / PI;
-        yaw   *= 180.0f / PI;
-        roll  *= 180.0f / PI;
+        Serial.print("q0 = "); Serial.print(q[0]);
+        Serial.print(" qx = "); Serial.print(q[1]);
+        Serial.print(" qy = "); Serial.print(q[2]);
+        Serial.print(" qz = "); Serial.println(q[3]);
+    */
+    // Define output variables from updated quaternion---these are Tait-Bryan angles, commonly used in aircraft orientation.
+    // In this coordinate system, the positive z-axis is down toward Earth.
+    // Yaw is the angle between Sensor x-axis and Earth magnetic North (or true North if corrected for local declination, looking down on the sensor positive yaw is counterclockwise.
+    // Pitch is angle between sensor x-axis and Earth ground plane, toward the Earth is positive, up toward the sky is negative.
+    // Roll is angle between sensor y-axis and Earth ground plane, y-axis up is positive roll.
+    // These arise from the definition of the homogeneous rotation matrix constructed from quaternions.
+    // Tait-Bryan angles as well as Euler angles are non-commutative; that is, the get the correct orientation the rotations must be
+    // applied in the correct order which for this configuration is yaw, pitch, and then roll.
+    // For more see http://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles which has additional links.
+    yaw   = atan2(2.0f * (q[1] * q[2] + q[0] * q[3]),
+                  q[0] * q[0] + q[1] * q[1] - q[2] * q[2] - q[3] * q[3]);
+    pitch = -asin(2.0f * (q[1] * q[3] - q[0] * q[2]));
+    roll  = atan2(2.0f * (q[0] * q[1] + q[2] * q[3]),
+                  q[0] * q[0] - q[1] * q[1] - q[2] * q[2] + q[3] * q[3]);
+    pitch *= 180.0f / PI;
+    yaw   *= 180.0f / PI;
+    roll  *= 180.0f / PI;
 
-        //    Serial.print("Yaw, Pitch, Roll: ");
-        Serial.print(yaw, 2);
-        Serial.print(", ");
-        Serial.print(pitch, 2);
-        Serial.print(", ");
-        Serial.println(roll, 2);
-
-        //    Serial.print("average rate = "); Serial.print(1.0f/deltat, 2); Serial.println(" Hz");
-#if 0
-        display.clearDisplay();
-
-        display.setCursor(0, 0);
-        display.print(" x   y   z  ");
-
-        display.setCursor(0,  8);
-        display.print((int)(1000 * ax));
-        display.setCursor(24, 8);
-        display.print((int)(1000 * ay));
-        display.setCursor(48, 8);
-        display.print((int)(1000 * az));
-        display.setCursor(72, 8);
-        display.print("mg");
-
-        display.setCursor(0,  16);
-        display.print((int)(gx));
-        display.setCursor(24, 16);
-        display.print((int)(gy));
-        display.setCursor(48, 16);
-        display.print((int)(gz));
-        display.setCursor(66, 16);
-        display.print("o/s");
-
-        display.setCursor(0,  32);
-        display.print((int)(yaw));
-        display.setCursor(24, 32);
-        display.print((int)(pitch));
-        display.setCursor(48, 32);
-        display.print((int)(roll));
-        display.setCursor(66, 32);
-        display.print("ypr");
-
-        display.setCursor(0, 40);
-        display.print("rt: ");
-        display.print(1.0f / deltat, 2);
-        display.print(" Hz");
-        display.display();
-#endif
-
-        blinkOn = ~blinkOn;
-        count = millis();
-    }
+    //    Serial.print("Yaw, Pitch, Roll: ");
+    Serial.print(yaw, 2);
+    Serial.print(", ");
+    Serial.print(pitch, 2);
+    Serial.print(", ");
+    Serial.println(roll, 2);
 }
 
 //===================================================================================================================
@@ -558,8 +426,6 @@ int16_t readTempData()
            ;  // Turn the MSB and LSB into a 16-bit value
 }
 
-
-
 // Configure the motion detection control for low power accelerometer mode
 void LowPowerAccelOnlyMPU6050()
 {
@@ -626,9 +492,7 @@ void LowPowerAccelOnlyMPU6050()
               c & ~0x20); // Clear sleep and cycle bit 5
     writeByte(MPU6050_ADDRESS, PWR_MGMT_1,
               c |  0x20); // Set cycle bit 5 to begin low power accelerometer motion interrupts
-
 }
-
 
 void initMPU6050()
 {
@@ -747,7 +611,6 @@ void calibrateMPU6050(float* dest1, float* dest2)
         gyro_bias[0]  += (int32_t) gyro_temp[0];
         gyro_bias[1]  += (int32_t) gyro_temp[1];
         gyro_bias[2]  += (int32_t) gyro_temp[2];
-
     }
 
     accel_bias[0] /= (int32_t)
