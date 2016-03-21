@@ -209,6 +209,7 @@ float GyroMeasDrift = PI * (2.0f /
 float zeta = sqrt(3.0f / 4.0f) *
              GyroMeasDrift;  // compute zeta, the other free parameter in the Madgwick scheme usually set to a small or zero value
 float pitch, yaw, roll;
+float ypr[3];
 float deltat =
     0.0f;                              // integration interval for both filter schemes
 uint32_t lastUpdate = 0,
@@ -325,21 +326,31 @@ void loop()
     // Tait-Bryan angles as well as Euler angles are non-commutative; that is, the get the correct orientation the rotations must be
     // applied in the correct order which for this configuration is yaw, pitch, and then roll.
     // For more see http://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles which has additional links.
-    yaw   = atan2(2.0f * (q[1] * q[2] + q[0] * q[3]),
-                  q[0] * q[0] + q[1] * q[1] - q[2] * q[2] - q[3] * q[3]);
-    pitch = -asin(2.0f * (q[1] * q[3] - q[0] * q[2]));
-    roll  = atan2(2.0f * (q[0] * q[1] + q[2] * q[3]),
-                  q[0] * q[0] - q[1] * q[1] - q[2] * q[2] + q[3] * q[3]);
-    pitch *= 180.0f / PI;
-    yaw   *= 180.0f / PI;
-    roll  *= 180.0f / PI;
 
+    // yaw
+    ypr[0]   = atan2(2.0f * (q[1] * q[2] + q[0] * q[3]),
+                  q[0] * q[0] + q[1] * q[1] - q[2] * q[2] - q[3] * q[3]);
+    // pitch
+    ypr[1] = -asin(2.0f * (q[1] * q[3] - q[0] * q[2]));
+
+    // roll
+    ypr[2] = atan2(2.0f * (q[0] * q[1] + q[2] * q[3]),
+                  q[0] * q[0] - q[1] * q[1] - q[2] * q[2] + q[3] * q[3]);
+
+    ypr[0] *= 180.0f / PI;
+    ypr[1] *= 180.0f / PI;
+    ypr[2] *= 180.0f / PI;
+
+#if 1
+    Serial.write((byte*) ypr, 12);  // No new-line
+#else
     //    Serial.print("Yaw, Pitch, Roll: ");
     Serial.print(yaw, 2);
     Serial.print(", ");
     Serial.print(pitch, 2);
     Serial.print(", ");
     Serial.println(roll, 2);
+#endif
 }
 
 //===================================================================================================================
