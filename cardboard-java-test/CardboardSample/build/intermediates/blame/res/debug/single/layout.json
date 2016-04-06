@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/jason_yao/cardboard/cardboard-java-test/CardboardSample/build/intermediates/res/merged/debug/layout/common_ui.xml",
+        "source": "/home/jason_yao/cardboard/cardboard-java-test/CardboardSample/src/main/res/layout/common_ui.xml"
+    },
+    {
+        "merged": "/home/jason_yao/github/cardboard-java/CardboardSample/build/intermediates/res/merged/debug/layout/common_ui.xml",
+        "source": "/home/jason_yao/github/cardboard-java/CardboardSample/src/main/res/layout/common_ui.xml"
+    }
+]

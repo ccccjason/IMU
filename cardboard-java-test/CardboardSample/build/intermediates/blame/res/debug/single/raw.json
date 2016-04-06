@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/home/jason_yao/cardboard/cardboard-java-test/CardboardSample/build/intermediates/res/merged/debug/raw/grid_fragment.shader",
+        "source": "/home/jason_yao/cardboard/cardboard-java-test/CardboardSample/src/main/res/raw/grid_fragment.shader"
+    },
+    {
+        "merged": "/home/jason_yao/github/cardboard-java/CardboardSample/build/intermediates/res/merged/debug/raw/passthrough_fragment.shader",
+        "source": "/home/jason_yao/github/cardboard-java/CardboardSample/src/main/res/raw/passthrough_fragment.shader"
+    },
+    {
+        "merged": "/home/jason_yao/cardboard/cardboard-java-test/CardboardSample/build/intermediates/res/merged/debug/raw/passthrough_fragment.shader",
+        "source": "/home/jason_yao/cardboard/cardboard-java-test/CardboardSample/src/main/res/raw/passthrough_fragment.shader"
+    },
+    {
+        "merged": "/home/jason_yao/github/cardboard-java/CardboardSample/build/intermediates/res/merged/debug/raw/light_vertex.shader",
+        "source": "/home/jason_yao/github/cardboard-java/CardboardSample/src/main/res/raw/light_vertex.shader"
+    },
+    {
+        "merged": "/home/jason_yao/github/cardboard-java/CardboardSample/build/intermediates/res/merged/debug/raw/grid_fragment.shader",
+        "source": "/home/jason_yao/github/cardboard-java/CardboardSample/src/main/res/raw/grid_fragment.shader"
+    },
+    {
+        "merged": "/home/jason_yao/cardboard/cardboard-java-test/CardboardSample/build/intermediates/res/merged/debug/raw/light_vertex.shader",
+        "source": "/home/jason_yao/cardboard/cardboard-java-test/CardboardSample/src/main/res/raw/light_vertex.shader"
+    }
+]
