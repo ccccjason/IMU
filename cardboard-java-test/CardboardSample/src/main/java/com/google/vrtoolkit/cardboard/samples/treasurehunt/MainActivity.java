@@ -623,7 +623,8 @@ public class MainActivity extends CardboardActivity implements
 
 
         // Log.i(TAG, "yawyawyawyawyaw = " + (yaw * 180.0) / 3.14);
-        Log.i(TAG, "pitchpitchpitchpitch = " + (pitch * 180.0) / 3.14);
+        // Log.i(TAG, "pitchpitchpitchpitch = " + (pitch * 180.0) / 3.14);
+        HeadTransform.getEulerAngles_export();
 
         return Math.abs(pitch) < PITCH_LIMIT && Math.abs(yaw) < YAW_LIMIT;
     }

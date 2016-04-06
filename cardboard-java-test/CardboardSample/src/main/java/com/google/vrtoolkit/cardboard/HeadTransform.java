@@ -7,15 +7,32 @@ package com.google.vrtoolkit.cardboard;
 
 import android.opengl.Matrix;
 import android.util.FloatMath;
+import android.util.Log;
 
 @UsedByNative
 public class HeadTransform
 {
     private static final float GIMBAL_LOCK_EPSILON = 0.01F;
     private final float[] headView = new float[16];
+    public static HeadTransform ptr_HeadTransform;
+
+    private static final String TAG = "HeadTransform";
+
+
+    public  static void getEulerAngles_export() {
+
+        float[] eulerAngles = {0,0,0};
+
+        ptr_HeadTransform.getEulerAngles(eulerAngles,0);
+
+        Log.i(TAG, "eulerAngles[0] = " + ((eulerAngles[0] * 180.0) / 3.14)  +
+                   "eulerAngles[1] = " + ((eulerAngles[1] * 180.0) / 3.14) +
+                   "eulerAngles[2] = " + ((eulerAngles[2] * 180.0) / 3.14));
+    }
 
     public HeadTransform()
     {
+        ptr_HeadTransform = this;
         Matrix.setIdentityM(this.headView, 0);
     }
 
