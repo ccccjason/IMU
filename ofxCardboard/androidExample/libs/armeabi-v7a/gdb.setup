@@ -1,0 +1,7 @@
+set solib-search-path /Users/dantheman/src/openFrameworks/addons/ofxCardboard/androidExample//obj/local/armeabi-v7a:/Users/dantheman/src/openFrameworks/addons/ofxCardboard/androidExample//libs/armeabi-v7a
+set sysroot /Users/dantheman/Downloads/eclipse/android-ndk/android-ndk-r9c/platforms/android-17/arch-arm/
+directory /Users/dantheman/Downloads/eclipse/android-ndk/android-ndk-r9c/platforms/android-17/arch-arm/usr/include
+directory /Users/dantheman/src/openFrameworks/addons/ofxCardboard/androidExample//src
+directory /Users/dantheman/Downloads/eclipse/android-ndk/android-ndk-r9c/sources/cxx-stl/system
+directory /Users/dantheman/src/openFrameworks/addons/ofxCardboard/androidExample//libs/armeabi-v7a
+
