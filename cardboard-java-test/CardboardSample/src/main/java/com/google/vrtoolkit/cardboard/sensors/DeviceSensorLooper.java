@@ -30,17 +30,23 @@ public class DeviceSensorLooper implements SensorEventProvider
 
     public DeviceSensorLooper(SensorManager sensorManager)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.sensorManager = sensorManager;
     }
 
     private Sensor getUncalibratedGyro()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return Build.MANUFACTURER.equals("HTC") ? null :
                this.sensorManager.getDefaultSensor(16);
     }
 
     public void start()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (!this.isRunning) {
             this.sensorEventListener = new SensorEventListener() {
                 public void onSensorChanged(SensorEvent event) {
@@ -94,6 +100,8 @@ public class DeviceSensorLooper implements SensorEventProvider
 
     public void stop()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.isRunning) {
             this.sensorManager.unregisterListener(this.sensorEventListener);
             this.sensorEventListener = null;
@@ -105,6 +113,8 @@ public class DeviceSensorLooper implements SensorEventProvider
 
     public void registerListener(SensorEventListener listener)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         ArrayList var2 = this.registeredListeners;
         synchronized(this.registeredListeners) {
             this.registeredListeners.add(listener);
@@ -113,6 +123,8 @@ public class DeviceSensorLooper implements SensorEventProvider
 
     public void unregisterListener(SensorEventListener listener)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         ArrayList var2 = this.registeredListeners;
         synchronized(this.registeredListeners) {
             this.registeredListeners.remove(listener);

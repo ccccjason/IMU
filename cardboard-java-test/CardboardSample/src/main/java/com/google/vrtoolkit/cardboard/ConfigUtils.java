@@ -11,6 +11,7 @@ import android.os.Environment;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import android.util.Log;
 
 public abstract class ConfigUtils
 {
@@ -21,10 +22,14 @@ public abstract class ConfigUtils
 
     public ConfigUtils()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
     }
 
     public static File getConfigFile(String filename)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         File configFolder = new File(Environment.getExternalStorageDirectory(),
                                      "Cardboard");
 
@@ -40,6 +45,8 @@ public abstract class ConfigUtils
 
     public static InputStream openAssetConfigFile(AssetManager assetManager,
             String filename) throws IOException {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         String assetPath = (new File("Cardboard", filename)).getPath();
         return assetManager.open(assetPath);
     }

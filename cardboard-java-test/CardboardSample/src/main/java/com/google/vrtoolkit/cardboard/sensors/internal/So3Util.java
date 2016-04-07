@@ -4,6 +4,7 @@
 //
 
 package com.google.vrtoolkit.cardboard.sensors.internal;
+import android.util.Log;
 
 public class So3Util
 {
@@ -22,10 +23,14 @@ public class So3Util
 
     public So3Util()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
     }
 
     public static void sO3FromTwoVec(Vector3d a, Vector3d b, Matrix3x3d result)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Vector3d.cross(a, b, sO3FromTwoVecN);
 
         if (sO3FromTwoVecN.length() == 0.0D) {
@@ -61,6 +66,8 @@ public class So3Util
 
     private static void rotationPiAboutAxis(Vector3d v, Matrix3x3d result)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         rotationPiAboutAxisTemp.set(v);
         rotationPiAboutAxisTemp.scale(3.141592653589793D /
                                       rotationPiAboutAxisTemp.length());
@@ -72,6 +79,8 @@ public class So3Util
 
     public static void sO3FromMu(Vector3d w, Matrix3x3d result)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         double thetaSq = Vector3d.dot(w, w);
         double theta = Math.sqrt(thetaSq);
         double kA;
@@ -95,6 +104,8 @@ public class So3Util
 
     public static void muFromSO3(Matrix3x3d so3, Vector3d result)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         double cosAngle = (so3.get(0, 0) + so3.get(1, 1) + so3.get(2, 2) - 1.0D) * 0.5D;
         result.set((so3.get(2, 1) - so3.get(1, 2)) / 2.0D, (so3.get(0, 2) - so3.get(2,
                    0)) / 2.0D, (so3.get(1, 0) - so3.get(0, 1)) / 2.0D);
@@ -143,6 +154,8 @@ public class So3Util
     private static void rodriguesSo3Exp(Vector3d w, double kA, double kB,
                                         Matrix3x3d result)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         double a = w.x * w.x;
         double b = w.y * w.y;
         double wz2 = w.z * w.z;
@@ -165,6 +178,8 @@ public class So3Util
 
     public static void generatorField(int i, Matrix3x3d pos, Matrix3x3d result)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         result.set(i, 0, 0.0D);
         result.set((i + 1) % 3, 0, -pos.get((i + 2) % 3, 0));
         result.set((i + 2) % 3, 0, pos.get((i + 1) % 3, 0));

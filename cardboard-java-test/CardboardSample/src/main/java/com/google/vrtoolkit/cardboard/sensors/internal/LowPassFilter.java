@@ -6,6 +6,7 @@
 package com.google.vrtoolkit.cardboard.sensors.internal;
 
 import java.util.concurrent.TimeUnit;
+import android.util.Log;
 
 public class LowPassFilter
 {
@@ -18,22 +19,30 @@ public class LowPassFilter
 
     public LowPassFilter(double cutoffFrequency)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.timeConstantSecs = 1.0D / (6.283185307179586D * cutoffFrequency);
     }
 
     public int getNumSamples()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.numSamples;
     }
 
     public void addSample(Vector3d sampleData, long timestampNs)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.addWeightedSample(sampleData, timestampNs, 1.0D);
     }
 
     public void addWeightedSample(Vector3d sampleData, long timestampNs,
                                   double weight)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         ++this.numSamples;
 
         if (this.numSamples == 1) {
@@ -53,6 +62,8 @@ public class LowPassFilter
 
     public Vector3d getFilteredData()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.filteredData;
     }
 

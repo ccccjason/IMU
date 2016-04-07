@@ -53,6 +53,8 @@ public class HeadTracker implements SensorEventListener
 
     public static HeadTracker createFromContext(Context context)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         SensorManager sensorManager = (SensorManager) context.getSystemService(
                                           Context.SENSOR_SERVICE);
         Display display = ((WindowManager) context.getSystemService(
@@ -64,6 +66,8 @@ public class HeadTracker implements SensorEventListener
     public HeadTracker(SensorEventProvider sensorEventProvider, Clock clock,
                        Display display)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.clock = clock;
         this.sensorEventProvider = sensorEventProvider;
         this.tracker = new OrientationEKF();
@@ -74,6 +78,8 @@ public class HeadTracker implements SensorEventListener
 
     public void onSensorChanged(SensorEvent event)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Object var2;
 
         if (event.sensor.getType() == 1) {
@@ -126,10 +132,14 @@ public class HeadTracker implements SensorEventListener
 
     public void onAccuracyChanged(Sensor sensor, int accuracy)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
     }
 
     public void startTracking()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (!this.tracking) {
             this.tracker.reset();
             Object var1 = this.gyroBiasEstimatorMutex;
@@ -148,11 +158,15 @@ public class HeadTracker implements SensorEventListener
 
     public void resetTracker()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.tracker.reset();
     }
 
     public void stopTracking()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.tracking) {
             this.sensorEventProvider.unregisterListener(this);
             this.sensorEventProvider.stop();
@@ -162,6 +176,8 @@ public class HeadTracker implements SensorEventListener
 
     public void setNeckModelEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (enabled) {
             this.setNeckModelFactor(1.0F);
         } else {
@@ -172,6 +188,8 @@ public class HeadTracker implements SensorEventListener
 
     public float getNeckModelFactor()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Object var1 = this.neckModelFactorMutex;
         synchronized(this.neckModelFactorMutex) {
             return this.neckModelFactor;
@@ -180,6 +198,8 @@ public class HeadTracker implements SensorEventListener
 
     public void setNeckModelFactor(float factor)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Object var2 = this.neckModelFactorMutex;
         synchronized(this.neckModelFactorMutex) {
             if (factor >= 0.0F && factor <= 1.0F) {
@@ -192,6 +212,8 @@ public class HeadTracker implements SensorEventListener
 
     public void setGyroBiasEstimationEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Object var2 = this.gyroBiasEstimatorMutex;
         synchronized(this.gyroBiasEstimatorMutex) {
             if (!enabled) {
@@ -205,6 +227,8 @@ public class HeadTracker implements SensorEventListener
 
     public boolean getGyroBiasEstimationEnabled()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Object var1 = this.gyroBiasEstimatorMutex;
         synchronized(this.gyroBiasEstimatorMutex) {
             return this.gyroBiasEstimator != null;
@@ -213,6 +237,8 @@ public class HeadTracker implements SensorEventListener
 
     public void getLastHeadView(float[] headView, int offset)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         // Log.i("YYYY", "getLastHeadView");
 
         if (offset + 16 > headView.length) {
@@ -276,11 +302,15 @@ public class HeadTracker implements SensorEventListener
 
     Matrix3x3d getCurrentPoseForTest()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return new Matrix3x3d(this.tracker.getRotationMatrix());
     }
 
     void setGyroBiasEstimator(GyroscopeBiasEstimator estimator)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Object var2 = this.gyroBiasEstimatorMutex;
         synchronized(this.gyroBiasEstimatorMutex) {
             this.gyroBiasEstimator = estimator;

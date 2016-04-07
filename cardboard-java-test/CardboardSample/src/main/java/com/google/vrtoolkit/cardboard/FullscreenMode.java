@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.os.Build.VERSION;
 import android.os.Handler;
 import android.view.View.OnSystemUiVisibilityChangeListener;
+import android.util.Log;
 
 class FullscreenMode
 {
@@ -17,11 +18,15 @@ class FullscreenMode
 
     FullscreenMode(Activity activity)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.activity = activity;
     }
 
     void startFullscreenMode()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         //TODO remove full screen flag
         //        this.activity.getWindow().addFlags(128);
         if (VERSION.SDK_INT < 19) {
@@ -45,6 +50,8 @@ class FullscreenMode
 
     void onWindowFocusChanged(boolean hasFocus)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (hasFocus) {
             this.setFullscreenMode();
         }
@@ -53,6 +60,8 @@ class FullscreenMode
 
     void setFullscreenMode()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         //TODO make cardboard not hide navigation bar
         //        this.activity.getWindow().getDecorView().setSystemUiVisibility(5894);
     }

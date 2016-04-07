@@ -4,6 +4,7 @@
 //
 
 package com.google.vrtoolkit.cardboard.sensors.internal;
+import android.util.Log;
 
 public class GyroscopeBiasEstimator
 {
@@ -26,11 +27,15 @@ public class GyroscopeBiasEstimator
 
     public GyroscopeBiasEstimator()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.reset();
     }
 
     public void reset()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.smoothedGyroDiff = new Vector3d();
         this.smoothedAccelDiff = new Vector3d();
         this.accelLowPass = new LowPassFilter(1.0D);
@@ -42,6 +47,8 @@ public class GyroscopeBiasEstimator
 
     public void processGyroscope(Vector3d gyro, long sensorTimestampNs)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.gyroLowPass.addSample(gyro, sensorTimestampNs);
         Vector3d.sub(gyro, this.gyroLowPass.getFilteredData(), this.smoothedGyroDiff);
         this.isGyroStatic.appendFrame(this.smoothedGyroDiff.length() <
@@ -56,6 +63,8 @@ public class GyroscopeBiasEstimator
 
     public void processAccelerometer(Vector3d accel, long sensorTimestampNs)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.accelLowPass.addSample(accel, sensorTimestampNs);
         Vector3d.sub(accel, this.accelLowPass.getFilteredData(),
                      this.smoothedAccelDiff);
@@ -64,6 +73,8 @@ public class GyroscopeBiasEstimator
 
     public void getGyroBias(Vector3d result)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.gyroBiasLowPass.getNumSamples() < 30) {
             result.setZero();
         } else {
@@ -77,6 +88,8 @@ public class GyroscopeBiasEstimator
 
     private void updateGyroBias(Vector3d gyro, long sensorTimestampNs)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (gyro.length() < 0.3499999940395355D) {
             double updateWeight = Math.max(0.0D,
                                            1.0D - gyro.length() / 0.3499999940395355D);
@@ -93,11 +106,15 @@ public class GyroscopeBiasEstimator
 
         IsStaticCounter(int minStaticFrames)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.minStaticFrames = minStaticFrames;
         }
 
         void appendFrame(boolean isStatic)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             if (!isStatic) {
                 this.consecutiveIsStatic = 0;
             } else {
@@ -108,6 +125,8 @@ public class GyroscopeBiasEstimator
 
         boolean isRecentlyStatic()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return this.consecutiveIsStatic >= this.minStaticFrames;
         }
     }

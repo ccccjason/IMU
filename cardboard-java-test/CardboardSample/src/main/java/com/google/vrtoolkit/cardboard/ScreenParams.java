@@ -11,6 +11,7 @@ import android.view.Display;
 import com.google.vrtoolkit.cardboard.proto.Phone.PhoneParams;
 
 import java.io.InputStream;
+import android.util.Log;
 
 public class ScreenParams
 {
@@ -24,6 +25,8 @@ public class ScreenParams
 
     public ScreenParams(Display display)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         DisplayMetrics metrics = new DisplayMetrics();
 
         try {
@@ -51,6 +54,8 @@ public class ScreenParams
 
     public static ScreenParams fromProto(Display display, PhoneParams params)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (params == null) {
             return null;
         } else {
@@ -74,6 +79,8 @@ public class ScreenParams
 
     public ScreenParams(ScreenParams params)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.width = params.width;
         this.height = params.height;
         this.xMetersPerPixel = params.xMetersPerPixel;
@@ -83,46 +90,64 @@ public class ScreenParams
 
     public void setWidth(int width)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.width = width;
     }
 
     public int getWidth()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.width;
     }
 
     public void setHeight(int height)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.height = height;
     }
 
     public int getHeight()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.height;
     }
 
     public float getWidthMeters()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return (float)this.width * this.xMetersPerPixel;
     }
 
     public float getHeightMeters()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return (float)this.height * this.yMetersPerPixel;
     }
 
     public void setBorderSizeMeters(float screenBorderSize)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.borderSizeMeters = screenBorderSize;
     }
 
     public float getBorderSizeMeters()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.borderSizeMeters;
     }
 
     public boolean equals(Object other)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (other == null) {
             return false;
         } else if (other == this) {
@@ -140,6 +165,8 @@ public class ScreenParams
 
     public String toString()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return "{\n" + "  width: " + this.width + ",\n" + "  height: " + this.height +
                ",\n" + "  x_meters_per_pixel: " + this.xMetersPerPixel + ",\n" +
                "  y_meters_per_pixel: " + this.yMetersPerPixel + ",\n" +
@@ -149,6 +176,8 @@ public class ScreenParams
     public static ScreenParams createFromInputStream(Display display,
             InputStream inputStream)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         PhoneParams phoneParams =
             com.google.vrtoolkit.cardboard.PhoneParams.readFromInputStream(inputStream);
         return phoneParams == null ? null : fromProto(display, phoneParams);

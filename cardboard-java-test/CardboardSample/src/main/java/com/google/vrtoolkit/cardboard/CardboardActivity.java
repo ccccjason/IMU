@@ -10,6 +10,7 @@
 /*     */ import com.google.vrtoolkit.cardboard.sensors.SensorConnection;
 /*     */ import
 com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
+import android.util.Log;
 /*     */
 /*     */
 /*     */
@@ -62,6 +63,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   public void setCardboardView(CardboardView cardboardView)
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /*  59 */     if (this.cardboardView == cardboardView) {
             /*  60 */       return;
             /*     */
@@ -132,6 +135,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   public CardboardView getCardboardView()
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 107 */     return this.cardboardView;
         /*     */
     }
@@ -148,6 +153,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   public NfcSensor getNfcSensor()
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 121 */     return this.sensorConnection.getNfcSensor();
         /*     */
     }
@@ -164,6 +171,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   public void setVolumeKeysMode(int mode)
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 135 */     this.volumeKeyState.setVolumeKeysMode(mode);
         /*     */
     }
@@ -177,6 +186,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   public int getVolumeKeysMode()
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 146 */     return this.volumeKeyState.getVolumeKeysMode();
         /*     */
     }
@@ -194,6 +205,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   public boolean areVolumeKeysDisabled()
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 161 */     return this.volumeKeyState.areVolumeKeysDisabled(
                                  this.sensorConnection.getNfcSensor());
         /*     */
@@ -210,6 +223,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
             cardboardDeviceParams)
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 173 */     updateCardboardDeviceParams(cardboardDeviceParams);
         /*     */
     }
@@ -244,6 +259,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
             newParams)
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 204 */     if (this.cardboardView != null) {
             /* 205 */       this.cardboardView.updateCardboardDeviceParams(newParams);
             /*     */
@@ -256,6 +273,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   protected void onCreate(Bundle savedInstanceState)
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 212 */     super.onCreate(savedInstanceState);
         /*     */
         /* 214 */     requestWindowFeature(1);
@@ -275,6 +294,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   public synchronized void setConvertTapIntoTrigger(boolean enabled)
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 229 */     this.convertTapIntoTriggerEnabled = enabled;
 
         /* 230 */     if (this.cardboardView != null) {
@@ -293,6 +314,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   public synchronized boolean getConvertTapIntoTrigger()
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 242 */     return this.cardboardView != null ?
                              this.cardboardView.getConvertTapIntoTrigger() :
                              this.convertTapIntoTriggerEnabled;
@@ -303,6 +326,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   protected void onResume()
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 248 */     super.onResume();
 
         /*     */
@@ -322,6 +347,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   protected void onPause()
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 261 */     super.onPause();
 
         /* 262 */     if (this.cardboardView != null) {
@@ -338,6 +365,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   protected void onDestroy()
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 272 */     this.sensorConnection.onDestroy(this);
         /*     */
         /* 274 */     super.onDestroy();
@@ -348,6 +377,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   public void setContentView(View view)
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 280 */     if ((view instanceof CardboardView)) {
             /* 281 */       setCardboardView((CardboardView)view);
             /*     */
@@ -362,6 +393,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   public void setContentView(View view, ViewGroup.LayoutParams params)
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 290 */     if ((view instanceof CardboardView)) {
             /* 291 */       setCardboardView((CardboardView)view);
             /*     */
@@ -377,6 +410,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   public boolean onKeyDown(int keyCode, KeyEvent event)
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 301 */     return (this.volumeKeyState.onKey(keyCode)) ||
                              (super.onKeyDown(keyCode, event));
         /*     */
@@ -387,6 +422,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   public boolean onKeyUp(int keyCode, KeyEvent event)
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 308 */     return (this.volumeKeyState.onKey(keyCode)) ||
                              (super.onKeyUp(keyCode, event));
         /*     */
@@ -396,6 +433,8 @@ com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
     /*     */   public void onWindowFocusChanged(boolean hasFocus)
     /*     */
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         /* 314 */     super.onWindowFocusChanged(hasFocus);
         /* 315 */     this.fullscreenMode.onWindowFocusChanged(hasFocus);
         /*     */

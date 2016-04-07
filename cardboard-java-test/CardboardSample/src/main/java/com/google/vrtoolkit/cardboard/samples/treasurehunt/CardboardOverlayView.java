@@ -29,6 +29,8 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.util.Log;
+import android.util.Log;
 
 /**
  * Contains two sub-views to provide a simple stereo HUD.
@@ -41,7 +43,10 @@ public class CardboardOverlayView extends LinearLayout
 
     public CardboardOverlayView(Context context, AttributeSet attrs)
     {
+
         super(context, attrs);
+        Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO [" + Thread.currentThread().getStackTrace()[2].getMethodName() + " | " + Thread.currentThread().getStackTrace()[2].getFileName() + ":" + Thread.currentThread().getStackTrace()[2].getLineNumber() + "]");
+
         setOrientation(HORIZONTAL);
 
         LayoutParams params = new LayoutParams(
@@ -67,6 +72,8 @@ public class CardboardOverlayView extends LinearLayout
 
     public void show3DToast(String message)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         setText(message);
         setTextAlpha(1f);
         textFadeAnimation.setAnimationListener(new EndAnimationListener() {
@@ -87,24 +94,32 @@ public class CardboardOverlayView extends LinearLayout
 
     private void setDepthOffset(float offset)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         leftView.setOffset(offset);
         rightView.setOffset(-offset);
     }
 
     private void setText(String text)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         leftView.setText(text);
         rightView.setText(text);
     }
 
     private void setTextAlpha(float alpha)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         leftView.setTextViewAlpha(alpha);
         rightView.setTextViewAlpha(alpha);
     }
 
     private void setColor(int color)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         leftView.setColor(color);
         rightView.setColor(color);
     }
@@ -123,7 +138,10 @@ public class CardboardOverlayView extends LinearLayout
 
         public CardboardOverlayEyeView(Context context, AttributeSet attrs)
         {
+
             super(context, attrs);
+            Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO [" + Thread.currentThread().getStackTrace()[2].getMethodName() + " | " + Thread.currentThread().getStackTrace()[2].getFileName() + ":" + Thread.currentThread().getStackTrace()[2].getLineNumber() + "]");
+
             imageView = new ImageView(context, attrs);
             imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             imageView.setAdjustViewBounds(true);  // Preserve aspect ratio.
@@ -139,22 +157,30 @@ public class CardboardOverlayView extends LinearLayout
 
         public void setColor(int color)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             imageView.setColorFilter(color);
             textView.setTextColor(color);
         }
 
         public void setText(String text)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             textView.setText(text);
         }
 
         public void setTextViewAlpha(float alpha)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             textView.setAlpha(alpha);
         }
 
         public void setOffset(float offset)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.offset = offset;
         }
 
@@ -162,6 +188,8 @@ public class CardboardOverlayView extends LinearLayout
         protected void onLayout(boolean changed, int left, int top, int right,
                                 int bottom)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             // Width and height of this ViewGroup.
             final int width = right - left;
             final int height = bottom - top;

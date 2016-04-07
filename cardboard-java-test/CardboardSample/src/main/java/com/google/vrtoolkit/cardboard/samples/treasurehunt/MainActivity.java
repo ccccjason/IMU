@@ -127,6 +127,8 @@ public class MainActivity extends CardboardActivity implements
      */
     private int loadGLShader(int type, int resId)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         String code = readRawTextFile(resId);
         int shader = GLES20.glCreateShader(type);
         GLES20.glShaderSource(shader, code);
@@ -157,6 +159,8 @@ public class MainActivity extends CardboardActivity implements
      */
     private static void checkGLError(String label)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         int error;
 
         while ((error = GLES20.glGetError()) != GLES20.GL_NO_ERROR) {
@@ -172,6 +176,8 @@ public class MainActivity extends CardboardActivity implements
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.common_ui);
@@ -203,6 +209,8 @@ public class MainActivity extends CardboardActivity implements
     @Override
     public void onPause()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         //cardboardAudioEngine.pause();
         super.onPause();
     }
@@ -210,6 +218,8 @@ public class MainActivity extends CardboardActivity implements
     @Override
     public void onResume()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         super.onResume();
         //cardboardAudioEngine.resume();
     }
@@ -217,12 +227,16 @@ public class MainActivity extends CardboardActivity implements
     @Override
     public void onRendererShutdown()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Log.i(TAG, "onRendererShutdown");
     }
 
     @Override
     public void onSurfaceChanged(int width, int height)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Log.i(TAG, "onSurfaceChanged");
     }
 
@@ -237,6 +251,8 @@ public class MainActivity extends CardboardActivity implements
     @Override
     public void onSurfaceCreated(EGLConfig config)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Log.i(TAG, "onSurfaceCreated");
         GLES20.glClearColor(0.1f, 0.1f, 0.1f,
                             0.5f); // Dark background so text shows up well.
@@ -377,6 +393,8 @@ public class MainActivity extends CardboardActivity implements
      */
     private void updateModelPosition()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Matrix.setIdentityM(modelCube, 0);
         Matrix.translateM(modelCube, 0, modelPosition[0], modelPosition[1],
                           modelPosition[2]);
@@ -400,6 +418,8 @@ public class MainActivity extends CardboardActivity implements
      */
     private String readRawTextFile(int resId)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         InputStream inputStream = getResources().openRawResource(resId);
 
         try {
@@ -428,6 +448,8 @@ public class MainActivity extends CardboardActivity implements
     @Override
     public void onNewFrame(HeadTransform headTransform)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         // Build the Model part of the ModelView matrix.
         Matrix.rotateM(modelCube, 0, TIME_DELTA, 0.5f, 0.5f, 1.0f);
 
@@ -456,6 +478,8 @@ public class MainActivity extends CardboardActivity implements
     @Override
     public void onDrawEye(Eye eye)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
@@ -490,6 +514,8 @@ public class MainActivity extends CardboardActivity implements
      */
     public void drawCube()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         GLES20.glUseProgram(cubeProgram);
 
         GLES20.glUniform3fv(cubeLightPosParam, 1, lightPosInEyeSpace, 0);
@@ -527,6 +553,8 @@ public class MainActivity extends CardboardActivity implements
      */
     public void drawFloor()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         GLES20.glUseProgram(floorProgram);
 
         // Set ModelView, MVP, position, normals, and color.
@@ -554,6 +582,8 @@ public class MainActivity extends CardboardActivity implements
     @Override
     public void onCardboardTrigger()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Log.i(TAG, "onCardboardTrigger");
 
         if (isLookingAtObject()) {
@@ -576,6 +606,8 @@ public class MainActivity extends CardboardActivity implements
      */
     private void hideObject()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         float[] rotationMatrix = new float[16];
         float[] posVec = new float[4];
 
@@ -611,6 +643,8 @@ public class MainActivity extends CardboardActivity implements
      */
     private boolean isLookingAtObject()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         float[] initVec = {0, 0, 0, 1.0f};
         float[] objPositionVec = new float[4];
 

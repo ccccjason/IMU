@@ -25,6 +25,8 @@ public class HeadMountedDisplayManager
 
     public HeadMountedDisplayManager(Context context)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.context = context;
         this.hmd = new HeadMountedDisplay(this.createScreenParams(),
                                           this.createCardboardDeviceParams());
@@ -32,11 +34,15 @@ public class HeadMountedDisplayManager
 
     public HeadMountedDisplay getHeadMountedDisplay()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.hmd;
     }
 
     public void onResume()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         CardboardDeviceParams deviceParams =
             this.createCardboardDeviceParamsFromExternalStorage();
 
@@ -60,11 +66,15 @@ public class HeadMountedDisplayManager
 
     public void onPause()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
     }
 
     public boolean updateCardboardDeviceParams(CardboardDeviceParams
             cardboardDeviceParams)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (cardboardDeviceParams != null &&
             !cardboardDeviceParams.equals(this.hmd.getCardboardDeviceParams())) {
             this.hmd.setCardboardDeviceParams(cardboardDeviceParams);
@@ -77,6 +87,8 @@ public class HeadMountedDisplayManager
 
     public boolean updateScreenParams(ScreenParams screenParams)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (screenParams != null && !screenParams.equals(this.hmd.getScreenParams())) {
             this.hmd.setScreenParams(screenParams);
             return true;
@@ -87,6 +99,8 @@ public class HeadMountedDisplayManager
 
     private void writeCardboardParamsToExternalStorage()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         boolean success = false;
         BufferedOutputStream stream = null;
 
@@ -125,6 +139,8 @@ public class HeadMountedDisplayManager
 
     private Display getDisplay()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         WindowManager windowManager = (WindowManager)this.context.getSystemService(
                                           Context.WINDOW_SERVICE);
         return windowManager.getDefaultDisplay();
@@ -132,6 +148,8 @@ public class HeadMountedDisplayManager
 
     private ScreenParams createScreenParams()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Display display = this.getDisplay();
         ScreenParams params = this.createScreenParamsFromExternalStorage(display);
 
@@ -146,6 +164,8 @@ public class HeadMountedDisplayManager
 
     private CardboardDeviceParams createCardboardDeviceParams()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         CardboardDeviceParams params =
             this.createCardboardDeviceParamsFromExternalStorage();
 
@@ -169,6 +189,8 @@ public class HeadMountedDisplayManager
 
     private CardboardDeviceParams createCardboardDeviceParamsFromAssetFolder()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         try {
             BufferedInputStream e = null;
 
@@ -202,6 +224,8 @@ public class HeadMountedDisplayManager
 
     private CardboardDeviceParams createCardboardDeviceParamsFromExternalStorage()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         try {
             BufferedInputStream e = null;
 
@@ -239,6 +263,8 @@ public class HeadMountedDisplayManager
 
     private ScreenParams createScreenParamsFromExternalStorage(Display display)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         try {
             BufferedInputStream e = null;
 

@@ -11,6 +11,7 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.Iterator;
+import android.util.Log;
 
 class GLStateBackup
 {
@@ -29,20 +30,28 @@ class GLStateBackup
 
     GLStateBackup()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
     }
 
     void addTrackedVertexAttribute(int attributeId)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.vertexAttributes.add(new GLStateBackup.VertexAttributeState(attributeId));
     }
 
     void clearTrackedVertexAttributes()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.vertexAttributes.clear();
     }
 
     void readFromGL()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         GLES20.glGetIntegerv(2978, this.viewport);
         this.cullFaceEnabled = GLES20.glIsEnabled(2884);
         this.scissorTestEnabled = GLES20.glIsEnabled(3089);
@@ -66,6 +75,8 @@ class GLStateBackup
 
     void writeToGL()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Iterator i$ = this.vertexAttributes.iterator();
 
         while (i$.hasNext()) {
@@ -113,16 +124,22 @@ class GLStateBackup
 
         VertexAttributeState(int attributeId)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.attributeId = attributeId;
         }
 
         void readFromGL()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             GLES20.glGetVertexAttribiv(this.attributeId, '蘢', this.enabled);
         }
 
         void writeToGL()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             if (this.enabled.array()[0] == 0) {
                 GLES20.glDisableVertexAttribArray(this.attributeId);
             } else {

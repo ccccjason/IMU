@@ -72,11 +72,15 @@ public class OrientationEKF
 
     public OrientationEKF()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.reset();
     }
 
     public synchronized void reset()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.sensorTimeStampGyro = 0L;
         this.so3SensorFromWorld.setIdentity();
         this.so3LastMotion.setIdentity();
@@ -107,11 +111,15 @@ public class OrientationEKF
 
     public boolean isReady()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.alignedToGravity;
     }
 
     public double getHeadingDegrees()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         //Log.i("YYYY", "getHeadingDegrees");
         double x = this.so3SensorFromWorld.get(2, 0);
         double y = this.so3SensorFromWorld.get(2, 1);
@@ -136,6 +144,8 @@ public class OrientationEKF
 
     public synchronized void setHeadingDegrees(double heading)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         //Log.i("YYYY", "setHeadingDegrees heading = " + heading);
         double currentHeading = this.getHeadingDegrees();
         double deltaHeading = heading - currentHeading;
@@ -149,12 +159,16 @@ public class OrientationEKF
 
     public double[] getGLMatrix()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         //Log.i("YYYY", "getGLMatrix");
         return this.glMatrixFromSo3(this.so3SensorFromWorld);
     }
 
     public double[] getPredictedGLMatrix(double secondsAfterLastGyroEvent)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         //Log.i("YYYY", "getPredictedGLMatrix");
         Vector3d pmu = this.getPredictedGLMatrixTempV1;
         pmu.set(this.lastGyro);
@@ -168,12 +182,16 @@ public class OrientationEKF
 
     public Matrix3x3d getRotationMatrix()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         //Log.i("YYYY", "getRotationMatrix");
         return this.so3SensorFromWorld;
     }
 
     public static void arrayAssign(double[][] data, Matrix3x3d m)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         System.out.print("arrayAssign");
         assert 3 == data.length;
 
@@ -189,18 +207,24 @@ public class OrientationEKF
 
     public boolean isAlignedToGravity()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         //Log.i("YYYY", "isAlignedToGravity");
         return this.alignedToGravity;
     }
 
     public boolean isAlignedToNorth()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         //Log.i("YYYY", "isAlignedToNorth");
         return this.alignedToNorth;
     }
 
     public synchronized void processGyro(Vector3d gyro, long sensorTimeStamp)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         float kTimeThreshold = 0.04F;
         float kdTdefault = 0.01F;
 
@@ -232,6 +256,8 @@ public class OrientationEKF
 
     private void updateAccelCovariance(double currentAccelNorm)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         double currentAccelNormChange = Math.abs(currentAccelNorm -
                                         this.previousAccelNorm);
         this.previousAccelNorm = currentAccelNorm;
@@ -246,6 +272,8 @@ public class OrientationEKF
 
     public synchronized void processAcc(Vector3d acc, long sensorTimeStamp)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.mz.set(acc);
         this.updateAccelCovariance(this.mz.length());
 
@@ -297,6 +325,8 @@ public class OrientationEKF
 
     public synchronized void processMag(float[] mag, long sensorTimeStamp)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.alignedToGravity) {
             this.mz.set((double)mag[0], (double)mag[1], (double)mag[2]);
             this.mz.normalize();
@@ -366,6 +396,8 @@ public class OrientationEKF
 
     private double[] glMatrixFromSo3(Matrix3x3d so3)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         for (int r = 0; r < 3; ++r) {
             for (int c = 0; c < 3; ++c) {
                 this.rotationMatrix[4 * c + r] = so3.get(r, c);
@@ -382,6 +414,8 @@ public class OrientationEKF
 
     private void filterGyroTimestep(float timeStep)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         float kFilterCoeff = 0.95F;
         float kMinSamples = 10.0F;
 
@@ -402,6 +436,8 @@ public class OrientationEKF
 
     private void updateCovariancesAfterMotion()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.so3LastMotion.transpose(this.updateCovariancesAfterMotionTempM1);
         Matrix3x3d.mult(this.mP, this.updateCovariancesAfterMotionTempM1,
                         this.updateCovariancesAfterMotionTempM2);
@@ -413,6 +449,8 @@ public class OrientationEKF
     private void accObservationFunctionForNumericalJacobian(
         Matrix3x3d so3SensorFromWorldPred, Vector3d result)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Matrix3x3d.mult(so3SensorFromWorldPred, this.down, this.mh);
         So3Util.sO3FromTwoVec(this.mh, this.mz,
                               this.accObservationFunctionForNumericalJacobianTempM);
@@ -422,6 +460,8 @@ public class OrientationEKF
     private void magObservationFunctionForNumericalJacobian(
         Matrix3x3d so3SensorFromWorldPred, Vector3d result)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Matrix3x3d.mult(so3SensorFromWorldPred, this.north, this.mh);
         So3Util.sO3FromTwoVec(this.mh, this.mz,
                               this.magObservationFunctionForNumericalJacobianTempM);

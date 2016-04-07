@@ -33,12 +33,16 @@ public class PhoneParams
 
     private PhoneParams()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
     }
 
     static boolean getPpiOverride(List<PpiOverride> overrides, String manufacturer,
                                   String device, String model, String hardware,
                                   com.google.vrtoolkit.cardboard.proto.Phone.PhoneParams params)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Log.d(TAG,
               String.format("Override search for device: {MANUFACTURER=%s, DEVICE=%s, MODEL=%s, HARDWARE=%s}",
                             new Object[] {manufacturer, device, model, hardware}));
@@ -65,6 +69,8 @@ public class PhoneParams
     static void registerOverridesInternal(List<PpiOverride> overrides,
                                           String manufacturer, String device, String model, String hardware)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         com.google.vrtoolkit.cardboard.proto.Phone.PhoneParams currentParams =
             readFromExternalStorage();
         com.google.vrtoolkit.cardboard.proto.Phone.PhoneParams newParams = currentParams
@@ -81,6 +87,8 @@ public class PhoneParams
 
     public static void registerOverrides()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         registerOverridesInternal(PPI_OVERRIDES, Build.MANUFACTURER, Build.DEVICE,
                                   Build.MODEL, Build.HARDWARE);
     }
@@ -88,6 +96,8 @@ public class PhoneParams
     static com.google.vrtoolkit.cardboard.proto.Phone.PhoneParams
     readFromInputStream(InputStream inputStream)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (inputStream == null) {
             return null;
         } else {
@@ -130,6 +140,8 @@ public class PhoneParams
     static com.google.vrtoolkit.cardboard.proto.Phone.PhoneParams
     readFromExternalStorage()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         try {
             BufferedInputStream e = null;
 
@@ -167,6 +179,8 @@ public class PhoneParams
         com.google.vrtoolkit.cardboard.proto.Phone.PhoneParams params,
         OutputStream outputStream)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         try {
             if (params.dEPRECATEDGyroBias != null &&
                 params.dEPRECATEDGyroBias.length == 0) {
@@ -190,6 +204,8 @@ public class PhoneParams
     static boolean writeToExternalStorage(
         com.google.vrtoolkit.cardboard.proto.Phone.PhoneParams params)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         boolean success = false;
         BufferedOutputStream stream = null;
 
@@ -230,6 +246,8 @@ public class PhoneParams
         PpiOverride(String manufacturer, String device, String model, String hardware,
                     int xPpi, int yPpi)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.manufacturer = manufacturer;
             this.device = device;
             this.model = model;
@@ -241,6 +259,8 @@ public class PhoneParams
         boolean isMatching(String manufacturer, String device, String model,
                            String hardware)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return (this.manufacturer == null || this.manufacturer.equals(manufacturer)) &&
                    (this.device == null || this.device.equals(device)) && (this.model == null ||
                            this.model.equals(model)) && (this.hardware == null ||

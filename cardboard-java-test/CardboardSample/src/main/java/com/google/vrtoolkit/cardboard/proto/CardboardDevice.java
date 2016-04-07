@@ -13,6 +13,7 @@ import com.google.protobuf.nano.MessageNano;
 import com.google.protobuf.nano.WireFormatNano;
 
 import java.io.IOException;
+import android.util.Log;
 
 public interface CardboardDevice {
     public static final class DeviceParams extends MessageNano implements Cloneable {
@@ -31,6 +32,8 @@ public interface CardboardDevice {
 
         public static CardboardDevice.DeviceParams[] emptyArray()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             if (_emptyArray == null) {
                 Object var0 = InternalNano.LAZY_INIT_LOCK;
                 synchronized(InternalNano.LAZY_INIT_LOCK) {
@@ -45,11 +48,15 @@ public interface CardboardDevice {
 
         public String getVendor()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return this.vendor_;
         }
 
         public CardboardDevice.DeviceParams setVendor(String value)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             if (value == null) {
                 throw new NullPointerException();
             } else {
@@ -61,11 +68,15 @@ public interface CardboardDevice {
 
         public boolean hasVendor()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return (this.bitField0_ & 1) != 0;
         }
 
         public CardboardDevice.DeviceParams clearVendor()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.vendor_ = "";
             this.bitField0_ &= -2;
             return this;
@@ -73,11 +84,15 @@ public interface CardboardDevice {
 
         public String getModel()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return this.model_;
         }
 
         public CardboardDevice.DeviceParams setModel(String value)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             if (value == null) {
                 throw new NullPointerException();
             } else {
@@ -89,11 +104,15 @@ public interface CardboardDevice {
 
         public boolean hasModel()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return (this.bitField0_ & 2) != 0;
         }
 
         public CardboardDevice.DeviceParams clearModel()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.model_ = "";
             this.bitField0_ &= -3;
             return this;
@@ -101,11 +120,15 @@ public interface CardboardDevice {
 
         public float getScreenToLensDistance()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return this.screenToLensDistance_;
         }
 
         public CardboardDevice.DeviceParams setScreenToLensDistance(float value)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.screenToLensDistance_ = value;
             this.bitField0_ |= 4;
             return this;
@@ -113,11 +136,15 @@ public interface CardboardDevice {
 
         public boolean hasScreenToLensDistance()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return (this.bitField0_ & 4) != 0;
         }
 
         public CardboardDevice.DeviceParams clearScreenToLensDistance()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.screenToLensDistance_ = 0.0F;
             this.bitField0_ &= -5;
             return this;
@@ -125,11 +152,15 @@ public interface CardboardDevice {
 
         public float getInterLensDistance()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return this.interLensDistance_;
         }
 
         public CardboardDevice.DeviceParams setInterLensDistance(float value)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.interLensDistance_ = value;
             this.bitField0_ |= 8;
             return this;
@@ -137,11 +168,15 @@ public interface CardboardDevice {
 
         public boolean hasInterLensDistance()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return (this.bitField0_ & 8) != 0;
         }
 
         public CardboardDevice.DeviceParams clearInterLensDistance()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.interLensDistance_ = 0.0F;
             this.bitField0_ &= -9;
             return this;
@@ -149,11 +184,15 @@ public interface CardboardDevice {
 
         public int getVerticalAlignment()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return this.verticalAlignment_;
         }
 
         public CardboardDevice.DeviceParams setVerticalAlignment(int value)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.verticalAlignment_ = value;
             this.bitField0_ |= 16;
             return this;
@@ -161,11 +200,15 @@ public interface CardboardDevice {
 
         public boolean hasVerticalAlignment()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return (this.bitField0_ & 16) != 0;
         }
 
         public CardboardDevice.DeviceParams clearVerticalAlignment()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.verticalAlignment_ = 0;
             this.bitField0_ &= -17;
             return this;
@@ -173,11 +216,15 @@ public interface CardboardDevice {
 
         public float getTrayToLensDistance()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return this.trayToLensDistance_;
         }
 
         public CardboardDevice.DeviceParams setTrayToLensDistance(float value)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.trayToLensDistance_ = value;
             this.bitField0_ |= 32;
             return this;
@@ -185,11 +232,15 @@ public interface CardboardDevice {
 
         public boolean hasTrayToLensDistance()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return (this.bitField0_ & 32) != 0;
         }
 
         public CardboardDevice.DeviceParams clearTrayToLensDistance()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.trayToLensDistance_ = 0.0F;
             this.bitField0_ &= -33;
             return this;
@@ -197,11 +248,15 @@ public interface CardboardDevice {
 
         public boolean getHasMagnet()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return this.hasMagnet_;
         }
 
         public CardboardDevice.DeviceParams setHasMagnet(boolean value)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.hasMagnet_ = value;
             this.bitField0_ |= 64;
             return this;
@@ -209,11 +264,15 @@ public interface CardboardDevice {
 
         public boolean hasHasMagnet()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return (this.bitField0_ & 64) != 0;
         }
 
         public CardboardDevice.DeviceParams clearHasMagnet()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.hasMagnet_ = false;
             this.bitField0_ &= -65;
             return this;
@@ -221,11 +280,15 @@ public interface CardboardDevice {
 
         public int getPrimaryButton()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return this.primaryButton_;
         }
 
         public CardboardDevice.DeviceParams setPrimaryButton(int value)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.primaryButton_ = value;
             this.bitField0_ |= 128;
             return this;
@@ -233,11 +296,15 @@ public interface CardboardDevice {
 
         public boolean hasPrimaryButton()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return (this.bitField0_ & 128) != 0;
         }
 
         public CardboardDevice.DeviceParams clearPrimaryButton()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.primaryButton_ = 1;
             this.bitField0_ &= -129;
             return this;
@@ -245,11 +312,15 @@ public interface CardboardDevice {
 
         public DeviceParams()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.clear();
         }
 
         public CardboardDevice.DeviceParams clear()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.bitField0_ = 0;
             this.vendor_ = "";
             this.model_ = "";
@@ -267,6 +338,8 @@ public interface CardboardDevice {
 
         public CardboardDevice.DeviceParams clone()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             CardboardDevice.DeviceParams cloned;
 
             try {
@@ -290,6 +363,8 @@ public interface CardboardDevice {
         }
 
         public void writeTo(CodedOutputByteBufferNano output) throws IOException {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             if ((this.bitField0_ & 1) != 0)
             {
                 output.writeString(1, this.vendor_);
@@ -360,6 +435,8 @@ public interface CardboardDevice {
 
         protected int computeSerializedSize()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             int size = super.computeSerializedSize();
 
             if ((this.bitField0_ & 1) != 0) {
@@ -417,6 +494,8 @@ public interface CardboardDevice {
         }
 
         public CardboardDevice.DeviceParams mergeFrom(CodedInputByteBufferNano input) throws IOException {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             while (true)
             {
                 int tag = input.readTag();
@@ -584,10 +663,14 @@ public interface CardboardDevice {
         }
 
         public static CardboardDevice.DeviceParams parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return (CardboardDevice.DeviceParams) MessageNano.mergeFrom(new CardboardDevice.DeviceParams(), data);
         }
 
         public static CardboardDevice.DeviceParams parseFrom(CodedInputByteBufferNano input) throws IOException {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return (new CardboardDevice.DeviceParams()).mergeFrom(input);
         }
 

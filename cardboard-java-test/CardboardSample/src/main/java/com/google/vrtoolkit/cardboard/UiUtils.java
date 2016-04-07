@@ -24,6 +24,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import android.util.Log;
 
 @UsedByNative
 class UiUtils
@@ -38,11 +39,15 @@ class UiUtils
 
     UiUtils()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
     }
 
     @UsedByNative
     static void launchOrInstallCardboard(Context context)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         PackageManager pm = context.getPackageManager();
         Intent settingsIntent = new Intent();
         settingsIntent.setAction("com.google.vrtoolkit.cardboard.CONFIGURE");
@@ -74,6 +79,8 @@ class UiUtils
 
     private static void showInstallDialog(Context context)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
         (new UiUtils.InstallSettingsDialogFragment()).show(fragmentManager,
                 "InstallCardboardDialog");
@@ -81,6 +88,8 @@ class UiUtils
 
     private static void showConfigureDialog(Context context, Intent intent)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
         UiUtils.ConfigureSettingsDialogFragment dialog = new
         UiUtils.ConfigureSettingsDialogFragment();
@@ -113,16 +122,22 @@ class UiUtils
 
         public ConfigureSettingsDialogFragment()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         }
 
         public void onCreate(Bundle savedInstanceState)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             super.onCreate(savedInstanceState);
             this.intent = (Intent) this.getArguments().getParcelable("intent");
         }
 
         public Dialog onCreateDialog(Bundle savedInstanceState)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             Builder builder = new Builder(this.getActivity());
             builder.setTitle("Configure").setMessage("Set up your viewer for the best experience.").setPositiveButton("Setup",
                     this.listener).setNegativeButton("Cancel", (OnClickListener) null);
@@ -155,10 +170,14 @@ class UiUtils
 
         public InstallSettingsDialogFragment()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         }
 
         public Dialog onCreateDialog(Bundle savedInstanceState)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             Builder builder = new Builder(this.getActivity());
             builder.setTitle("Configure").setMessage("Get the Cardboard app in order to configure your viewer.").setPositiveButton("Go to Play Store",
                     this.listener).setNegativeButton("Cancel", (OnClickListener) null);

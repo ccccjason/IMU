@@ -54,10 +54,14 @@ public class DistortionRenderer
 
     public DistortionRenderer()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
     }
 
     public void beforeDrawFrame()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.drawingFrame = true;
 
         if (this.fovsChanged) {
@@ -72,6 +76,8 @@ public class DistortionRenderer
 
     public void afterDrawFrame()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         GLES20.glBindFramebuffer('赀', this.originalFramebufferId.array()[0]);
         this.undistortTexture(this.textureId);
         this.drawingFrame = false;
@@ -79,6 +85,8 @@ public class DistortionRenderer
 
     public void undistortTexture(int textureId)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.restoreGLStateEnabled) {
             if (this.chromaticAberrationCorrectionEnabled) {
                 this.gLStateBackupAberration.readFromGL();
@@ -126,22 +134,30 @@ public class DistortionRenderer
 
     public void setResolutionScale(float scale)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.resolutionScale = scale;
         this.viewportsChanged = true;
     }
 
     public void setRestoreGLStateEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.restoreGLStateEnabled = enabled;
     }
 
     public void setChromaticAberrationCorrectionEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.chromaticAberrationCorrectionEnabled = enabled;
     }
 
     public void setVignetteEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.vignetteEnabled = enabled;
         this.fovsChanged = true;
     }
@@ -149,6 +165,8 @@ public class DistortionRenderer
     public void onFovChanged(HeadMountedDisplay hmd, FieldOfView leftFov,
                              FieldOfView rightFov, float virtualEyeToScreenDistance)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.drawingFrame) {
             throw new IllegalStateException("Cannot change FOV while rendering a frame.");
         } else {
@@ -169,11 +187,15 @@ public class DistortionRenderer
 
     public boolean haveViewportsChanged()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.viewportsChanged;
     }
 
     public void updateViewports(Viewport leftViewport, Viewport rightViewport)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         leftViewport.setViewport(Math.round(this.leftEyeViewport.x *
                                             this.xPxPerTanAngle * this.resolutionScale),
                                  Math.round(this.leftEyeViewport.y * this.yPxPerTanAngle * this.resolutionScale),
@@ -192,6 +214,8 @@ public class DistortionRenderer
 
     private void updateDistortionMesh(boolean flip180)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         ScreenParams screen = this.hmd.getScreenParams();
         CardboardDeviceParams cdp = this.hmd.getCardboardDeviceParams();
 
@@ -225,6 +249,8 @@ public class DistortionRenderer
     private DistortionRenderer.EyeViewport initViewportForEye(FieldOfView fov,
             float xOffset)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         float left = (float)Math.tan(Math.toRadians((double)fov.getLeft()));
         float right = (float)Math.tan(Math.toRadians((double)fov.getRight()));
         float bottom = (float)Math.tan(Math.toRadians((double)fov.getBottom()));
@@ -244,6 +270,8 @@ public class DistortionRenderer
         float textureHeightTanAngle, float xEyeOffsetTanAngleScreen,
         float yEyeOffsetTanAngleScreen, boolean flip180)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return new DistortionRenderer.DistortionMesh(
                    this.hmd.getCardboardDeviceParams().getDistortion(),
                    this.hmd.getCardboardDeviceParams().getDistortion(),
@@ -258,6 +286,8 @@ public class DistortionRenderer
     private void renderDistortionMesh(DistortionRenderer.DistortionMesh mesh,
                                       int textureId)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Object holder;
 
         if (this.chromaticAberrationCorrectionEnabled) {
@@ -302,6 +332,8 @@ public class DistortionRenderer
     private int createTexture(int width, int height, int textureFormat,
                               int textureType)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         int[] textureIds = new int[1];
         GLES20.glGenTextures(1, textureIds, 0);
         GLES20.glBindTexture(3553, textureIds[0]);
@@ -316,6 +348,8 @@ public class DistortionRenderer
 
     private int setupRenderTextureAndRenderbuffer()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         float textureWidthTanAngle = this.leftEyeViewport.width +
                                      this.rightEyeViewport.width;
         float textureHeightTanAngle = Math.max(this.leftEyeViewport.height,
@@ -331,6 +365,8 @@ public class DistortionRenderer
 
     private int setupRenderTextureAndRenderbuffer(int width, int height)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.textureId != -1) {
             GLES20.glDeleteTextures(1, new int[] {this.textureId}, 0);
         }
@@ -371,6 +407,8 @@ public class DistortionRenderer
 
     private int loadShader(int shaderType, String source)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         int shader = GLES20.glCreateShader(shaderType);
 
         if (shader != 0) {
@@ -392,6 +430,8 @@ public class DistortionRenderer
 
     private int createProgram(String vertexSource, String fragmentSource)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         int vertexShader = this.loadShader('謱', vertexSource);
 
         if (vertexShader == 0) {
@@ -429,12 +469,16 @@ public class DistortionRenderer
 
     private DistortionRenderer.ProgramHolder createProgramHolder()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.createProgramHolder(false);
     }
 
     private DistortionRenderer.ProgramHolder createProgramHolder(
         boolean aberrationCorrected)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Object holder;
         GLStateBackup state;
 
@@ -547,6 +591,8 @@ public class DistortionRenderer
 
     private void clearGlError()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         while (GLES20.glGetError() != 0) {
             ;
         }
@@ -555,6 +601,8 @@ public class DistortionRenderer
 
     private void checkGlError(String op)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         int error;
 
         if ((error = GLES20.glGetError()) != 0) {
@@ -565,6 +613,8 @@ public class DistortionRenderer
 
     private static float clamp(float val, float min, float max)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return Math.max(min, Math.min(max, val));
     }
 
@@ -596,6 +646,8 @@ public class DistortionRenderer
                               float viewportXTexture, float viewportYTexture, float viewportWidthTexture,
                               float viewportHeightTexture, boolean flip180)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             float[] vertexData = new float[14400];
             short vertexOffset = 0;
 
@@ -725,10 +777,14 @@ public class DistortionRenderer
 
         private EyeViewport()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         }
 
         public String toString()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return "{\n" + "  x: " + this.x + ",\n" + "  y: " + this.y + ",\n" + "  width: "
                    + this.width + ",\n" + "  height: " + this.height + ",\n" + "  eyeX: " +
                    this.eyeX + ",\n" + "  eyeY: " + this.eyeY + ",\n" + "}";
@@ -742,7 +798,10 @@ public class DistortionRenderer
 
         private ProgramHolderAberration()
         {
+
             super();
+            Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO [" + Thread.currentThread().getStackTrace()[2].getMethodName() + " | " + Thread.currentThread().getStackTrace()[2].getFileName() + ":" + Thread.currentThread().getStackTrace()[2].getLineNumber() + "]");
+
         }
     }
 
@@ -757,6 +816,8 @@ public class DistortionRenderer
 
         private ProgramHolder()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         }
     }
 }

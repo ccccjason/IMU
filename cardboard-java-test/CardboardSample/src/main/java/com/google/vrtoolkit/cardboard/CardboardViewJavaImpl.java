@@ -40,6 +40,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
     public CardboardViewJavaImpl(Context context, GLSurfaceView view)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.glSurfaceView = view;
         this.headTracker = HeadTracker.createFromContext(context);
         this.hmdManager = new HeadMountedDisplayManager(context);
@@ -50,6 +52,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
     public Renderer setRenderer(
         com.google.vrtoolkit.cardboard.CardboardView.Renderer renderer)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (renderer == null) {
             return null;
         } else {
@@ -60,6 +64,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
     public Renderer setRenderer(StereoRenderer renderer)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.setRenderer((renderer != null ? new
                                  CardboardViewJavaImpl.StereoRendererHelper(renderer) :
                                  (com.google.vrtoolkit.cardboard.CardboardView.Renderer)null));
@@ -69,81 +75,111 @@ public class CardboardViewJavaImpl implements CardboardViewApi
                                     Eye monocular, Eye leftEyeNoDistortionCorrection,
                                     Eye rightEyeNoDistortionCorrection)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.rendererHelper.getCurrentEyeParams(head, leftEye, rightEye, monocular,
                                                 leftEyeNoDistortionCorrection, rightEyeNoDistortionCorrection);
     }
 
     public void setVRModeEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.vrMode = enabled;
         this.rendererHelper.setVRModeEnabled(enabled);
     }
 
     public boolean getVRMode()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.vrMode;
     }
 
     public void setAlignmentMarkerEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.uiLayer.setAlignmentMarkerEnabled(enabled);
     }
 
     public boolean getAlignmentMarkerEnabled()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.uiLayer.getAlignmentMarkerEnabled();
     }
 
     public void setSettingsButtonEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.uiLayer.setSettingsButtonEnabled(enabled);
     }
 
     public boolean getSettingsButtonEnabled()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.uiLayer.getSettingsButtonEnabled();
     }
 
     public HeadMountedDisplay getHeadMountedDisplay()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.hmdManager.getHeadMountedDisplay();
     }
 
     public void setRestoreGLStateEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.restoreGLStateEnabled = enabled;
         this.rendererHelper.setRestoreGLStateEnabled(enabled);
     }
 
     public boolean getRestoreGLStateEnabled()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.restoreGLStateEnabled;
     }
 
     public void setChromaticAberrationCorrectionEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.chromaticAberrationCorrectionEnabled = enabled;
         this.rendererHelper.setChromaticAberrationCorrectionEnabled(enabled);
     }
 
     public boolean getChromaticAberrationCorrectionEnabled()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.chromaticAberrationCorrectionEnabled;
     }
 
     public void setVignetteEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.vignetteEnabled = enabled;
         this.rendererHelper.setVignetteEnabled(enabled);
     }
 
     public boolean getVignetteEnabled()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.vignetteEnabled;
     }
 
     public void setElectronicDisplayStabilizationEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (enabled) {
             throw new UnsupportedOperationException("This is not supported in this version.");
         }
@@ -151,42 +187,58 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
     public boolean getElectronicDisplayStabilizationEnabled()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return false;
     }
 
     public void setNeckModelEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.headTracker.setNeckModelEnabled(enabled);
     }
 
     public float getNeckModelFactor()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.headTracker.getNeckModelFactor();
     }
 
     public void setNeckModelFactor(float factor)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.headTracker.setNeckModelFactor(factor);
     }
 
     public void setGyroBiasEstimationEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.headTracker.setGyroBiasEstimationEnabled(enabled);
     }
 
     public boolean getGyroBiasEstimationEnabled()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.headTracker.getGyroBiasEstimationEnabled();
     }
 
     public void resetHeadTracker()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.headTracker.resetTracker();
     }
 
     public void updateCardboardDeviceParams(CardboardDeviceParams
                                             cardboardDeviceParams)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.hmdManager.updateCardboardDeviceParams(cardboardDeviceParams)) {
             this.rendererHelper.setCardboardDeviceParams(this.getCardboardDeviceParams());
         }
@@ -195,11 +247,15 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
     public CardboardDeviceParams getCardboardDeviceParams()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.hmdManager.getHeadMountedDisplay().getCardboardDeviceParams();
     }
 
     public void updateScreenParams(ScreenParams screenParams)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.hmdManager.updateScreenParams(screenParams)) {
             this.rendererHelper.setScreenParams(this.getScreenParams());
         }
@@ -208,27 +264,37 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
     public ScreenParams getScreenParams()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.hmdManager.getHeadMountedDisplay().getScreenParams();
     }
 
     public float getInterpupillaryDistance()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.getCardboardDeviceParams().getInterLensDistance();
     }
 
     public void setDistortionCorrectionEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.distortionCorrectionEnabled = enabled;
         this.rendererHelper.setDistortionCorrectionEnabled(enabled);
     }
 
     public boolean getDistortionCorrectionEnabled()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.distortionCorrectionEnabled;
     }
 
     public void setLowLatencyModeEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (enabled) {
             throw new IllegalArgumentException("Low latency mode is not supported in this build");
         }
@@ -236,26 +302,36 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
     public boolean getLowLatencyModeEnabled()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return false;
     }
 
     public void undistortTexture(int inputTexture)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.rendererHelper.undistortTexture(inputTexture);
     }
 
     public void renderUiLayer()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.rendererHelper.renderUiLayer();
     }
 
     public void setDistortionCorrectionScale(float scale)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.rendererHelper.setDistortionCorrectionScale(scale);
     }
 
     public void onResume()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.hmdManager.onResume();
         this.rendererHelper.setCardboardDeviceParams(this.getCardboardDeviceParams());
         this.headTracker.startTracking();
@@ -263,12 +339,16 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
     public void onPause()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.hmdManager.onPause();
         this.headTracker.stopTracking();
     }
 
     public void onDetachedFromWindow()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.shutdownLatch == null) {
             this.shutdownLatch = new CountDownLatch(1);
             this.rendererHelper.shutdown();
@@ -286,6 +366,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
     public void runOnCardboardTriggerListener()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.cardboardTriggerListener != null) {
             this.cardboardTriggerListener.run();
         }
@@ -294,6 +376,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
     public boolean onTouchEvent(MotionEvent e)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.uiLayer.onTouchEvent(e)) {
             return true;
         } else if (e.getActionMasked() == 0 && this.cardboardTriggerListener != null &&
@@ -307,26 +391,36 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
     public void setOnCardboardTriggerListener(Runnable listener)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.cardboardTriggerListener = listener;
     }
 
     public void setConvertTapIntoTrigger(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.convertTapIntoTrigger = enabled;
     }
 
     public boolean getConvertTapIntoTrigger()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.convertTapIntoTrigger;
     }
 
     public boolean handlesMagnetInput()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return false;
     }
 
     private void queueEvent(Runnable r)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.glSurfaceView.queueEvent(r);
     }
 
@@ -338,17 +432,23 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public StereoRendererHelper(StereoRenderer stereoRenderer)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.stereoRenderer = stereoRenderer;
             this.vrMode = CardboardViewJavaImpl.this.vrMode;
         }
 
         public void setVRModeEnabled(boolean enabled)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.vrMode = enabled;
         }
 
         public void onDrawFrame(HeadTransform head, Eye leftEye, Eye rightEye)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.stereoRenderer.onNewFrame(head);
             GLES20.glEnable(3089);
             leftEye.getViewport().setGLViewport();
@@ -364,6 +464,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public void onFinishFrame(Viewport viewport)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             viewport.setGLViewport();
             viewport.setGLScissor();
             this.stereoRenderer.onFinishFrame(viewport);
@@ -371,6 +473,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public void onSurfaceChanged(int width, int height)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             if (this.vrMode) {
                 this.stereoRenderer.onSurfaceChanged(width / 2, height);
             } else {
@@ -381,11 +485,15 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public void onSurfaceCreated(EGLConfig config)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.stereoRenderer.onSurfaceCreated(config);
         }
 
         public void onRendererShutdown()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.stereoRenderer.onRendererShutdown();
         }
     }
@@ -412,6 +520,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public RendererHelper()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.updateFieldOfView(this.leftEye.getFov(), this.rightEye.getFov());
             this.leftEyeNoDistortion = new Eye(1);
             this.rightEyeNoDistortion = new Eye(2);
@@ -433,11 +543,15 @@ public class CardboardViewJavaImpl implements CardboardViewApi
         public void setRenderer(com.google.vrtoolkit.cardboard.CardboardView.Renderer
                                 renderer)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.renderer = renderer;
         }
 
         public void shutdown()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             CardboardViewJavaImpl.this.queueEvent(new Runnable() {
                 public void run() {
                     if (RendererHelper.this.renderer != null &&
@@ -453,6 +567,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public void setCardboardDeviceParams(CardboardDeviceParams newParams)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             final CardboardDeviceParams deviceParams = new CardboardDeviceParams(newParams);
             CardboardViewJavaImpl.this.queueEvent(new Runnable() {
                 public void run() {
@@ -464,6 +580,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public void setScreenParams(ScreenParams newParams)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             final ScreenParams screenParams = new ScreenParams(newParams);
             CardboardViewJavaImpl.this.queueEvent(new Runnable() {
                 public void run() {
@@ -475,6 +593,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public void setDistortionCorrectionEnabled(final boolean enabled)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             CardboardViewJavaImpl.this.queueEvent(new Runnable() {
                 public void run() {
                     RendererHelper.this.distortionCorrectionEnabled = enabled;
@@ -485,6 +605,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public void setDistortionCorrectionScale(final float scale)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             CardboardViewJavaImpl.this.queueEvent(new Runnable() {
                 public void run() {
                     RendererHelper.this.distortionRenderer.setResolutionScale(scale);
@@ -494,6 +616,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public void setVRModeEnabled(final boolean enabled)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             CardboardViewJavaImpl.this.uiLayer.setEnabled(enabled);
             CardboardViewJavaImpl.this.queueEvent(new Runnable() {
                 public void run() {
@@ -518,6 +642,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public void setRestoreGLStateEnabled(final boolean enabled)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             CardboardViewJavaImpl.this.queueEvent(new Runnable() {
                 public void run() {
                     RendererHelper.this.distortionRenderer.setRestoreGLStateEnabled(enabled);
@@ -527,6 +653,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public void setChromaticAberrationCorrectionEnabled(final boolean enabled)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             CardboardViewJavaImpl.this.queueEvent(new Runnable() {
                 public void run() {
                     RendererHelper.this.distortionRenderer.setChromaticAberrationCorrectionEnabled(
@@ -537,6 +665,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public void setVignetteEnabled(final boolean enabled)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             CardboardViewJavaImpl.this.queueEvent(new Runnable() {
                 public void run() {
                     RendererHelper.this.distortionRenderer.setVignetteEnabled(enabled);
@@ -547,6 +677,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public void undistortTexture(final int inputTexture)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             CardboardViewJavaImpl.this.queueEvent(new Runnable() {
                 public void run() {
                     RendererHelper.this.distortionRenderer.undistortTexture(inputTexture);
@@ -556,6 +688,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public void renderUiLayer()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             CardboardViewJavaImpl.this.queueEvent(new Runnable() {
                 public void run() {
                     CardboardViewJavaImpl.this.uiLayer.draw();
@@ -568,6 +702,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
                                         final Eye leftEyeNoDistortionCorrection,
                                         final Eye rightEyeNoDistortionCorrection)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             final CountDownLatch finished = new CountDownLatch(1);
             CardboardViewJavaImpl.this.queueEvent(new Runnable() {
                 public void run() {
@@ -591,6 +727,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
                 Eye leftEye, Eye rightEye, Eye monocular, Eye leftEyeNoDistortionCorrection,
                 Eye rightEyeNoDistortionCorrection)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.getFrameParams(head, leftEye, rightEye, monocular);
             System.arraycopy(leftEye.getEyeView(), 0, this.leftEyeNoDistortion.getEyeView(),
                              0, 16);
@@ -607,6 +745,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
         private void getFrameParams(HeadTransform head, Eye leftEye, Eye rightEye,
                                     Eye monocular)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             CardboardDeviceParams cdp = this.hmd.getCardboardDeviceParams();
             ScreenParams screen = this.hmd.getScreenParams();
             CardboardViewJavaImpl.this.headTracker.getLastHeadView(head.getHeadView(), 0);
@@ -663,6 +803,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public void onDrawFrame(GL10 gl)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             if (this.renderer != null && this.surfaceCreated) {
                 this.getCurrentEyeParamsFromRenderingThread(this.headTransform, this.leftEye,
                         this.rightEye, this.monocular, this.leftEyeNoDistortion,
@@ -691,6 +833,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public void onSurfaceChanged(GL10 gl, int width, int height)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             if (this.renderer != null && this.surfaceCreated) {
                 ScreenParams screen = this.hmd.getScreenParams();
 
@@ -715,6 +859,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         public void onSurfaceCreated(GL10 gl, EGLConfig config)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             if (this.renderer != null) {
                 this.surfaceCreated = true;
                 this.renderer.onSurfaceCreated(config);
@@ -724,6 +870,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         private void updateFieldOfView(FieldOfView leftEyeFov, FieldOfView rightEyeFov)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             CardboardDeviceParams cdp = this.hmd.getCardboardDeviceParams();
             ScreenParams screen = this.hmd.getScreenParams();
             Distortion distortion = cdp.getDistortion();
@@ -752,6 +900,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         private void updateMonocularFieldOfView(FieldOfView monocularFov)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             float monocularBottomFov = 22.5F;
             float monocularLeftFov = (float)Math.toDegrees(Math.atan(Math.tan(
                                          Math.toRadians((double)monocularBottomFov)) * (double)
@@ -765,6 +915,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         private void getFovAndViewportNoDistortionCorrection(Eye leftEye, Eye rightEye)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             ScreenParams screen = this.hmd.getScreenParams();
             CardboardDeviceParams cdp = this.hmd.getCardboardDeviceParams();
             Distortion distortion = cdp.getDistortion();
@@ -818,6 +970,8 @@ public class CardboardViewJavaImpl implements CardboardViewApi
 
         private float getVirtualEyeToScreenDistance()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return this.hmd.getCardboardDeviceParams().getScreenToLensDistance();
         }
     }

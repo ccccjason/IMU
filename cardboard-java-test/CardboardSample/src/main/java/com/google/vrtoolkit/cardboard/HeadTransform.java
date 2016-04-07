@@ -20,6 +20,8 @@ public class HeadTransform
 
 
     public  static void getEulerAngles_export() {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
 
         float[] eulerAngles = {0,0,0};
 
@@ -32,6 +34,8 @@ public class HeadTransform
 
     public HeadTransform()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         ptr_HeadTransform = this;
         Matrix.setIdentityM(this.headView, 0);
     }
@@ -39,11 +43,15 @@ public class HeadTransform
     @UsedByNative
     float[] getHeadView()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.headView;
     }
 
     public void getHeadView(float[] headView, int offset)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (offset + 16 > headView.length) {
             throw new IllegalArgumentException("Not enough space to write the result");
         } else {
@@ -53,6 +61,8 @@ public class HeadTransform
 
     public void getForwardVector(float[] forward, int offset)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (offset + 3 > forward.length) {
             throw new IllegalArgumentException("Not enough space to write the result");
         } else {
@@ -65,6 +75,8 @@ public class HeadTransform
 
     public void getUpVector(float[] up, int offset)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (offset + 3 > up.length) {
             throw new IllegalArgumentException("Not enough space to write the result");
         } else {
@@ -77,6 +89,8 @@ public class HeadTransform
 
     public void getRightVector(float[] right, int offset)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (offset + 3 > right.length) {
             throw new IllegalArgumentException("Not enough space to write the result");
         } else {
@@ -89,6 +103,8 @@ public class HeadTransform
 
     public void getQuaternion(float[] quaternion, int offset)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (offset + 4 > quaternion.length) {
             throw new IllegalArgumentException("Not enough space to write the result");
         } else {
@@ -139,6 +155,8 @@ public class HeadTransform
 
     public void getEulerAngles(float[] eulerAngles, int offset)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (offset + 3 > eulerAngles.length) {
             throw new IllegalArgumentException("Not enough space to write the result");
         } else {
@@ -162,6 +180,8 @@ public class HeadTransform
 
     public void getTranslation(float[] translation, int offset)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (offset + 3 > translation.length) {
             throw new IllegalArgumentException("Not enough space to write the result");
         } else {

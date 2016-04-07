@@ -16,6 +16,8 @@ import android.os.Looper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import android.util.Log;
+import android.util.Log;
 
 public class MagnetSensor
 {
@@ -25,6 +27,8 @@ public class MagnetSensor
 
     public MagnetSensor(Context context)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if ("HTC One".equals(Build.MODEL)) {
             this.detector = new MagnetSensor.VectorTriggerDetector(context);
         } else {
@@ -35,12 +39,16 @@ public class MagnetSensor
 
     public void start()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.detectorThread = new Thread(this.detector);
         this.detectorThread.start();
     }
 
     public void stop()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.detectorThread != null) {
             this.detectorThread.interrupt();
             this.detector.stop();
@@ -51,6 +59,8 @@ public class MagnetSensor
     public void setOnCardboardTriggerListener(
         MagnetSensor.OnCardboardTriggerListener listener)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.detector.setOnCardboardTriggerListener(listener, new Handler());
     }
 
@@ -68,7 +78,10 @@ public class MagnetSensor
 
         public VectorTriggerDetector(Context context)
         {
+
             super(context);
+            Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO [" + Thread.currentThread().getStackTrace()[2].getMethodName() + " | " + Thread.currentThread().getStackTrace()[2].getFileName() + ":" + Thread.currentThread().getStackTrace()[2].getLineNumber() + "]");
+
             xThreshold = -3;
             yThreshold = 15;
             zThreshold = 6;
@@ -77,7 +90,10 @@ public class MagnetSensor
         public VectorTriggerDetector(Context context, int xThreshold, int yThreshold,
                                      int zThreshold)
         {
-            super(context);
+	       super(context);
+            Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO [" + Thread.currentThread().getStackTrace()[2].getMethodName() + " | " + Thread.currentThread().getStackTrace()[2].getFileName() + ":" + Thread.currentThread().getStackTrace()[2].getLineNumber() + "]");
+
+
             xThreshold = xThreshold;
             yThreshold = yThreshold;
             zThreshold = zThreshold;
@@ -85,6 +101,8 @@ public class MagnetSensor
 
         private void addData(float[] values, long time)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.sensorData.add(values);
             this.sensorTimes.add(Long.valueOf(time));
 
@@ -98,6 +116,8 @@ public class MagnetSensor
 
         private void evaluateModel(long time)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             if (time - this.lastFiring >= 350000000L && this.sensorData.size() >= 2) {
                 int baseIndex = 0;
 
@@ -124,6 +144,8 @@ public class MagnetSensor
 
         public void onSensorChanged(SensorEvent event)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             if (event.sensor.equals(this.magnetometer)) {
                 float[] values = event.values;
 
@@ -138,6 +160,8 @@ public class MagnetSensor
 
         public void onAccuracyChanged(Sensor sensor, int accuracy)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         }
     }
 
@@ -155,18 +179,26 @@ public class MagnetSensor
 
         public ThresholdTriggerDetector(Context context)
         {
+
             super(context);
+            Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO [" + Thread.currentThread().getStackTrace()[2].getMethodName() + " | " + Thread.currentThread().getStackTrace()[2].getFileName() + ":" + Thread.currentThread().getStackTrace()[2].getLineNumber() + "]");
+
         }
 
         public ThresholdTriggerDetector(Context context, int t1, int t2)
         {
+
             super(context);
+            Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO [" + Thread.currentThread().getStackTrace()[2].getMethodName() + " | " + Thread.currentThread().getStackTrace()[2].getFileName() + ":" + Thread.currentThread().getStackTrace()[2].getLineNumber() + "]");
+
             t1 = t1;
             t2 = t2;
         }
 
         private void addData(float[] values, long time)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.sensorData.add(values);
             this.sensorTimes.add(Long.valueOf(time));
 
@@ -180,6 +212,8 @@ public class MagnetSensor
 
         private void evaluateModel(long time)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             if (time - this.lastFiring >= 350000000L && this.sensorData.size() >= 2) {
                 float[] baseline = (float[]) this.sensorData.get(this.sensorData.size() - 1);
                 int startSecondSegment = 0;
@@ -208,6 +242,8 @@ public class MagnetSensor
 
         private void computeOffsets(float[] offsets, float[] baseline)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             for (int i = 0; i < this.sensorData.size(); ++i) {
                 float[] point = (float[]) this.sensorData.get(i);
                 float[] o = new float[] {point[0] - baseline[0], point[1] - baseline[1], point[2] - baseline[2]};
@@ -220,6 +256,8 @@ public class MagnetSensor
 
         private float computeMaximum(float[] offsets)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             float max = -Float.MAX_VALUE;
             float[] arr = offsets;
             int len = offsets.length;
@@ -234,6 +272,8 @@ public class MagnetSensor
 
         private float computeMinimum(float[] offsets)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             float min = Float.MAX_VALUE;
             float[] arr = offsets;
             int len$ = offsets.length;
@@ -248,6 +288,8 @@ public class MagnetSensor
 
         public void onSensorChanged(SensorEvent event)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             if (event.sensor.equals(this.magnetometer)) {
                 float[] values = event.values;
 
@@ -262,6 +304,8 @@ public class MagnetSensor
 
         public void onAccuracyChanged(Sensor sensor, int accuracy)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         }
     }
 
@@ -276,6 +320,8 @@ public class MagnetSensor
 
         public TriggerDetector(Context context)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.sensorManager = (SensorManager) context.getSystemService(
                                      Context.SENSOR_SERVICE);
             this.magnetometer = this.sensorManager.getDefaultSensor(2);
@@ -284,12 +330,16 @@ public class MagnetSensor
         public synchronized void setOnCardboardTriggerListener(
             MagnetSensor.OnCardboardTriggerListener listener, Handler handler)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.listener = listener;
             this.handler = handler;
         }
 
         protected void handleButtonPressed()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             synchronized(this) {
                 if (this.listener != null) {
                     this.handler.post(new Runnable() {
@@ -307,6 +357,8 @@ public class MagnetSensor
 
         public void run()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             Looper.prepare();
             this.sensorManager.registerListener(this, this.magnetometer, 0);
             Looper.loop();
@@ -314,15 +366,21 @@ public class MagnetSensor
 
         public void stop()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.sensorManager.unregisterListener(this);
         }
 
         public void onSensorChanged(SensorEvent event)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         }
 
         public void onAccuracyChanged(Sensor sensor, int accuracy)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         }
     }
 

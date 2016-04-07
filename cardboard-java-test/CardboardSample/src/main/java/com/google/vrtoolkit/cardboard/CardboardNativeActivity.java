@@ -16,6 +16,7 @@ import com.google.vrtoolkit.cardboard.VolumeKeyState.Handler;
 import com.google.vrtoolkit.cardboard.sensors.NfcSensor;
 import com.google.vrtoolkit.cardboard.sensors.SensorConnection;
 import com.google.vrtoolkit.cardboard.sensors.SensorConnection.SensorListener;
+import android.util.Log;
 
 public class CardboardNativeActivity extends NativeActivity implements
     SensorListener, Handler
@@ -27,10 +28,14 @@ public class CardboardNativeActivity extends NativeActivity implements
 
     public CardboardNativeActivity()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
     }
 
     public void setCardboardView(CardboardView cardboardView)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.cardboardView = cardboardView;
 
         if (cardboardView != null) {
@@ -46,26 +51,36 @@ public class CardboardNativeActivity extends NativeActivity implements
 
     public CardboardView getCardboardView()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.cardboardView;
     }
 
     public NfcSensor getNfcSensor()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.sensorConnection.getNfcSensor();
     }
 
     public void setVolumeKeysMode(int mode)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.volumeKeyState.setVolumeKeysMode(mode);
     }
 
     public int getVolumeKeysMode()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.volumeKeyState.getVolumeKeysMode();
     }
 
     public boolean areVolumeKeysDisabled()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.volumeKeyState.areVolumeKeysDisabled(
                    this.sensorConnection.getNfcSensor());
     }
@@ -73,19 +88,27 @@ public class CardboardNativeActivity extends NativeActivity implements
     public void onInsertedIntoCardboard(CardboardDeviceParams
                                         cardboardDeviceParams)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.updateCardboardDeviceParams(cardboardDeviceParams);
     }
 
     public void onRemovedFromCardboard()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
     }
 
     public void onCardboardTrigger()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
     }
 
     protected void updateCardboardDeviceParams(CardboardDeviceParams newParams)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.cardboardView != null) {
             this.cardboardView.updateCardboardDeviceParams(newParams);
         }
@@ -94,6 +117,8 @@ public class CardboardNativeActivity extends NativeActivity implements
 
     protected void onCreate(Bundle savedInstanceState)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.requestWindowFeature(1);
         super.onCreate(savedInstanceState);
         this.fullscreenMode.startFullscreenMode();
@@ -103,6 +128,8 @@ public class CardboardNativeActivity extends NativeActivity implements
 
     protected void onResume()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         super.onResume();
 
         if (this.cardboardView != null) {
@@ -115,6 +142,8 @@ public class CardboardNativeActivity extends NativeActivity implements
 
     protected void onPause()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         super.onPause();
 
         if (this.cardboardView != null) {
@@ -126,12 +155,16 @@ public class CardboardNativeActivity extends NativeActivity implements
 
     protected void onDestroy()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.sensorConnection.onDestroy(this);
         super.onDestroy();
     }
 
     public void setContentView(View view)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (view instanceof CardboardView) {
             this.setCardboardView((CardboardView)view);
         }
@@ -141,6 +174,8 @@ public class CardboardNativeActivity extends NativeActivity implements
 
     public void setContentView(View view, LayoutParams params)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (view instanceof CardboardView) {
             this.setCardboardView((CardboardView)view);
         }
@@ -150,16 +185,22 @@ public class CardboardNativeActivity extends NativeActivity implements
 
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.volumeKeyState.onKey(keyCode) || super.onKeyDown(keyCode, event);
     }
 
     public boolean onKeyUp(int keyCode, KeyEvent event)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.volumeKeyState.onKey(keyCode) || super.onKeyUp(keyCode, event);
     }
 
     public void onWindowFocusChanged(boolean hasFocus)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         super.onWindowFocusChanged(hasFocus);
         this.fullscreenMode.onWindowFocusChanged(hasFocus);
     }

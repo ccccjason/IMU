@@ -17,6 +17,8 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
+import android.util.Log;
+import android.util.Log;
 
 class UiLayer
 {
@@ -43,6 +45,8 @@ class UiLayer
 
     UiLayer(Context context)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.context = context;
         float density = context.getResources().getDisplayMetrics().density;
         int buttonWidthPx = (int)(28.0F * density);
@@ -58,11 +62,15 @@ class UiLayer
 
     void setEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.uiLayerEnabled = enabled;
     }
 
     void updateViewport(Viewport viewport)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         synchronized(this) {
             if (!this.viewport.equals(viewport)) {
                 int w = viewport.width;
@@ -78,6 +86,8 @@ class UiLayer
 
     void initializeGl()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.shader.initializeGl();
         this.glStateBackup.clearTrackedVertexAttributes();
         this.glStateBackup.addTrackedVertexAttribute(this.shader.aPosition);
@@ -90,6 +100,8 @@ class UiLayer
 
     void draw()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.uiLayerEnabled) {
             if (this.getSettingsButtonEnabled() || this.getAlignmentMarkerEnabled()) {
                 if (!this.initialized) {
@@ -122,6 +134,8 @@ class UiLayer
 
     synchronized void setAlignmentMarkerEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.alignmentMarkerEnabled != enabled) {
             this.alignmentMarkerEnabled = enabled;
             this.shouldUpdateViewport = true;
@@ -131,11 +145,15 @@ class UiLayer
 
     synchronized boolean getAlignmentMarkerEnabled()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.alignmentMarkerEnabled;
     }
 
     synchronized void setSettingsButtonEnabled(boolean enabled)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.settingsButtonEnabled != enabled) {
             this.settingsButtonEnabled = enabled;
             this.shouldUpdateViewport = true;
@@ -145,11 +163,15 @@ class UiLayer
 
     synchronized boolean getSettingsButtonEnabled()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.settingsButtonEnabled;
     }
 
     boolean onTouchEvent(MotionEvent e)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (!this.uiLayerEnabled) {
             return false;
         } else {
@@ -187,6 +209,8 @@ class UiLayer
 
     private void setPressed(boolean pressed)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.settingsButtonRenderer != null) {
             this.settingsButtonRenderer.setColor(pressed ? -12303292 : -3355444);
         }
@@ -195,6 +219,8 @@ class UiLayer
 
     private static void clearGlError()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         while (GLES20.glGetError() != 0) {
             ;
         }
@@ -203,6 +229,8 @@ class UiLayer
 
     private static void checkGlError(String op)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         int error;
 
         if ((error = GLES20.glGetError()) != 0) {
@@ -213,6 +241,8 @@ class UiLayer
 
     private static float lerp(float a, float b, float t)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return a * (1.0F - t) + b * t;
     }
 
@@ -230,12 +260,17 @@ class UiLayer
 
         SettingsButtonRenderer(UiLayer.ShaderProgram shader, int buttonWidthPx)
         {
+
             super(shader);
+            Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO [" + Thread.currentThread().getStackTrace()[2].getMethodName() + " | " + Thread.currentThread().getStackTrace()[2].getFileName() + ":" + Thread.currentThread().getStackTrace()[2].getLineNumber() + "]");
+
             this.buttonWidthPx = buttonWidthPx;
         }
 
         void initializeGl()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             float[] vertexData = new float[120];
             byte numVerticesPerRim = 30;
             float lerpInterval = 8.0F;
@@ -291,11 +326,15 @@ class UiLayer
 
         synchronized void setColor(int color)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.color = color;
         }
 
         void updateViewport(Viewport viewport)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             Matrix.setIdentityM(this.mvp, 0);
             float yScale = (float)this.buttonWidthPx / (float)viewport.height;
             float xScale = yScale * (float)viewport.height / (float)viewport.width;
@@ -305,6 +344,8 @@ class UiLayer
 
         void draw()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             GLES20.glUseProgram(this.shader.program);
             synchronized(this) {
                 GLES20.glUniform4f(this.shader.uColor, (float)Color.red(this.color) / 255.0F,
@@ -325,13 +366,18 @@ class UiLayer
         AlignmentMarkerRenderer(UiLayer.ShaderProgram shader,
                                 float verticalBorderPaddingPx, float lineThicknessPx)
         {
+
             super(shader);
+            Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO [" + Thread.currentThread().getStackTrace()[2].getMethodName() + " | " + Thread.currentThread().getStackTrace()[2].getFileName() + ":" + Thread.currentThread().getStackTrace()[2].getLineNumber() + "]");
+
             this.verticalBorderPaddingPx = verticalBorderPaddingPx;
             this.lineThicknessPx = lineThicknessPx;
         }
 
         void initializeGl()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             float[] vertexData = new float[] {1.0F, 1.0F, -1.0F, 1.0F, 1.0F, -1.0F, -1.0F, -1.0F};
             short[] indexData = new short[vertexData.length / 2];
 
@@ -344,6 +390,8 @@ class UiLayer
 
         void updateViewport(Viewport viewport)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             Matrix.setIdentityM(this.mvp, 0);
             float xScale = this.lineThicknessPx / (float)viewport.width;
             float yScale = 1.0F - 2.0F * this.verticalBorderPaddingPx /
@@ -353,6 +401,8 @@ class UiLayer
 
         void draw()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             GLES20.glUseProgram(this.shader.program);
             GLES20.glUniform4f(this.shader.uColor, (float)Color.red(COLOR) / 255.0F,
                                (float)Color.green(COLOR) / 255.0F, (float)Color.blue(COLOR) / 255.0F,
@@ -376,11 +426,15 @@ class UiLayer
 
         MeshRenderer(UiLayer.ShaderProgram shader)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.shader = shader;
         }
 
         void genAndBindBuffers(float[] vertexData, short[] indexData)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             FloatBuffer vertexBuffer = ByteBuffer.allocateDirect(vertexData.length *
                                        4).order(ByteOrder.nativeOrder()).asFloatBuffer();
             vertexBuffer.put(vertexData).position(0);
@@ -402,11 +456,15 @@ class UiLayer
 
         void updateViewport(Viewport viewport)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             Matrix.setIdentityM(this.mvp, 0);
         }
 
         void draw()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             GLES20.glDisable(2929);
             GLES20.glDisable(2884);
             GLES20.glUseProgram(this.shader.program);
@@ -432,10 +490,14 @@ class UiLayer
 
         private ShaderProgram()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         }
 
         void initializeGl()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.program =
                 this.createProgram("uniform mat4 uMVPMatrix;\nattribute vec2 aPosition;\nvoid main() {\n  gl_Position = uMVPMatrix * vec4(aPosition, 0.0, 1.0);\n}\n",
                                    "precision mediump float;\nuniform vec4 uColor;\nvoid main() {\n  gl_FragColor = uColor;\n}\n");
@@ -467,6 +529,8 @@ class UiLayer
 
         private int loadShader(int shaderType, String source)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             int shader = GLES20.glCreateShader(shaderType);
 
             if (shader != 0) {
@@ -488,6 +552,8 @@ class UiLayer
 
         private int createProgram(String vertexSource, String fragmentSource)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             int vertexShader = this.loadShader('謱', vertexSource);
 
             if (vertexShader == 0) {

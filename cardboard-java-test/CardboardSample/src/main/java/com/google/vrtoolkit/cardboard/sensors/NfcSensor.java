@@ -53,6 +53,8 @@ public class NfcSensor
 
     public static NfcSensor getInstance(Context context)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (sInstance == null) {
             sInstance = new NfcSensor(context);
         }
@@ -62,6 +64,8 @@ public class NfcSensor
 
     private NfcSensor(Context context)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         this.context = context.getApplicationContext();
         this.nfcAdapter = NfcAdapter.getDefaultAdapter(context);
         this.listeners = new ArrayList();
@@ -79,6 +83,8 @@ public class NfcSensor
     public void addOnCardboardNfcListener(NfcSensor.OnCardboardNfcListener
                                           listener)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (listener != null) {
             List var2 = this.listeners;
             synchronized(this.listeners) {
@@ -110,6 +116,8 @@ public class NfcSensor
     public void removeOnCardboardNfcListener(NfcSensor.OnCardboardNfcListener
             listener)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (listener != null) {
             List var2 = this.listeners;
             synchronized(this.listeners) {
@@ -134,16 +142,22 @@ public class NfcSensor
 
     public boolean isNfcSupported()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.nfcAdapter != null;
     }
 
     public boolean isNfcEnabled()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         return this.isNfcSupported() && this.nfcAdapter.isEnabled();
     }
 
     public boolean isDeviceInCardboard()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Object var1 = this.tagLock;
         synchronized(this.tagLock) {
             return this.currentTagIsCardboard;
@@ -152,6 +166,8 @@ public class NfcSensor
 
     public NdefMessage getTagContents()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Object var1 = this.tagLock;
         synchronized(this.tagLock) {
             return this.currentNdef != null ? this.currentNdef.getCachedNdefMessage() :
@@ -161,6 +177,8 @@ public class NfcSensor
 
     public NdefMessage getCurrentTagContents() throws TagLostException, IOException,
     FormatException {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Object var1 = this.tagLock;
         synchronized(this.tagLock)
         {
@@ -170,6 +188,8 @@ public class NfcSensor
 
     public int getTagCapacity()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Object var1 = this.tagLock;
         synchronized(this.tagLock) {
             if (this.currentNdef == null) {
@@ -182,6 +202,8 @@ public class NfcSensor
 
     public void writeUri(Uri uri) throws TagLostException, IOException,
     IllegalArgumentException {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         Object var2 = this.tagLock;
         synchronized(this.tagLock)
         {
@@ -269,6 +291,8 @@ public class NfcSensor
 
     public void onResume(Activity activity)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.isNfcEnabled()) {
             Intent intent = new Intent("android.nfc.action.NDEF_DISCOVERED");
             intent.setPackage(activity.getPackageName());
@@ -281,6 +305,8 @@ public class NfcSensor
 
     public void onPause(Activity activity)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.isNfcEnabled()) {
             this.nfcAdapter.disableForegroundDispatch(activity);
         }
@@ -288,6 +314,8 @@ public class NfcSensor
 
     public void onNfcIntent(Intent intent)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.isNfcEnabled() && intent != null &&
             this.nfcIntentFilters[0].matchAction(intent.getAction())) {
             this.onNewNfcTag((Tag) intent.getParcelableExtra("android.nfc.extra.TAG"));
@@ -296,6 +324,8 @@ public class NfcSensor
 
     private void onNewNfcTag(Tag nfcTag)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (nfcTag != null) {
             Object var2 = this.tagLock;
             synchronized(this.tagLock) {
@@ -383,6 +413,8 @@ public class NfcSensor
 
     private void closeCurrentNfcTag()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (this.nfcDisconnectTimer != null) {
             this.nfcDisconnectTimer.cancel();
         }
@@ -402,6 +434,8 @@ public class NfcSensor
 
     private void sendDisconnectionEvent()
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         List var1 = this.listeners;
         synchronized(this.listeners) {
             Iterator i$ = this.listeners.iterator();
@@ -416,6 +450,8 @@ public class NfcSensor
 
     private boolean isCardboardNdefMessage(NdefMessage message)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (message == null) {
             return false;
         } else {
@@ -436,6 +472,8 @@ public class NfcSensor
 
     private boolean isCardboardNdefRecord(NdefRecord record)
     {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
         if (record == null) {
             return false;
         } else {
@@ -452,17 +490,23 @@ public class NfcSensor
         public ListenerHelper(NfcSensor.OnCardboardNfcListener listener,
                               Handler handler)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.listener = listener;
             this.handler = handler;
         }
 
         public NfcSensor.OnCardboardNfcListener getListener()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             return this.listener;
         }
 
         public void onInsertedIntoCardboard(final CardboardDeviceParams deviceParams)
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.handler.post(new Runnable() {
                 public void run() {
                     ListenerHelper.this.listener.onInsertedIntoCardboard(deviceParams);
@@ -472,6 +516,8 @@ public class NfcSensor
 
         public void onRemovedFromCardboard()
         {
+	Log.i(Thread.currentThread().getStackTrace()[2].getClassName(), "YAO ["+ Thread.currentThread().getStackTrace()[2].getMethodName() +" | "+Thread.currentThread().getStackTrace()[2].getFileName()+":"+Thread.currentThread().getStackTrace()[2].getLineNumber()+"]");
+
             this.handler.post(new Runnable() {
                 public void run() {
                     ListenerHelper.this.listener.onRemovedFromCardboard();
