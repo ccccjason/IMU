@@ -1,10 +1,14 @@
 [
     {
+        "merged": "/home/jason_yao/github/cardboard-java/CardboardSample/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/ic_launcher.png",
+        "source": "/home/jason_yao/github/cardboard-java/CardboardSample/src/main/res/drawable-xxhdpi/ic_launcher.png"
+    },
+    {
         "merged": "/home/jason_yao/cardboard/cardboard-java-test/CardboardSample/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/ic_launcher.png",
         "source": "/home/jason_yao/cardboard/cardboard-java-test/CardboardSample/src/main/res/drawable-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "/home/jason_yao/github/cardboard-java/CardboardSample/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/ic_launcher.png",
-        "source": "/home/jason_yao/github/cardboard-java/CardboardSample/src/main/res/drawable-xxhdpi/ic_launcher.png"
+        "merged": "/home/shihyu/github/IMU/cardboard-java-test/CardboardSample/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/ic_launcher.png",
+        "source": "/home/shihyu/github/IMU/cardboard-java-test/CardboardSample/src/main/res/drawable-xxhdpi/ic_launcher.png"
     }
 ]

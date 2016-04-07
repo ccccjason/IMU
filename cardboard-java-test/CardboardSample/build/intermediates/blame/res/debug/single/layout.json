@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/home/shihyu/github/IMU/cardboard-java-test/CardboardSample/build/intermediates/res/merged/debug/layout/common_ui.xml",
+        "source": "/home/shihyu/github/IMU/cardboard-java-test/CardboardSample/src/main/res/layout/common_ui.xml"
+    },
+    {
         "merged": "/home/jason_yao/cardboard/cardboard-java-test/CardboardSample/build/intermediates/res/merged/debug/layout/common_ui.xml",
         "source": "/home/jason_yao/cardboard/cardboard-java-test/CardboardSample/src/main/res/layout/common_ui.xml"
     },
