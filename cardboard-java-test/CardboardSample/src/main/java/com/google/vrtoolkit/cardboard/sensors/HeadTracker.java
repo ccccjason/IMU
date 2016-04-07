@@ -79,6 +79,11 @@ public class HeadTracker implements SensorEventListener
         if (event.sensor.getType() == 1) {
             this.latestAcc.set((double) event.values[0], (double) event.values[1],
                                (double) event.values[2]);
+/*
+            Log.i("HeadTracker", "accx=" + (double) event.values[0] + "accy=" + (double) event.values[1] + "accz=" + (double) event.values[2]);
+            */
+
+
             this.tracker.processAcc(this.latestAcc, event.timestamp);
             var2 = this.gyroBiasEstimatorMutex;
             synchronized(this.gyroBiasEstimatorMutex) {
@@ -208,7 +213,7 @@ public class HeadTracker implements SensorEventListener
 
     public void getLastHeadView(float[] headView, int offset)
     {
-        Log.i("YYYY", "getLastHeadView");
+        // Log.i("YYYY", "getLastHeadView");
 
         if (offset + 16 > headView.length) {
             throw new IllegalArgumentException("Not enough space to write the result");

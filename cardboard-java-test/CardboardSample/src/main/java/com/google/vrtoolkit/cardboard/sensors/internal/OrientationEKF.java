@@ -112,7 +112,7 @@ public class OrientationEKF
 
     public double getHeadingDegrees()
     {
-        Log.i("YYYY", "getHeadingDegrees");
+        //Log.i("YYYY", "getHeadingDegrees");
         double x = this.so3SensorFromWorld.get(2, 0);
         double y = this.so3SensorFromWorld.get(2, 1);
         double mag = Math.sqrt(x * x + y * y);
@@ -136,7 +136,7 @@ public class OrientationEKF
 
     public synchronized void setHeadingDegrees(double heading)
     {
-        Log.i("YYYY", "setHeadingDegrees heading = " + heading);
+        //Log.i("YYYY", "setHeadingDegrees heading = " + heading);
         double currentHeading = this.getHeadingDegrees();
         double deltaHeading = heading - currentHeading;
         double s = Math.sin(deltaHeading / 180.0D * 3.141592653589793D);
@@ -149,13 +149,13 @@ public class OrientationEKF
 
     public double[] getGLMatrix()
     {
-        Log.i("YYYY", "getGLMatrix");
+        //Log.i("YYYY", "getGLMatrix");
         return this.glMatrixFromSo3(this.so3SensorFromWorld);
     }
 
     public double[] getPredictedGLMatrix(double secondsAfterLastGyroEvent)
     {
-        Log.i("YYYY", "getPredictedGLMatrix");
+        //Log.i("YYYY", "getPredictedGLMatrix");
         Vector3d pmu = this.getPredictedGLMatrixTempV1;
         pmu.set(this.lastGyro);
         pmu.scale(-secondsAfterLastGyroEvent);
@@ -168,7 +168,7 @@ public class OrientationEKF
 
     public Matrix3x3d getRotationMatrix()
     {
-        Log.i("YYYY", "getRotationMatrix");
+        //Log.i("YYYY", "getRotationMatrix");
         return this.so3SensorFromWorld;
     }
 
@@ -189,13 +189,13 @@ public class OrientationEKF
 
     public boolean isAlignedToGravity()
     {
-        Log.i("YYYY", "isAlignedToGravity");
+        //Log.i("YYYY", "isAlignedToGravity");
         return this.alignedToGravity;
     }
 
     public boolean isAlignedToNorth()
     {
-        Log.i("YYYY", "isAlignedToNorth");
+        //Log.i("YYYY", "isAlignedToNorth");
         return this.alignedToNorth;
     }
 
