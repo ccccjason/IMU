@@ -71,11 +71,7 @@ static uint8_t int_state = 0;
 // for a human.
 //#define OUTPUT_BINARY_ACCELGYRO
 
-
-#define LED_PIN 13
-bool blinkState = false;
 const int interruptNumber = 0;
-const int buttonPin = 2;
 static int count_int = 0;
 
 float convertRawAcceleration(int aRaw)
@@ -108,28 +104,21 @@ void setup()
     Fastwire::setup(400, true);
 #endif
 
-    // initialize serial communication
-    // (38400 chosen because it works as well at 8MHz as it does at 16MHz, but
-    // it's really up to you depending on your project)
     Serial.begin(38400);
 
     // initialize device
     Serial.println("Initializing I2C devices...");
     accelgyro.initialize();
     accelgyro.setIntEnabled(0x01);
-    accelgyro.setRate(4); // 1khz / (1 + 4) = 200 Hz
+    accelgyro.setRate(0); // 1khz / (1 + 4) = 200 Hz
     accelgyro.setDLPFMode(0x03);
+
     // verify connection
     Serial.println("Testing device connections...");
     Serial.println(accelgyro.testConnection() ? "MPU6050 connection successful" :
                    "MPU6050 connection failed");
 
-
     filter.begin(SAMPLERATE); // add
-
-    // initialize variables to pace updates to correct rate
-    microsPerReading = 1000000 / SAMPLERATE;
-    microsPrevious = micros();
 
     accelgyro.setXAccelOffset(-4379);
     accelgyro.setYAccelOffset(-572);
@@ -137,123 +126,53 @@ void setup()
     accelgyro.setXGyroOffset(89);
     accelgyro.setYGyroOffset(23);
     accelgyro.setZGyroOffset(0);
-    // use the code below to change accel/gyro offset values
-    /*
-    Serial.println("Updating internal sensor offsets...");
-    // -76  -2359   1688    0   0   0
-    Serial.print(accelgyro.getXAccelOffset()); Serial.print("\t"); // -76
-    Serial.print(accelgyro.getYAccelOffset()); Serial.print("\t"); // -2359
-    Serial.print(accelgyro.getZAccelOffset()); Serial.print("\t"); // 1688
-    Serial.print(accelgyro.getXGyroOffset()); Serial.print("\t"); // 0
-    Serial.print(accelgyro.getYGyroOffset()); Serial.print("\t"); // 0
-    Serial.print(accelgyro.getZGyroOffset()); Serial.print("\t"); // 0
-    Serial.print("\n");
-    accelgyro.setXGyroOffset(220);
-    accelgyro.setYGyroOffset(76);
-    accelgyro.setZGyroOffset(-85);
-    Serial.print(accelgyro.getXAccelOffset()); Serial.print("\t"); // -76
-    Serial.print(accelgyro.getYAccelOffset()); Serial.print("\t"); // -2359
-    Serial.print(accelgyro.getZAccelOffset()); Serial.print("\t"); // 1688
-    Serial.print(accelgyro.getXGyroOffset()); Serial.print("\t"); // 0
-    Serial.print(accelgyro.getYGyroOffset()); Serial.print("\t"); // 0
-    Serial.print(accelgyro.getZGyroOffset()); Serial.print("\t"); // 0
-    Serial.print("\n");
-    */
 
-    // configure Arduino LED for
-    pinMode(LED_PIN, OUTPUT);
-    pinMode(buttonPin, INPUT);
     attachInterrupt(interruptNumber, buttonStateChanged, RISING);
 }
 
 void buttonStateChanged()
 {
-
     count_int++;
-    /*
-    int_state = accelgyro.getIntStatus();
-    if(int_state & 0x01) {
-    count_int++;
-    }
-    */
+    int_state = 1;
 }
 
 void loop()
 {
-
-    Serial.print("count: ");
-    Serial.print("\t");
-    Serial.println(count_int);
-    count_int = 0;
-    delay(1000);
-#if 0
-    // read raw accel/gyro measurements from device
-    // accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
-
-    // these methods (and a few others) are also available
-    //accelgyro.getAcceleration(&ax, &ay, &az);
-    //accelgyro.getRotation(&gx, &gy, &gz);
+    /*
+      delay(1000);  // 1s
+      Serial.println("count: ");
+      count_int = 0;
+     */
 
     float roll, pitch, heading;
     float aax, aay, aaz;
     float ggx, ggy, ggz;
-    unsigned long microsNow;
 
-    // check if it's time to read data and update the filter
-    microsNow = micros();
-    //  if (microsNow - microsPrevious >= microsPerReading) {
-    accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+    if (int_state) {
+        accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
 
-    // convert from raw data to gravity and degrees/second units
-    aax = convertRawAcceleration(ax);
-    aay = convertRawAcceleration(ay);
-    aaz = convertRawAcceleration(az);
-    ggx = convertRawGyro(gx);
-    ggy = convertRawGyro(gy);
-    ggz = convertRawGyro(gz);
+        // convert from raw data to gravity and degrees/second units
+        aax = convertRawAcceleration(ax);
+        aay = convertRawAcceleration(ay);
+        aaz = convertRawAcceleration(az);
+        ggx = convertRawGyro(gx);
+        ggy = convertRawGyro(gy);
+        ggz = convertRawGyro(gz);
 
-    // update the filter, which computes orientation
-    filter.updateIMU(ggx, ggy, ggz, aax, aay, aaz);
+        // update the filter, which computes orientation
+        filter.updateIMU(ggx, ggy, ggz, aax, aay, aaz);
 
-    // print the heading, pitch and roll
-    roll = filter.getRoll();
-    pitch = filter.getPitch();
-    heading = filter.getYaw();
+        // print the heading, pitch and roll
+        roll = filter.getRoll();
+        pitch = filter.getPitch();
+        heading = filter.getYaw();
 
-    Serial.print("Orientation: ");
-    Serial.print(heading);
-    Serial.print(" ");
-    Serial.print(pitch);
-    Serial.print(" ");
-    Serial.println(roll);
-
-    // increment previous time, so we keep proper pace
-    microsPrevious = microsPrevious + microsPerReading;
-#endif
-    //}
-
-    /*
-        #ifdef OUTPUT_READABLE_ACCELGYRO
-            // display tab-separated accel/gyro x/y/z values
-            Serial.print("a/g:\t");
-            Serial.print(ax); Serial.print("\t");
-            Serial.print(ay); Serial.print("\t");
-            Serial.print(az); Serial.print("\t");
-            Serial.print(gx); Serial.print("\t");
-            Serial.print(gy); Serial.print("\t");
-            Serial.println(gz);
-        #endif
-
-        #ifdef OUTPUT_BINARY_ACCELGYRO
-            Serial.write((uint8_t)(ax >> 8)); Serial.write((uint8_t)(ax & 0xFF));
-            Serial.write((uint8_t)(ay >> 8)); Serial.write((uint8_t)(ay & 0xFF));
-            Serial.write((uint8_t)(az >> 8)); Serial.write((uint8_t)(az & 0xFF));
-            Serial.write((uint8_t)(gx >> 8)); Serial.write((uint8_t)(gx & 0xFF));
-            Serial.write((uint8_t)(gy >> 8)); Serial.write((uint8_t)(gy & 0xFF));
-            Serial.write((uint8_t)(gz >> 8)); Serial.write((uint8_t)(gz & 0xFF));
-        #endif
-    */
-    // blink LED to indicate activity
-    blinkState = !blinkState;
-    digitalWrite(LED_PIN, blinkState);
+        Serial.print("Orientation: ");
+        Serial.print(heading);
+        Serial.print(" ");
+        Serial.print(pitch);
+        Serial.print(" ");
+        Serial.println(roll);
+        int_state = 0;
+    }
 }
