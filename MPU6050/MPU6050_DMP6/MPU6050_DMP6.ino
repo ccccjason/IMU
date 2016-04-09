@@ -212,12 +212,12 @@ void setup()
     devStatus = mpu.dmpInitialize();
 
 
-    mpu.setXAccelOffset(4082);
-    mpu.setYAccelOffset(1514);
-    mpu.setZAccelOffset(1158);
-    mpu.setXGyroOffset(13);
-    mpu.setYGyroOffset(26);
-    mpu.setZGyroOffset(-8);
+    mpu.setXAccelOffset(-2239);
+    mpu.setYAccelOffset(698);
+    mpu.setZAccelOffset(1554);
+    mpu.setXGyroOffset(28);
+    mpu.setYGyroOffset(-79);
+    mpu.setZGyroOffset(-4);
 
     // make sure it worked (returns 0 if so)
     if (devStatus == 0) {
