@@ -11,71 +11,69 @@
 namespace iosvr
 {
 
-    Eye::Eye(Eye::EyeType eye) :
-        type(eye),
-        eyeView(GLKMatrix4Identity),
-        projectionChanged(true),
-        perspective(GLKMatrix4Identity),
-        lastZNear(0),
-        lastZFar(0)
-    {
-        viewport = new Viewport();
-        fov = new FieldOfView();
+Eye::Eye(Eye::EyeType eye) :
+    type(eye),
+    eyeView(GLKMatrix4Identity),
+    projectionChanged(true),
+    perspective(GLKMatrix4Identity),
+    lastZNear(0),
+    lastZFar(0)
+{
+    viewport = new Viewport();
+    fov = new FieldOfView();
+}
+
+Eye::~Eye()
+{
+    if (viewport != 0) {
+        delete viewport;
     }
 
-    Eye::~Eye()
-    {
-        if (viewport != 0)
-        {
-            delete viewport;
-        }
-        
-        if (fov != 0)
-        {
-            delete fov;
-        }
+    if (fov != 0) {
+        delete fov;
     }
+}
 
-    Eye::EyeType Eye::getType()
-    {
-        return type;
-    }
+Eye::EyeType Eye::getType()
+{
+    return type;
+}
 
-    GLKMatrix4 Eye::getEyeView()
-    {
-        return eyeView;
-    }
+GLKMatrix4 Eye::getEyeView()
+{
+    return eyeView;
+}
 
-    void Eye::setEyeView(GLKMatrix4 _eyeView)
-    {
-        this->eyeView = _eyeView;
-    }
+void Eye::setEyeView(GLKMatrix4 _eyeView)
+{
+    this->eyeView = _eyeView;
+}
 
-    GLKMatrix4 Eye::getPerspective(GLfloat zNear, GLfloat zFar)
-    {
-        if (!projectionChanged && lastZNear == zNear && lastZFar == zFar)
-        {
-            return perspective;
-        }
-        perspective = fov->toPerspectiveMatrix(zNear, zFar);
-        lastZNear = zNear;
-        lastZFar = zFar;
-        projectionChanged = false;
+GLKMatrix4 Eye::getPerspective(GLfloat zNear, GLfloat zFar)
+{
+    if (!projectionChanged && lastZNear == zNear && lastZFar == zFar) {
         return perspective;
     }
 
-    Viewport *Eye::getViewport()
-    {
-        return viewport;
-    }
+    perspective = fov->toPerspectiveMatrix(zNear, zFar);
+    lastZNear = zNear;
+    lastZFar = zFar;
+    projectionChanged = false;
+    return perspective;
+}
 
-    FieldOfView *Eye::getFov()
-    {
-        return fov;
-    }
+Viewport* Eye::getViewport()
+{
+    return viewport;
+}
 
-    void Eye::setProjectionChanged()
-    {
-        projectionChanged = true;
-    }
+FieldOfView* Eye::getFov()
+{
+    return fov;
+}
+
+void Eye::setProjectionChanged()
+{
+    projectionChanged = true;
+}
 }

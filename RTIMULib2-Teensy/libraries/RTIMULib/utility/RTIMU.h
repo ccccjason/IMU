@@ -22,7 +22,7 @@
 //  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #ifndef _RTIMU_H
-#define	_RTIMU_H
+#define _RTIMU_H
 
 #include "RTMath.h"
 #include "RTFusion.h"
@@ -68,19 +68,21 @@ class RTIMU
 public:
     //  IMUs should always be created with the following call
 
-    static RTIMU *createIMU(RTIMUSettings *settings);
+    static RTIMU* createIMU(RTIMUSettings* settings);
 
     //  Constructor/destructor
 
-    RTIMU(RTIMUSettings *settings);
+    RTIMU(RTIMUSettings* settings);
     virtual ~RTIMU();
 
     //  These functions must be provided by sub classes
 
-    virtual const char *IMUName() = 0;                      // the name of the IMU
-    virtual int IMUType() = 0;                              // the type code of the IMU
+    virtual const char* IMUName() = 0;                      // the name of the IMU
+    virtual int IMUType() =
+        0;                              // the type code of the IMU
     virtual bool IMUInit() = 0;                             // set up the IMU
-    virtual int IMUGetPollInterval() = 0;                   // returns the recommended poll interval in mS
+    virtual int IMUGetPollInterval() =
+        0;                   // returns the recommended poll interval in mS
     virtual bool IMURead() = 0;                             // get a sample
 
     // setGyroContinuousALearninglpha allows the continuous learning rate to be over-ridden
@@ -94,45 +96,79 @@ public:
 
     //  the following function can be called to set the SLERP power
 
-    void setSlerpPower(RTFLOAT power) { m_fusion->setSlerpPower(power); }
+    void setSlerpPower(RTFLOAT power)
+    {
+        m_fusion->setSlerpPower(power);
+    }
 
     //  call the following to reset the fusion algorithm
 
-    void resetFusion() { m_fusion->reset(); }
+    void resetFusion()
+    {
+        m_fusion->reset();
+    }
 
     //  the following three functions control the influence of the gyro, accel and compass sensors
 
-    void setGyroEnable(bool enable) { m_fusion->setGyroEnable(enable);}
-    void setAccelEnable(bool enable) { m_fusion->setAccelEnable(enable);}
-    void setCompassEnable(bool enable) { m_fusion->setCompassEnable(enable);}
+    void setGyroEnable(bool enable)
+    {
+        m_fusion->setGyroEnable(enable);
+    }
+    void setAccelEnable(bool enable)
+    {
+        m_fusion->setAccelEnable(enable);
+    }
+    void setCompassEnable(bool enable)
+    {
+        m_fusion->setCompassEnable(enable);
+    }
 
     //  call the following to enable debug messages
 
-    void setDebugEnable(bool enable) { m_fusion->setDebugEnable(enable); }
+    void setDebugEnable(bool enable)
+    {
+        m_fusion->setDebugEnable(enable);
+    }
 
     //  getIMUData returns the standard outputs of the IMU and fusion filter
 
-    const RTIMU_DATA& getIMUData() { return m_imuData; }
+    const RTIMU_DATA& getIMUData()
+    {
+        return m_imuData;
+    }
 
     //  setExtIMUData allows data from some external IMU to be injected to the fusion algorithm
 
-    void setExtIMUData(RTFLOAT gx, RTFLOAT gy, RTFLOAT gz, RTFLOAT ax, RTFLOAT ay, RTFLOAT az,
-        RTFLOAT mx, RTFLOAT my, RTFLOAT mz, uint64_t timestamp);
+    void setExtIMUData(RTFLOAT gx, RTFLOAT gy, RTFLOAT gz, RTFLOAT ax, RTFLOAT ay,
+                       RTFLOAT az,
+                       RTFLOAT mx, RTFLOAT my, RTFLOAT mz, uint64_t timestamp);
 
     //  the following two functions get access to the measured pose (accel and compass)
 
-    const RTVector3& getMeasuredPose() { return m_fusion->getMeasuredPose(); }
-    const RTQuaternion& getMeasuredQPose() { return m_fusion->getMeasuredQPose(); }
+    const RTVector3& getMeasuredPose()
+    {
+        return m_fusion->getMeasuredPose();
+    }
+    const RTQuaternion& getMeasuredQPose()
+    {
+        return m_fusion->getMeasuredQPose();
+    }
 
     //  setCompassCalibrationMode() turns off use of cal data so that raw data can be accumulated
     //  to derive calibration data
 
-    void setCompassCalibrationMode(bool enable) { m_compassCalibrationMode = enable; }
+    void setCompassCalibrationMode(bool enable)
+    {
+        m_compassCalibrationMode = enable;
+    }
 
     //  setAccelCalibrationMode() turns off use of cal data so that raw data can be accumulated
     //  to derive calibration data
 
-    void setAccelCalibrationMode(bool enable) { m_accelCalibrationMode = enable; }
+    void setAccelCalibrationMode(bool enable)
+    {
+        m_accelCalibrationMode = enable;
+    }
 
     //  setCalibrationData configures the cal data from settings and also enables use if valid
 
@@ -140,25 +176,49 @@ public:
 
     //  getCompassCalibrationValid() returns true if the compass min/max calibration data is being used
 
-    bool getCompassCalibrationValid() { return !m_compassCalibrationMode && m_settings->m_compassCalValid; }
+    bool getCompassCalibrationValid()
+    {
+        return !m_compassCalibrationMode && m_settings->m_compassCalValid;
+    }
 
     //  getRuntimeCompassCalibrationValid() returns true if the runtime compass min/max calibration data is being used
 
-    bool getRuntimeCompassCalibrationValid() { return !m_compassCalibrationMode && m_runtimeMagCalValid; }
+    bool getRuntimeCompassCalibrationValid()
+    {
+        return !m_compassCalibrationMode && m_runtimeMagCalValid;
+    }
 
     //  getCompassCalibrationEllipsoidValid() returns true if the compass ellipsoid calibration data is being used
 
-    bool getCompassCalibrationEllipsoidValid() { return !m_compassCalibrationMode && m_settings->m_compassCalEllipsoidValid; }
+    bool getCompassCalibrationEllipsoidValid()
+    {
+        return !m_compassCalibrationMode && m_settings->m_compassCalEllipsoidValid;
+    }
 
     //  getAccelCalibrationValid() returns true if the accel calibration data is being used
 
-    bool getAccelCalibrationValid() { return !m_accelCalibrationMode && m_settings->m_accelCalValid; }
+    bool getAccelCalibrationValid()
+    {
+        return !m_accelCalibrationMode && m_settings->m_accelCalValid;
+    }
 
-    const RTVector3& getGyro() { return m_imuData.gyro; }   // gets gyro rates in radians/sec
-    const RTVector3& getAccel() { return m_imuData.accel; } // get accel data in gs
-    const RTVector3& getCompass() { return m_imuData.compass; } // gets compass data in uT
+    const RTVector3& getGyro()
+    {
+        return m_imuData.gyro;    // gets gyro rates in radians/sec
+    }
+    const RTVector3& getAccel()
+    {
+        return m_imuData.accel;    // get accel data in gs
+    }
+    const RTVector3& getCompass()
+    {
+        return m_imuData.compass;    // gets compass data in uT
+    }
 
-    RTVector3 getAccelResiduals() { return m_fusion->getAccelResiduals(); }
+    RTVector3 getAccelResiduals()
+    {
+        return m_fusion->getAccelResiduals();
+    }
 
 protected:
     void gyroBiasInit();                                    // sets up gyro bias calculation
@@ -172,9 +232,10 @@ protected:
 
     RTIMU_DATA m_imuData;                                   // the data from the IMU
 
-    RTIMUSettings *m_settings;                              // the settings object pointer
+    RTIMUSettings*
+    m_settings;                              // the settings object pointer
 
-    RTFusion *m_fusion;                                     // the fusion algorithm
+    RTFusion* m_fusion;                                     // the fusion algorithm
 
     int m_sampleRate;                                       // samples per second
     uint64_t m_sampleInterval;                              // interval between samples in microseonds
@@ -193,8 +254,9 @@ protected:
     float m_runtimeMagCalMax[3];                            // runtime max mag values seen
     float m_runtimeMagCalMin[3];                            // runtime min mag values seen
 
-    static float m_axisRotation[RTIMU_AXIS_ROTATION_COUNT][9];    // array of rotation matrices
+    static float
+    m_axisRotation[RTIMU_AXIS_ROTATION_COUNT][9];    // array of rotation matrices
 
- };
+};
 
 #endif // _RTIMU_H

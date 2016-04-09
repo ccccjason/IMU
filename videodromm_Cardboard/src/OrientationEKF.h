@@ -11,24 +11,24 @@
 
 class OrientationEKF
 {
-  public:
+public:
     OrientationEKF();
     virtual ~OrientationEKF();
-    
+
     void reset();
     bool isReady();
-    
+
     void processGyro(ofVec3f gyro, double sensorTimeStamp);
     void processAcceleration(ofVec3f acc, double sensorTimeStamp);
-    
+
     double getHeadingDegrees();
     void setHeadingDegrees(double heading);
-    
+
     ofMatrix4x4 getGLMatrix();
     ofMatrix4x4 getPredictedGLMatrix(double secondsAfterLastGyroEvent);
-    ofMatrix4x4 glMatrixFromSo3(Matrix3x3d *so3);
-    
-  private:
+    ofMatrix4x4 glMatrixFromSo3(Matrix3x3d* so3);
+
+private:
     Matrix3x3d _so3SensorFromWorld;
     Matrix3x3d _so3LastMotion;
     Matrix3x3d _mP;
@@ -55,9 +55,10 @@ class OrientationEKF
     bool _gyroFilterValid;
     bool _alignedToGravity;
     bool _alignedToNorth;
-    
+
     void filterGyroTimestep(double timestep);
     void updateCovariancesAfterMotion();
     void updateAccelerationCovariance(double currentAccelNorm);
-    void accelerationObservationFunctionForNumericalJacobian(Matrix3x3d *so3SensorFromWorldPred, Vector3d *result);
+    void accelerationObservationFunctionForNumericalJacobian(
+        Matrix3x3d* so3SensorFromWorldPred, Vector3d* result);
 };

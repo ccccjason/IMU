@@ -7,12 +7,14 @@
 
 #include "LowPassFilter.h"
 
-LowPassFilter::LowPassFilter() {
-	// TODO Auto-generated constructor stub
+LowPassFilter::LowPassFilter()
+{
+    // TODO Auto-generated constructor stub
 
 }
 
-LowPassFilter::~LowPassFilter() {
-	// TODO Auto-generated destructor stub
+LowPassFilter::~LowPassFilter()
+{
+    // TODO Auto-generated destructor stub
 }
 //

@@ -23,7 +23,7 @@
 
 
 #ifndef _RTIMUGD20HM303DLHC_H
-#define	_RTIMUGD20HM303DLHC_H
+#define _RTIMUGD20HM303DLHC_H
 
 #include "RTIMU.h"
 
@@ -40,13 +40,14 @@
 #define GD20M303DLHC_FIFO_THRESH        16                      // threshold point in fifo
 #define GD20M303DLHC_CACHE_BLOCK_COUNT  16                      // number of cache blocks
 
-typedef struct
-{
+typedef struct {
     unsigned char data[GD20M303DLHC_FIFO_THRESH * GD20M303DLHC_FIFO_CHUNK_SIZE];
     int count;                                              // number of chunks in the cache block
     int index;                                              // current index into the cache
-    unsigned char accel[6];                                 // the raw accel readings for the block
-    unsigned char compass[6];                               // the raw compass readings for the block
+    unsigned char
+    accel[6];                                 // the raw accel readings for the block
+    unsigned char
+    compass[6];                               // the raw compass readings for the block
 
 } GD20M303DLHC_CACHE_BLOCK;
 
@@ -55,11 +56,17 @@ typedef struct
 class RTIMUGD20HM303DLHC : public RTIMU
 {
 public:
-    RTIMUGD20HM303DLHC(RTIMUSettings *settings);
+    RTIMUGD20HM303DLHC(RTIMUSettings* settings);
     ~RTIMUGD20HM303DLHC();
 
-    virtual const char *IMUName() { return "L3GD20H + LSM303DLHC"; }
-    virtual int IMUType() { return RTIMU_TYPE_GD20HM303DLHC; }
+    virtual const char* IMUName()
+    {
+        return "L3GD20H + LSM303DLHC";
+    }
+    virtual int IMUType()
+    {
+        return RTIMU_TYPE_GD20HM303DLHC;
+    }
     virtual bool IMUInit();
     virtual int IMUGetPollInterval();
     virtual bool IMURead();
@@ -76,8 +83,10 @@ private:
     bool setCompassCRM();
 
     unsigned char m_gyroSlaveAddr;                          // I2C address of L3GD20
-    unsigned char m_accelSlaveAddr;                         // I2C address of LSM303DLHC accel
-    unsigned char m_compassSlaveAddr;                       // I2C address of LSM303DLHC compass
+    unsigned char
+    m_accelSlaveAddr;                         // I2C address of LSM303DLHC accel
+    unsigned char
+    m_compassSlaveAddr;                       // I2C address of LSM303DLHC compass
 
     RTFLOAT m_gyroScale;
     RTFLOAT m_accelScale;
@@ -87,7 +96,8 @@ private:
 #ifdef GD20M303DLHC_CACHE_MODE
     bool m_firstTime;                                       // if first sample
 
-    GD20M303DLHC_CACHE_BLOCK m_cache[GD20M303DLHC_CACHE_BLOCK_COUNT]; // the cache itself
+    GD20M303DLHC_CACHE_BLOCK
+    m_cache[GD20M303DLHC_CACHE_BLOCK_COUNT]; // the cache itself
     int m_cacheIn;                                          // the in index
     int m_cacheOut;                                         // the out index
     int m_cacheCount;                                       // number of used cache blocks

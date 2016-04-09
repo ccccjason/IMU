@@ -6,17 +6,17 @@
 
 namespace hfgl
 {
-    void CheckGlErrors()
-    {
-        GLenum err = glGetError();
-        if (err != GL_NO_ERROR)
-        {
-            std::cerr << "CheckGlErrors: " << err <<std::endl;
-        }
+void CheckGlErrors()
+{
+    GLenum err = glGetError();
+
+    if (err != GL_NO_ERROR) {
+        std::cerr << "CheckGlErrors: " << err << std::endl;
     }
-    
-    void ClearGLErrors()
-    {
-        
-    }
+}
+
+void ClearGLErrors()
+{
+
+}
 };

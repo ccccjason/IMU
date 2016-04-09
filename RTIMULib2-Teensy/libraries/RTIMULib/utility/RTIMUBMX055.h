@@ -23,18 +23,24 @@
 
 
 #ifndef _RTIMUBMX055_H
-#define	_RTIMUBMX055_H
+#define _RTIMUBMX055_H
 
 #include "RTIMU.h"
 
 class RTIMUBMX055 : public RTIMU
 {
 public:
-    RTIMUBMX055(RTIMUSettings *settings);
+    RTIMUBMX055(RTIMUSettings* settings);
     ~RTIMUBMX055();
 
-    virtual const char *IMUName() { return "BMX055"; }
-    virtual int IMUType() { return RTIMU_TYPE_BMX055; }
+    virtual const char* IMUName()
+    {
+        return "BMX055";
+    }
+    virtual int IMUType()
+    {
+        return RTIMU_TYPE_BMX055;
+    }
     virtual bool IMUInit();
     virtual int IMUGetPollInterval();
     virtual bool IMURead();
@@ -46,7 +52,8 @@ private:
     bool setAccelFSR();
     bool magInitTrimRegisters();
     bool setMagPreset();
-    void processMagData(unsigned char *v_data_uint8_t, float& magX, float& magY, float& magZ);
+    void processMagData(unsigned char* v_data_uint8_t, float& magX, float& magY,
+                        float& magZ);
     float bmm050_compensate_X_float(int16_t mag_data_x, uint16_t data_r);
     float bmm050_compensate_Y_float(int16_t mag_data_y, uint16_t data_r);
     float bmm050_compensate_Z_float(int16_t mag_data_z, uint16_t data_r);

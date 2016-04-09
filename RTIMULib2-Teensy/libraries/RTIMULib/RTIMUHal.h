@@ -25,7 +25,7 @@
 //  staslock@gmail.com (www.clickdrive.io)
 
 #ifndef _RTIMUHAL_H
-#define	_RTIMUHAL_H
+#define _RTIMUHAL_H
 
 #include <math.h>
 #include <stdint.h>
@@ -49,7 +49,7 @@
 
 #else
 
-#define HAL_INFO(m) 
+#define HAL_INFO(m)
 #define HAL_INFO1(m, x)
 #define HAL_INFO2(m, x, y)
 #define HAL_INFO3(m, x, y, z)
@@ -78,12 +78,13 @@ public:
 
     bool HALOpen();
     void HALClose();
-    bool HALRead(unsigned char slaveAddr, unsigned char regAddr, unsigned char length,
-                 unsigned char *data, const char *errorMsg);
+    bool HALRead(unsigned char slaveAddr, unsigned char regAddr,
+                 unsigned char length,
+                 unsigned char* data, const char* errorMsg);
     bool HALWrite(unsigned char slaveAddr, unsigned char regAddr,
-                  unsigned char length, unsigned char const *data, const char *errorMsg);
+                  unsigned char length, unsigned char const* data, const char* errorMsg);
     bool HALWrite(unsigned char slaveAddr, unsigned char regAddr,
-                  unsigned char const data, const char *errorMsg);
+                  unsigned char const data, const char* errorMsg);
 
     void delayMs(int milliSeconds);
 

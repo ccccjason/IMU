@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, CBDEyeType)
 
 @interface CBDEye : NSObject
 
-@property (nonatomic) CBDEyeType type;
+    @property(nonatomic) CBDEyeType type;
 
 - (GLKMatrix4)eyeViewMatrix;
 - (GLKMatrix4)perspectiveMatrixWithZNear:(float)zNear zFar:(float)zFar;
@@ -26,12 +26,12 @@ typedef NS_ENUM(NSInteger, CBDEyeType)
 
 @protocol CardboardStereoRendererDelegate <NSObject>
 
-- (void)setupRendererWithView:(GLKView *)glView;
-- (void)shutdownRendererWithView:(GLKView *)glView;
+- (void)setupRendererWithView:(GLKView*)glView;
+- (void)shutdownRendererWithView:(GLKView*)glView;
 - (void)renderViewDidChangeSize:(CGSize)size;
 
 - (void)prepareNewFrameWithHeadViewMatrix:(GLKMatrix4)headViewMatrix;
-- (void)drawEyeWithEye:(CBDEye *)eye;
+- (void)drawEyeWithEye:(CBDEye*)eye;
 - (void)finishFrameWithViewportRect:(CGRect)viewPort;
 
 @optional
@@ -43,15 +43,16 @@ typedef NS_ENUM(NSInteger, CBDEyeType)
 
 @interface CardboardViewController : GLKViewController
 
-@property (nonatomic) GLKView *view;
-@property (nonatomic, readonly) NSRecursiveLock *glLock;
+    @property(nonatomic) GLKView* view;
+@property(nonatomic, readonly) NSRecursiveLock* glLock;
 
-@property (nonatomic, unsafe_unretained) id <CardboardStereoRendererDelegate> stereoRendererDelegate;
-@property (nonatomic) BOOL vrModeEnabled;
-@property (nonatomic) BOOL distortionCorrectionEnabled;
-@property (nonatomic) BOOL vignetteEnabled;
-@property (nonatomic) BOOL chromaticAberrationCorrectionEnabled;
-@property (nonatomic) BOOL restoreGLStateEnabled;
-@property (nonatomic) BOOL neckModelEnabled;
+@property(nonatomic, unsafe_unretained) id <CardboardStereoRendererDelegate>
+stereoRendererDelegate;
+@property(nonatomic) BOOL vrModeEnabled;
+@property(nonatomic) BOOL distortionCorrectionEnabled;
+@property(nonatomic) BOOL vignetteEnabled;
+@property(nonatomic) BOOL chromaticAberrationCorrectionEnabled;
+@property(nonatomic) BOOL restoreGLStateEnabled;
+@property(nonatomic) BOOL neckModelEnabled;
 
 @end

@@ -13,20 +13,20 @@
 namespace iosvr
 {
 
-    class Viewport
-    {
-      public:
-        Viewport();
-        virtual ~Viewport();
-        GLint x;
-        GLint y;
-        GLint width;
-        GLint height;
+class Viewport
+{
+public:
+    Viewport();
+    virtual ~Viewport();
+    GLint x;
+    GLint y;
+    GLint width;
+    GLint height;
 
-        void setViewport(GLint _x, GLint _y, GLint _width, GLint _height);
-        void setGLViewport();
-        void setGLScissor();
-    };
+    void setViewport(GLint _x, GLint _y, GLint _width, GLint _height);
+    void setGLViewport();
+    void setGLScissor();
+};
 
 };
 

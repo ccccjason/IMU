@@ -7,10 +7,12 @@
 
 #include "GyroscopeBiasEstimator.h"
 
-GyroscopeBiasEstimator::GyroscopeBiasEstimator() {
+GyroscopeBiasEstimator::GyroscopeBiasEstimator()
+{
 }
 
-GyroscopeBiasEstimator::~GyroscopeBiasEstimator() {
-	// TODO Auto-generated destructor stub
+GyroscopeBiasEstimator::~GyroscopeBiasEstimator()
+{
+    // TODO Auto-generated destructor stub
 }
 

@@ -51,7 +51,7 @@ THE SOFTWARE.
 // Arduino Wire library is required if I2Cdev I2CDEV_ARDUINO_WIRE implementation
 // is used in I2Cdev.h
 #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
-    #include "Wire.h"
+#include "Wire.h"
 #endif
 #include "MadgwickAHRS.h" // add
 // class default I2C address is 0x68
@@ -135,17 +135,19 @@ uint8_t fifoBuffer[64]; // FIFO storage buffer
 Quaternion q;           // [w, x, y, z]         quaternion container
 VectorInt16 aa;         // [x, y, z]            accel sensor measurements
 VectorInt16 GyroAxis;   // [x, y, z]            Gyroscope measurements
-VectorInt16 aaReal;     // [x, y, z]            gravity-free accel sensor measurements
-VectorInt16 aaWorld;    // [x, y, z]            world-frame accel sensor measurements
+VectorInt16
+aaReal;     // [x, y, z]            gravity-free accel sensor measurements
+VectorInt16
+aaWorld;    // [x, y, z]            world-frame accel sensor measurements
 VectorFloat gravity;    // [x, y, z]            gravity vector
 float euler[3];         // [psi, theta, phi]    Euler angle container
 float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
 
 
 // packet structure for InvenSense teapot demo
-uint8_t teapotPacket[14] = { '$', 0x02, 0,0, 0,0, 0,0, 0,0, 0x00, 0x00, '\r', '\n' };
+uint8_t teapotPacket[14] = { '$', 0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0x00, 0x00, '\r', '\n' };
 
-int i=0;
+int i = 0;
 
 Madgwick filter; // add
 unsigned long microsPerReading, microsPrevious;
@@ -153,47 +155,53 @@ unsigned long microsPerReading, microsPrevious;
 // ===               INTERRUPT DETECTION ROUTINE                ===
 // ================================================================
 
-volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
-void dmpDataReady() {
+volatile bool mpuInterrupt =
+    false;     // indicates whether MPU interrupt pin has gone high
+void dmpDataReady()
+{
     mpuInterrupt = true;
 }
 
-float convertRawAcceleration(int aRaw) {
-  // since we are using 2G range
-  // -2g maps to a raw value of -32768
-  // +2g maps to a raw value of 32767
-  
-  float a = (aRaw * 2.0) / 32768.0;
-  return a;
+float convertRawAcceleration(int aRaw)
+{
+    // since we are using 2G range
+    // -2g maps to a raw value of -32768
+    // +2g maps to a raw value of 32767
+
+    float a = (aRaw * 2.0) / 32768.0;
+    return a;
 }
 
-float convertRawGyro(int gRaw) {
-  // since we are using 250 degrees/seconds range
-  // -250 maps to a raw value of -32768
-  // +250 maps to a raw value of 32767
-  
-  float g = (gRaw * 250.0) / 32768.0;
-  return g;
+float convertRawGyro(int gRaw)
+{
+    // since we are using 250 degrees/seconds range
+    // -250 maps to a raw value of -32768
+    // +250 maps to a raw value of 32767
+
+    float g = (gRaw * 250.0) / 32768.0;
+    return g;
 }
 
 // ================================================================
 // ===                      INITIAL SETUP                       ===
 // ================================================================
 
-void setup() {
+void setup()
+{
     // join I2C bus (I2Cdev library doesn't do this automatically)
-    #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
-        Wire.begin();
-        TWBR = 24; // 400kHz I2C clock (200kHz if CPU is 8MHz). Comment this line if having compilation difficulties with TWBR.
-        //TWBR = 12; // set 400kHz mode @ 16MHz CPU or 200kHz mode @ 8MHz CPU
-    #elif I2CDEV_IMPLEMENTATION == I2CDEV_BUILTIN_FASTWIRE
-        Fastwire::setup(400, true);
-    #endif
+#if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
+    Wire.begin();
+    TWBR = 24; // 400kHz I2C clock (200kHz if CPU is 8MHz). Comment this line if having compilation difficulties with TWBR.
+    //TWBR = 12; // set 400kHz mode @ 16MHz CPU or 200kHz mode @ 8MHz CPU
+#elif I2CDEV_IMPLEMENTATION == I2CDEV_BUILTIN_FASTWIRE
+    Fastwire::setup(400, true);
+#endif
 
     // initialize serial communication
     // (115200 chosen because it is required for Teapot Demo output, but it's
     // really up to you depending on your project)
     Serial.begin(115200);
+
     while (!Serial); // wait for Leonardo enumeration, others continue immediately
 
     // NOTE: 8MHz or slower host processors, like the Teensy @ 3.3v or Ardunio
@@ -203,14 +211,14 @@ void setup() {
     // crystal solution for the UART timer.
 
     // initialize device
-   // Serial.println(F("Initializing I2C devices..."));
+    // Serial.println(F("Initializing I2C devices..."));
     mpu.initialize();
 #if 1
-            DEBUG_PRINTLN(F("Setting sample rate to 200Hz..."));
-            mpu.setRate(0); // 1khz / (1 + 4) = 200 Hz
+    DEBUG_PRINTLN(F("Setting sample rate to 200Hz..."));
+    mpu.setRate(0); // 1khz / (1 + 4) = 200 Hz
 
-            DEBUG_PRINTLN(F("Setting DLPF bandwidth to 42Hz..."));
-            mpu.setDLPFMode(MPU6050_DLPF_BW_42);
+    DEBUG_PRINTLN(F("Setting DLPF bandwidth to 42Hz..."));
+    mpu.setDLPFMode(MPU6050_DLPF_BW_42);
 #endif
     filter.begin(SAMPLERATE); // add
     // verify connection
@@ -229,76 +237,76 @@ void setup() {
     //Serial.println(F("Initializing DMP..."));
     // devStatus = mpu.dmpInitialize();
 
-  // initialize variables to pace updates to correct rate
-  microsPerReading = 1000000 / SAMPLERATE;
-  microsPrevious = micros();
+    // initialize variables to pace updates to correct rate
+    microsPerReading = 1000000 / SAMPLERATE;
+    microsPrevious = micros();
 
-/*
-    int8_t xgOffsetTCj = mpu.getXGyroOffsetTC();
-    int8_t ygOffsetTCj = mpu.getYGyroOffsetTC();
-    int8_t zgOffsetTCj = mpu.getZGyroOffsetTC();
-    Serial.print("X gyro offset TC = ");
-    Serial.print(xgOffsetTCj);
-    Serial.print("Y gyro offset TC = ");
-    Serial.print(ygOffsetTCj);
-    Serial.print("Z gyro offset TC = ");
-    Serial.println(zgOffsetTCj);
-    
-    int8_t xgOffsetj = mpu.getXGyroOffset();
-    int8_t ygOffsetj = mpu.getYGyroOffset();
-    int8_t zgOffsetj = mpu.getZGyroOffset();
-    Serial.print("X gyro offset = ");
-    Serial.print(xgOffsetj);
-    Serial.print(" Y gyro offset = ");
-    Serial.print(ygOffsetj);
-    Serial.print(" Z gyro offset = ");
-    Serial.println(zgOffsetj);
-    
-    int8_t xaOffsetj = mpu.getXAccelOffset();
-    int8_t yaOffsetj = mpu.getYAccelOffset();
-    int8_t zaOffsetj = mpu.getZAccelOffset();
-    Serial.print("X gyro offset = ");
-    Serial.print(xaOffsetj);
-    Serial.print(" Y gyro offset = ");
-    Serial.print(yaOffsetj);
-    Serial.print(" Z gyro offset = ");
-    Serial.println(zaOffsetj);
-*/
+    /*
+        int8_t xgOffsetTCj = mpu.getXGyroOffsetTC();
+        int8_t ygOffsetTCj = mpu.getYGyroOffsetTC();
+        int8_t zgOffsetTCj = mpu.getZGyroOffsetTC();
+        Serial.print("X gyro offset TC = ");
+        Serial.print(xgOffsetTCj);
+        Serial.print("Y gyro offset TC = ");
+        Serial.print(ygOffsetTCj);
+        Serial.print("Z gyro offset TC = ");
+        Serial.println(zgOffsetTCj);
 
-/*
-    // supply your own gyro offsets here, scaled for min sensitivity
-    #if 1
-        //original
-        //mpu.setXGyroOffset(220);
-        //mpu.setYGyroOffset(76);
-        //mpu.setZGyroOffset(-85);
-        //mpu.setZAccelOffset(1788); // 1688 factory default for my test chip
-        
-        mpu.setXAccelOffset(-3217); 
-        mpu.setYAccelOffset(-398); 
-        mpu.setZAccelOffset(971); 
-        mpu.setXGyroOffset(29);
-        mpu.setYGyroOffset(-10);
-        mpu.setZGyroOffset(44);
+        int8_t xgOffsetj = mpu.getXGyroOffset();
+        int8_t ygOffsetj = mpu.getYGyroOffset();
+        int8_t zgOffsetj = mpu.getZGyroOffset();
+        Serial.print("X gyro offset = ");
+        Serial.print(xgOffsetj);
+        Serial.print(" Y gyro offset = ");
+        Serial.print(ygOffsetj);
+        Serial.print(" Z gyro offset = ");
+        Serial.println(zgOffsetj);
 
-    #else
-        mpu.setXGyroOffset(61);
-        mpu.setYGyroOffset(0);
-        mpu.setZGyroOffset(63);
-        
-        //mpu.setXAccelOffset(36); 
-        //mpu.setYAccelOffset(117); 
-        //mpu.setZAccelOffset(-106); 
-    #endif
-*/
+        int8_t xaOffsetj = mpu.getXAccelOffset();
+        int8_t yaOffsetj = mpu.getYAccelOffset();
+        int8_t zaOffsetj = mpu.getZAccelOffset();
+        Serial.print("X gyro offset = ");
+        Serial.print(xaOffsetj);
+        Serial.print(" Y gyro offset = ");
+        Serial.print(yaOffsetj);
+        Serial.print(" Z gyro offset = ");
+        Serial.println(zaOffsetj);
+    */
+
+    /*
+        // supply your own gyro offsets here, scaled for min sensitivity
+        #if 1
+            //original
+            //mpu.setXGyroOffset(220);
+            //mpu.setYGyroOffset(76);
+            //mpu.setZGyroOffset(-85);
+            //mpu.setZAccelOffset(1788); // 1688 factory default for my test chip
+
+            mpu.setXAccelOffset(-3217);
+            mpu.setYAccelOffset(-398);
+            mpu.setZAccelOffset(971);
+            mpu.setXGyroOffset(29);
+            mpu.setYGyroOffset(-10);
+            mpu.setZGyroOffset(44);
+
+        #else
+            mpu.setXGyroOffset(61);
+            mpu.setYGyroOffset(0);
+            mpu.setZGyroOffset(63);
+
+            //mpu.setXAccelOffset(36);
+            //mpu.setYAccelOffset(117);
+            //mpu.setZAccelOffset(-106);
+        #endif
+    */
 
 
-        mpu.setXAccelOffset(-1056); 
-        mpu.setYAccelOffset(-3732); 
-        mpu.setZAccelOffset(1289); 
-        mpu.setXGyroOffset(40);
-        mpu.setYGyroOffset(24);
-        mpu.setZGyroOffset(31);
+    mpu.setXAccelOffset(-1056);
+    mpu.setYAccelOffset(-3732);
+    mpu.setZAccelOffset(1289);
+    mpu.setXGyroOffset(40);
+    mpu.setYGyroOffset(24);
+    mpu.setZGyroOffset(31);
 
 
     // make sure it worked (returns 0 if so)
@@ -330,8 +338,8 @@ void setup() {
 
     // configure LED for output
     pinMode(LED_PIN, OUTPUT);
-    
-    i=0;
+
+    i = 0;
 }
 
 
@@ -340,15 +348,18 @@ void setup() {
 // ===                    MAIN PROGRAM LOOP                     ===
 // ================================================================
 
-void loop() {
+void loop()
+{
 
-  //long timestamp=0;
-  //long timestamp_old=0;
+    //long timestamp=0;
+    //long timestamp_old=0;
 
-  //timestamp_old = micros();
-  
+    //timestamp_old = micros();
+
     // if programming failed, don't try to do anything
-    if (!dmpReady) return;
+    if (!dmpReady) {
+        return;
+    }
 
     // wait for MPU interrupt or extra packet(s) available
     while (!mpuInterrupt && fifoCount < packetSize) {
@@ -377,205 +388,221 @@ void loop() {
         mpu.resetFIFO();
         Serial.println(F("FIFO overflow!"));
 
-    // otherwise, check for DMP data ready interrupt (this should happen frequently)
+        // otherwise, check for DMP data ready interrupt (this should happen frequently)
     } else if (mpuIntStatus & 0x02) {
         // wait for correct available data length, should be a VERY short wait
-        while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
+        while (fifoCount < packetSize) {
+            fifoCount = mpu.getFIFOCount();
+        }
 
         // read a packet from FIFO
         mpu.getFIFOBytes(fifoBuffer, packetSize);
-        
+
         // track FIFO count here in case there is > 1 packet available
         // (this lets us immediately read more without waiting for an interrupt)
         fifoCount -= packetSize;
 
-        #ifdef OUTPUT_READABLE_QUATERNION
-            // display quaternion values in easy matrix form: w x y z
-            mpu.dmpGetQuaternion(&q, fifoBuffer);
-            Serial.print("quat\t");
-            Serial.print(q.w);
-            Serial.print("\t");
-            Serial.print(q.x);
-            Serial.print("\t");
-            Serial.print(q.y);
-            Serial.print("\t");
-            Serial.println(q.z);
-        #endif
+#ifdef OUTPUT_READABLE_QUATERNION
+        // display quaternion values in easy matrix form: w x y z
+        mpu.dmpGetQuaternion(&q, fifoBuffer);
+        Serial.print("quat\t");
+        Serial.print(q.w);
+        Serial.print("\t");
+        Serial.print(q.x);
+        Serial.print("\t");
+        Serial.print(q.y);
+        Serial.print("\t");
+        Serial.println(q.z);
+#endif
 
-        #ifdef OUTPUT_READABLE_EULER
-            // display Euler angles in degrees
-            mpu.dmpGetQuaternion(&q, fifoBuffer);
-            mpu.dmpGetEuler(euler, &q);
+#ifdef OUTPUT_READABLE_EULER
+        // display Euler angles in degrees
+        mpu.dmpGetQuaternion(&q, fifoBuffer);
+        mpu.dmpGetEuler(euler, &q);
 
-            /*
-            Serial.print("euler\t");
-            Serial.print(euler[0] * 180/M_PI);
-            Serial.print("\t");
-            Serial.print(euler[1] * 180/M_PI);
-            Serial.print("\t");
-            Serial.println(euler[2] * 180/M_PI);
-            */
-            /*
-            Serial.print(aaReal.x);
-            Serial.print(":");
-            Serial.print(aaReal.y);
-            Serial.print(":");
-            Serial.print(aaReal.z);
-            Serial.print(":");
-            Serial.print(euler[2] * 180/M_PI);
-            Serial.print(":");
-            Serial.print(euler[1] * 180/M_PI);
-            Serial.print(":");
-            Serial.println(euler[0] * 180/M_PI);
-*/
+        /*
+        Serial.print("euler\t");
+        Serial.print(euler[0] * 180/M_PI);
+        Serial.print("\t");
+        Serial.print(euler[1] * 180/M_PI);
+        Serial.print("\t");
+        Serial.println(euler[2] * 180/M_PI);
+        */
+        /*
+        Serial.print(aaReal.x);
+        Serial.print(":");
+        Serial.print(aaReal.y);
+        Serial.print(":");
+        Serial.print(aaReal.z);
+        Serial.print(":");
+        Serial.print(euler[2] * 180/M_PI);
+        Serial.print(":");
+        Serial.print(euler[1] * 180/M_PI);
+        Serial.print(":");
+        Serial.println(euler[0] * 180/M_PI);
+        */
+        mpu.getMotion6(&aa.x, &aa.y, &aa.z, &GyroAxis.x, &GyroAxis.y, &GyroAxis.z);
+
+        Serial.print(euler[0] * 180 / M_PI);
+        Serial.print(";");
+        Serial.print(euler[1] * 180 / M_PI);
+        Serial.print(";");
+        Serial.print(euler[2] * 180 / M_PI);
+        Serial.print(";");
+        Serial.print(aa.x);
+        Serial.print(";");
+        Serial.print(aa.y);
+        Serial.print(";");
+        Serial.print(aa.z);
+        Serial.println();
+
+#endif
+
+#ifdef OUTPUT_READABLE_YAWPITCHROLL
+        // display Euler angles in degrees
+        mpu.dmpGetQuaternion(&q, fifoBuffer);
+        mpu.dmpGetGravity(&gravity, &q);
+        mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
+        /*
+        Serial.print("ypr\t");
+        Serial.print(ypr[0] * 180/M_PI);
+        Serial.print("\t");
+        Serial.print(ypr[1] * 180/M_PI);
+        Serial.print("\t");
+        Serial.println(ypr[2] * 180/M_PI);
+        */
+        /*
+        Serial.print(aaReal.x);
+        Serial.print(":");
+        Serial.print(aaReal.y);
+        Serial.print(":");
+        Serial.print(aaReal.z);
+        Serial.print(":");
+        Serial.print(ypr[1] * 180/M_PI);
+        Serial.print(":");
+        Serial.print(ypr[2] * 180/M_PI);
+        Serial.print(":");
+        Serial.println(ypr[0] * 180/M_PI);
+        */
+
+        mpu.getMotion6(&aa.x, &aa.y, &aa.z, &GyroAxis.x, &GyroAxis.y, &GyroAxis.z);
+        Serial.print(-ypr[0] * 180 / M_PI);
+        Serial.print(";");
+        Serial.print(-ypr[1] * 180 / M_PI);
+        Serial.print(";");
+        Serial.print(ypr[2] * 180 / M_PI);
+        Serial.print(";");
+        Serial.print(aa.x);
+        Serial.print(";");
+        Serial.print(aa.y);
+        Serial.print(";");
+        Serial.print(aa.z);
+        Serial.println();
+
+#endif
+
+#ifdef OUTPUT_READABLE_REALACCEL
+        // display real acceleration, adjusted to remove gravity
+        mpu.dmpGetQuaternion(&q, fifoBuffer);
+        mpu.dmpGetAccel(&aa, fifoBuffer);
+        mpu.dmpGetGravity(&gravity, &q);
+        mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
+        Serial.print("areal\t");
+        Serial.print(aa.x);
+        Serial.print("\t");
+        Serial.print(aa.y);
+        Serial.print("\t");
+        Serial.println(aa.z);
+#endif
+
+#ifdef OUTPUT_READABLE_WORLDACCEL
+        // display initial world-frame acceleration, adjusted to remove gravity
+        // and rotated based on known orientation from quaternion
+        mpu.dmpGetQuaternion(&q, fifoBuffer);
+        mpu.dmpGetAccel(&aa, fifoBuffer);
+        mpu.dmpGetGravity(&gravity, &q);
+        mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
+        mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
+        Serial.print("aworld\t");
+        Serial.print(aaWorld.x);
+        Serial.print("\t");
+        Serial.print(aaWorld.y);
+        Serial.print("\t");
+        Serial.println(aaWorld.z);
+#endif
+
+#ifdef OUTPUT_TEAPOT
+        // display quaternion values in InvenSense Teapot demo format:
+        teapotPacket[2] = fifoBuffer[0];
+        teapotPacket[3] = fifoBuffer[1];
+        teapotPacket[4] = fifoBuffer[4];
+        teapotPacket[5] = fifoBuffer[5];
+        teapotPacket[6] = fifoBuffer[8];
+        teapotPacket[7] = fifoBuffer[9];
+        teapotPacket[8] = fifoBuffer[12];
+        teapotPacket[9] = fifoBuffer[13];
+        Serial.write(teapotPacket, 14);
+        teapotPacket[11]++; // packetCount, loops at 0xFF on purpose
+#endif
+
+#ifdef OUTPUT_RAW_DATA
+        //
+        float roll, pitch, heading;
+        float ax, ay, az;
+        float gx, gy, gz;
+        unsigned long microsNow;
+
+        // check if it's time to read data and update the filter
+        microsNow = micros();
+
+        if (microsNow - microsPrevious >= microsPerReading) {
             mpu.getMotion6(&aa.x, &aa.y, &aa.z, &GyroAxis.x, &GyroAxis.y, &GyroAxis.z);
-            
-            Serial.print(euler[0] * 180/M_PI);    Serial.print(";");
-            Serial.print(euler[1] * 180/M_PI);    Serial.print(";");
-            Serial.print(euler[2] * 180/M_PI);   Serial.print(";");
-            Serial.print(aa.x);                   Serial.print(";");
-            Serial.print(aa.y);                   Serial.print(";");
-            Serial.print(aa.z);                   Serial.println();
-            
-        #endif
 
-        #ifdef OUTPUT_READABLE_YAWPITCHROLL
-            // display Euler angles in degrees
-            mpu.dmpGetQuaternion(&q, fifoBuffer);
-            mpu.dmpGetGravity(&gravity, &q);
-            mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
-            /*
-            Serial.print("ypr\t");
-            Serial.print(ypr[0] * 180/M_PI);
-            Serial.print("\t");
-            Serial.print(ypr[1] * 180/M_PI);
-            Serial.print("\t");
-            Serial.println(ypr[2] * 180/M_PI);
-            */
-            /*
-            Serial.print(aaReal.x);
-            Serial.print(":");
-            Serial.print(aaReal.y);
-            Serial.print(":");
-            Serial.print(aaReal.z);
-            Serial.print(":");
-            Serial.print(ypr[1] * 180/M_PI);
-            Serial.print(":");
-            Serial.print(ypr[2] * 180/M_PI);
-            Serial.print(":");
-            Serial.println(ypr[0] * 180/M_PI);
-            */
-            
-            mpu.getMotion6(&aa.x, &aa.y, &aa.z, &GyroAxis.x, &GyroAxis.y, &GyroAxis.z);
-            Serial.print(-ypr[0] * 180/M_PI);  Serial.print(";");
-            Serial.print(-ypr[1] * 180/M_PI);  Serial.print(";");
-            Serial.print(ypr[2] * 180/M_PI);  Serial.print(";");
-            Serial.print(aa.x);           Serial.print(";");
-            Serial.print(aa.y);           Serial.print(";");
-            Serial.print(aa.z);           Serial.println(); 
+            // convert from raw data to gravity and degrees/second units
+            ax = convertRawAcceleration(aa.x);
+            ay = convertRawAcceleration(aa.y);
+            az = convertRawAcceleration(aa.z);
+            gx = convertRawGyro(GyroAxis.x);
+            gy = convertRawGyro(GyroAxis.y);
+            gz = convertRawGyro(GyroAxis.z);
 
-        #endif
+            // update the filter, which computes orientation
+            filter.updateIMU(gx, gy, gz, ax, ay, az);
 
-        #ifdef OUTPUT_READABLE_REALACCEL
-            // display real acceleration, adjusted to remove gravity
-            mpu.dmpGetQuaternion(&q, fifoBuffer);
-            mpu.dmpGetAccel(&aa, fifoBuffer);
-            mpu.dmpGetGravity(&gravity, &q);
-            mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
-            Serial.print("areal\t");
-            Serial.print(aa.x);
-            Serial.print("\t");
-            Serial.print(aa.y);
-            Serial.print("\t");
-            Serial.println(aa.z);
-        #endif
+            // print the heading, pitch and roll
+            roll = filter.getRoll();
+            pitch = filter.getPitch();
+            heading = filter.getYaw();
+            Serial.print("Orientation: ");
+            Serial.print(heading);
+            Serial.print(" ");
+            Serial.print(pitch);
+            Serial.print(" ");
+            Serial.println(roll);
 
-        #ifdef OUTPUT_READABLE_WORLDACCEL
-            // display initial world-frame acceleration, adjusted to remove gravity
-            // and rotated based on known orientation from quaternion
-            mpu.dmpGetQuaternion(&q, fifoBuffer);
-            mpu.dmpGetAccel(&aa, fifoBuffer);
-            mpu.dmpGetGravity(&gravity, &q);
-            mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
-            mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
-            Serial.print("aworld\t");
-            Serial.print(aaWorld.x);
-            Serial.print("\t");
-            Serial.print(aaWorld.y);
-            Serial.print("\t");
-            Serial.println(aaWorld.z);
-        #endif
-    
-        #ifdef OUTPUT_TEAPOT
-            // display quaternion values in InvenSense Teapot demo format:
-            teapotPacket[2] = fifoBuffer[0];
-            teapotPacket[3] = fifoBuffer[1];
-            teapotPacket[4] = fifoBuffer[4];
-            teapotPacket[5] = fifoBuffer[5];
-            teapotPacket[6] = fifoBuffer[8];
-            teapotPacket[7] = fifoBuffer[9];
-            teapotPacket[8] = fifoBuffer[12];
-            teapotPacket[9] = fifoBuffer[13];
-            Serial.write(teapotPacket, 14);
-            teapotPacket[11]++; // packetCount, loops at 0xFF on purpose
-        #endif
+            // increment previous time, so we keep proper pace
+            microsPrevious = microsPrevious + microsPerReading;
 
-        #ifdef OUTPUT_RAW_DATA
-            //
-  float roll, pitch, heading;
-  float ax, ay, az;
-  float gx, gy, gz;
-  unsigned long microsNow;
+        }
 
-  // check if it's time to read data and update the filter
-  microsNow = micros();
-  if (microsNow - microsPrevious >= microsPerReading) {
-              mpu.getMotion6(&aa.x, &aa.y, &aa.z, &GyroAxis.x, &GyroAxis.y, &GyroAxis.z);
+        /*
+                  Serial.print(i);
+                  Serial.print(": Accel/Gyro Raw Data:\t");
+                  Serial.print(aa.x);
+                  Serial.print("\t");
+                  Serial.print(aa.y);
+                  Serial.print("\t");
+                  Serial.print(aa.z);
+                  Serial.print("\t");
+                  Serial.print(GyroAxis.x);
+                  Serial.print("\t");
+                  Serial.print(GyroAxis.y);
+                  Serial.print("\t");
+                  Serial.println(GyroAxis.z);
 
-    // convert from raw data to gravity and degrees/second units
-    ax = convertRawAcceleration(aa.x);
-    ay = convertRawAcceleration(aa.y);
-    az = convertRawAcceleration(aa.z);
-    gx = convertRawGyro(GyroAxis.x);
-    gy = convertRawGyro(GyroAxis.y);
-    gz = convertRawGyro(GyroAxis.z);
-    
-    // update the filter, which computes orientation
-    filter.updateIMU(gx, gy, gz, ax, ay, az);
-
-    // print the heading, pitch and roll
-    roll = filter.getRoll();
-    pitch = filter.getPitch();
-    heading = filter.getYaw();
-    Serial.print("Orientation: ");
-    Serial.print(heading);
-    Serial.print(" ");
-    Serial.print(pitch);
-    Serial.print(" ");
-    Serial.println(roll);
-
-    // increment previous time, so we keep proper pace
-    microsPrevious = microsPrevious + microsPerReading;
-
-  }
-    /*
-              Serial.print(i);           
-              Serial.print(": Accel/Gyro Raw Data:\t");
-              Serial.print(aa.x);
-              Serial.print("\t");
-              Serial.print(aa.y);
-              Serial.print("\t");
-              Serial.print(aa.z);
-              Serial.print("\t");
-              Serial.print(GyroAxis.x);
-              Serial.print("\t");
-              Serial.print(GyroAxis.y);
-              Serial.print("\t");
-              Serial.println(GyroAxis.z);   
-              
-            i++;
-     */
-        #endif
+                i++;
+         */
+#endif
 
 
         // blink LED to indicate activity
@@ -583,8 +610,8 @@ void loop() {
         digitalWrite(LED_PIN, blinkState);
     }
 
-//   timestamp = micros()- timestamp_old;
-   //Serial.print("timestamp");
-   //Serial.print("\t");
-   //Serial.println(timestamp);
+    //   timestamp = micros()- timestamp_old;
+    //Serial.print("timestamp");
+    //Serial.print("\t");
+    //Serial.println(timestamp);
 }

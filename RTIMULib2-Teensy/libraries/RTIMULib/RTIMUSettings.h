@@ -41,10 +41,11 @@
 #define RTIMULIB_CAL_DATA_VALID_LOW         0xfc            // pattern to detect valid config - low byte
 #define RTIMULIB_CAL_DATA_VALID_HIGH        0x15            // pattern to detect valid config - high byte
 
-typedef struct
-{
-    unsigned char validL;                                   // should contain the valid pattern if a good config
-    unsigned char validH;                                   // should contain the valid pattern if a good config
+typedef struct {
+    unsigned char
+    validL;                                   // should contain the valid pattern if a good config
+    unsigned char
+    validH;                                   // should contain the valid pattern if a good config
     unsigned char magValid;                                 // true if data valid
     unsigned char pad;
     RTFLOAT magMin[3];                                      // min values
@@ -195,7 +196,7 @@ typedef struct
 class RTIMUSettings : public RTIMUHal
 {
 public:
-    RTIMUSettings(const char *productType = "RTIMULib");
+    RTIMUSettings(const char* productType = "RTIMULib");
 
     //  This function tries to find an IMU. It stops at the first valid one
     //  and returns true or else false
@@ -223,10 +224,12 @@ public:
 
     int m_imuType;                                          // type code of imu in use
     int m_fusionType;                                       // fusion algorithm type code
-    unsigned char m_I2CSlaveAddress;                        // I2C slave address of the imu
+    unsigned char
+    m_I2CSlaveAddress;                        // I2C slave address of the imu
     int m_axisRotation;                                     // axis rotation code
     int m_pressureType;                                     // type code of pressure sensor in use
-    unsigned char m_I2CPressureAddress;                     // I2C slave address of the pressure sensor
+    unsigned char
+    m_I2CPressureAddress;                     // I2C slave address of the pressure sensor
 
     bool m_compassCalValid;                                 // true if there is valid compass calibration data
     RTVector3 m_compassCalMin;                              // the minimum values
@@ -330,10 +333,10 @@ public:
 
 private:
     void setBlank();
-    void setComment(const char *comment);
-    void setValue(const char *key, const bool val);
-    void setValue(const char *key, const int val);
-    void setValue(const char *key, const RTFLOAT val);
+    void setComment(const char* comment);
+    void setValue(const char* key, const bool val);
+    void setValue(const char* key, const int val);
+    void setValue(const char* key, const RTFLOAT val);
 
     char m_filename[256];                                    // the settings file name
 
@@ -341,8 +344,8 @@ private:
     bool m_usingSD;                                          // true if using SD card
 
     void EEErase(byte device);
-    void EEWrite(byte device, RTIMULIB_CAL_DATA * calData);
-    boolean EERead(byte device, RTIMULIB_CAL_DATA * calData);
+    void EEWrite(byte device, RTIMULIB_CAL_DATA* calData);
+    boolean EERead(byte device, RTIMULIB_CAL_DATA* calData);
 };
 
 #endif // _RTIMUSETTINGS_H

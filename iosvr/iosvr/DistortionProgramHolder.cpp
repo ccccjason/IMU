@@ -10,7 +10,7 @@
 
 namespace iosvr
 {
-    DistortionProgramHolder::DistortionProgramHolder() : program(-1),
+DistortionProgramHolder::DistortionProgramHolder() : program(-1),
     positionLocation(-1),
     vignetteLocation(-1),
     redTextureCoordLocation(-1),
@@ -18,7 +18,7 @@ namespace iosvr
     blueTextureCoordLocation(-1),
     uTextureCoordScaleLocation(-1),
     uTextureSamplerLocation(-1)
-    {
-        
-    }
+{
+
+}
 }

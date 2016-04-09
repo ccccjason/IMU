@@ -23,7 +23,7 @@
 
 
 #ifndef _RTIMUMPU9150_H
-#define	_RTIMUMPU9150_H
+#define _RTIMUMPU9150_H
 
 #include "RTIMU.h"
 
@@ -42,12 +42,12 @@
 #define MPU9150_CACHE_SIZE          8                       // number of chunks in a block
 #define MPU9150_CACHE_BLOCK_COUNT   8                      // number of cache blocks
 
-typedef struct
-{
+typedef struct {
     unsigned char data[MPU9150_FIFO_CHUNK_SIZE * MPU9150_CACHE_SIZE];
     int count;                                              // number of chunks in the cache block
     int index;                                              // current index into the cache
-    unsigned char compass[8];                               // the raw compass readings for the block
+    unsigned char
+    compass[8];                               // the raw compass readings for the block
 
 } MPU9150_CACHE_BLOCK;
 
@@ -57,7 +57,7 @@ typedef struct
 class RTIMUMPU9150 : public RTIMU
 {
 public:
-    RTIMUMPU9150(RTIMUSettings *settings);
+    RTIMUMPU9150(RTIMUSettings* settings);
     ~RTIMUMPU9150();
 
     bool setLpf(unsigned char lpf);
@@ -66,8 +66,14 @@ public:
     bool setGyroFsr(unsigned char fsr);
     bool setAccelFsr(unsigned char fsr);
 
-    virtual const char *IMUName() { return "MPU-9150"; }
-    virtual int IMUType() { return RTIMU_TYPE_MPU9150; }
+    virtual const char* IMUName()
+    {
+        return "MPU-9150";
+    }
+    virtual int IMUType()
+    {
+        return RTIMU_TYPE_MPU9150;
+    }
     virtual bool IMUInit();
     virtual bool IMURead();
     virtual int IMUGetPollInterval();
@@ -82,9 +88,11 @@ private:
 
     bool m_firstTime;                                       // if first sample
 
-    unsigned char m_slaveAddr;                              // I2C address of MPU9150
+    unsigned char
+    m_slaveAddr;                              // I2C address of MPU9150
 
-    unsigned char m_lpf;                                    // low pass filter setting
+    unsigned char
+    m_lpf;                                    // low pass filter setting
     int m_compassRate;                                      // compass sample rate in Hz
     unsigned char m_gyroFsr;
     unsigned char m_accelFsr;

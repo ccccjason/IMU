@@ -37,11 +37,17 @@ class RTIMUSettings;
 class RTPressureMS5637 : public RTPressure
 {
 public:
-    RTPressureMS5637(RTIMUSettings *settings);
+    RTPressureMS5637(RTIMUSettings* settings);
     ~RTPressureMS5637();
 
-    virtual const char *pressureName() { return "MS5637"; }
-    virtual int pressureType() { return RTPRESSURE_TYPE_MS5611; }
+    virtual const char* pressureName()
+    {
+        return "MS5637";
+    }
+    virtual int pressureType()
+    {
+        return RTPRESSURE_TYPE_MS5611;
+    }
     virtual bool pressureInit();
     virtual bool pressureRead(RTIMU_DATA& data);
 

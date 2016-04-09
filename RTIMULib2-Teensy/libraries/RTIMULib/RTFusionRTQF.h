@@ -23,7 +23,7 @@
 
 
 #ifndef _RTFUSIONRTQF_H
-#define	_RTFUSIONRTQF_H
+#define _RTFUSIONRTQF_H
 
 #include "RTFusion.h"
 
@@ -35,7 +35,10 @@ public:
 
     //  fusionType returns the type code of the fusion algorithm
 
-    virtual int fusionType() { return RTFUSION_TYPE_RTQF; }
+    virtual int fusionType()
+    {
+        return RTFUSION_TYPE_RTQF;
+    }
 
     //  reset() resets the state but keeps any setting changes (such as enables)
 
@@ -44,17 +47,19 @@ public:
     //  newIMUData() should be called for subsequent updates
     //  deltaTime is in units of seconds
 
-    void newIMUData(RTIMU_DATA& data, const RTIMUSettings *settings);
+    void newIMUData(RTIMU_DATA& data, const RTIMUSettings* settings);
 
 private:
     void predict();
     void update();
 
-    RTVector3 m_gyro;										// unbiased gyro data
+    RTVector3 m_gyro;                                       // unbiased gyro data
     RTFLOAT m_timeDelta;                                    // time between predictions
 
-    RTQuaternion m_stateQ;									// quaternion state vector
-    RTQuaternion m_stateQError;                             // difference between stateQ and measuredQ
+    RTQuaternion
+    m_stateQ;                                  // quaternion state vector
+    RTQuaternion
+    m_stateQError;                             // difference between stateQ and measuredQ
 
     int m_sampleNumber;
 };

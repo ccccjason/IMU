@@ -10,95 +10,93 @@
 
 namespace iosvr
 {
-    GLfloat CardboardDeviceParams::DefaultInterLensDistance = 0.06f;
-    GLfloat CardboardDeviceParams::DefaultVerticalDistanceToLensCenter = 0.035f;
-    GLfloat CardboardDeviceParams::DefaultScreenToLensDistance = 0.042f;
+GLfloat CardboardDeviceParams::DefaultInterLensDistance = 0.06f;
+GLfloat CardboardDeviceParams::DefaultVerticalDistanceToLensCenter = 0.035f;
+GLfloat CardboardDeviceParams::DefaultScreenToLensDistance = 0.042f;
 
-    CardboardDeviceParams::CardboardDeviceParams()
-    {
-        this->interLensDistance = DefaultInterLensDistance;
-        verticalDistanceToLensCenter = DefaultVerticalDistanceToLensCenter;
-        screenToLensDistance = DefaultScreenToLensDistance;
-        
-        distortion = new Distortion();
-        maximumLeftEyeFOV = new FieldOfView();
+CardboardDeviceParams::CardboardDeviceParams()
+{
+    this->interLensDistance = DefaultInterLensDistance;
+    verticalDistanceToLensCenter = DefaultVerticalDistanceToLensCenter;
+    screenToLensDistance = DefaultScreenToLensDistance;
+
+    distortion = new Distortion();
+    maximumLeftEyeFOV = new FieldOfView();
+}
+
+CardboardDeviceParams::CardboardDeviceParams(const CardboardDeviceParams& other)
+{
+    this->interLensDistance = other.interLensDistance;
+    this->verticalDistanceToLensCenter = other.verticalDistanceToLensCenter;
+    this->screenToLensDistance = other.screenToLensDistance;
+
+    this->maximumLeftEyeFOV = new FieldOfView(*other.maximumLeftEyeFOV);
+    this->distortion = new Distortion(*other.distortion);
+}
+
+CardboardDeviceParams::~CardboardDeviceParams()
+{
+    if (distortion != 0) {
+        delete distortion;
     }
 
-    CardboardDeviceParams::CardboardDeviceParams(const CardboardDeviceParams& other)
-    {
+    if (maximumLeftEyeFOV != 0) {
+        delete maximumLeftEyeFOV;
+    }
+}
+
+CardboardDeviceParams& CardboardDeviceParams::operator=(const
+        CardboardDeviceParams& other)
+{
+    if (this != &other) {
         this->interLensDistance = other.interLensDistance;
         this->verticalDistanceToLensCenter = other.verticalDistanceToLensCenter;
         this->screenToLensDistance = other.screenToLensDistance;
-        
+
         this->maximumLeftEyeFOV = new FieldOfView(*other.maximumLeftEyeFOV);
         this->distortion = new Distortion(*other.distortion);
     }
 
-    CardboardDeviceParams::~CardboardDeviceParams()
-    {
-        if (distortion != 0)
-        {
-            delete distortion;
-        }
-        
-        if (maximumLeftEyeFOV != 0)
-        {
-            delete maximumLeftEyeFOV;
-        }
-    }
-    
-    CardboardDeviceParams& CardboardDeviceParams::operator=(const CardboardDeviceParams &other)
-    {
-        if (this != &other)
-        {
-            this->interLensDistance = other.interLensDistance;
-            this->verticalDistanceToLensCenter = other.verticalDistanceToLensCenter;
-            this->screenToLensDistance = other.screenToLensDistance;
-            
-            this->maximumLeftEyeFOV = new FieldOfView(*other.maximumLeftEyeFOV);
-            this->distortion = new Distortion(*other.distortion);
-        }
-        
-        return *this;
-    }
-    
-    bool CardboardDeviceParams::operator==(const CardboardDeviceParams &other) const
-    {
-        return (this->interLensDistance == other.interLensDistance
-                && this->verticalDistanceToLensCenter == other.verticalDistanceToLensCenter
-                && this->screenToLensDistance == other.screenToLensDistance
-                && this->maximumLeftEyeFOV == other.maximumLeftEyeFOV
-                && this->distortion == other.distortion);
-    }
-    
-    bool CardboardDeviceParams::operator!=(const CardboardDeviceParams &other) const
-    {
-        return !(*this == other);
-    }
+    return *this;
+}
 
-    GLfloat CardboardDeviceParams::getInterLensDistance()
-    {
-        return interLensDistance;
-    }
+bool CardboardDeviceParams::operator==(const CardboardDeviceParams& other) const
+{
+    return (this->interLensDistance == other.interLensDistance
+            && this->verticalDistanceToLensCenter == other.verticalDistanceToLensCenter
+            && this->screenToLensDistance == other.screenToLensDistance
+            && this->maximumLeftEyeFOV == other.maximumLeftEyeFOV
+            && this->distortion == other.distortion);
+}
 
-    GLfloat CardboardDeviceParams::getVerticalDistanceToLensCenter()
-    {
-        return verticalDistanceToLensCenter;
-    }
+bool CardboardDeviceParams::operator!=(const CardboardDeviceParams& other) const
+{
+    return !(*this == other);
+}
 
-    GLfloat CardboardDeviceParams::getScreenToLensDistance()
-    {
-        return screenToLensDistance;
-    }
+GLfloat CardboardDeviceParams::getInterLensDistance()
+{
+    return interLensDistance;
+}
 
-    FieldOfView *CardboardDeviceParams::getMaximumLeftEyeFOV()
-    {
-        return maximumLeftEyeFOV;
-    }
+GLfloat CardboardDeviceParams::getVerticalDistanceToLensCenter()
+{
+    return verticalDistanceToLensCenter;
+}
 
-    Distortion *CardboardDeviceParams::getDistortion()
-    {
-        return distortion;
-    }
+GLfloat CardboardDeviceParams::getScreenToLensDistance()
+{
+    return screenToLensDistance;
+}
+
+FieldOfView* CardboardDeviceParams::getMaximumLeftEyeFOV()
+{
+    return maximumLeftEyeFOV;
+}
+
+Distortion* CardboardDeviceParams::getDistortion()
+{
+    return distortion;
+}
 
 }

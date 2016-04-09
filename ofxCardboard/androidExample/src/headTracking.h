@@ -10,15 +10,16 @@
 #include "OrientationEKF.h"
 #include "ofxAccelerometer.h"
 //#include "GyroscopeBiasEstimator.h"
-class headTracking {
+class headTracking
+{
 public:
-	headTracking();
-	virtual ~headTracking();
-	void setup();
-	ofMatrix4x4 getLastHeadView(ofMatrix4x4 headView);
+    headTracking();
+    virtual ~headTracking();
+    void setup();
+    ofMatrix4x4 getLastHeadView(ofMatrix4x4 headView);
     void processSensorEvent(SensorEvent event);
-//    void accelerationChanged(SensorEvent & event);
-//    void gyroChanged(SensorEvent & event);
+    //    void accelerationChanged(SensorEvent & event);
+    //    void gyroChanged(SensorEvent & event);
     void reset();
     void setGyroBias(ofVec3f bias);
     void setNeckModelEnabled(bool enable);

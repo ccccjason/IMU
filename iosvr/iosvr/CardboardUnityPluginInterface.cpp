@@ -31,12 +31,14 @@ void getScreenSizeMeters(float* screenSize)
 
 void getDistortionCoefficients(float* distCoeff)
 {
-    iosvr::CardboardUnity::Instance().getDistortionCoefficients((GLfloat*)distCoeff);
+    iosvr::CardboardUnity::Instance().getDistortionCoefficients((
+                GLfloat*)distCoeff);
 }
 
 void getInverseDistortionCoefficients(float* invDistCoeff)
 {
-    iosvr::CardboardUnity::Instance().getInverseDistortionCoefficients((GLfloat*)invDistCoeff);
+    iosvr::CardboardUnity::Instance().getInverseDistortionCoefficients((
+                GLfloat*)invDistCoeff);
 }
 
 void getLeftEyeMaximumFOV(float* maxFov)
@@ -46,7 +48,8 @@ void getLeftEyeMaximumFOV(float* maxFov)
 
 void getFrameParams(float* frameInfo, float zNear, float zFar)
 {
-    iosvr::CardboardUnity::Instance().getFrameParams((GLfloat*)frameInfo, (GLfloat)zNear, (GLfloat)zFar);
+    iosvr::CardboardUnity::Instance().getFrameParams((GLfloat*)frameInfo,
+            (GLfloat)zNear, (GLfloat)zFar);
 }
 
 void resetHeadTracker()
@@ -73,26 +76,23 @@ static int g_DeviceType = -1;
 void UnitySetGraphicsDevice(void* device, int deviceType, int eventType)
 {
     g_DeviceType = -1;
-    
-    if(deviceType == kGfxRendererOpenGLES20Mobile)
-    {
+
+    if (deviceType == kGfxRendererOpenGLES20Mobile) {
         g_DeviceType = deviceType;
-    }
-    else if(deviceType == kGfxRendererOpenGLES30)
-    {
+    } else if (deviceType == kGfxRendererOpenGLES30) {
         g_DeviceType = deviceType;
     }
 }
 
 void UnityRenderEvent(int eventID)
 {
-    if(g_DeviceType == -1)
+    if (g_DeviceType == -1) {
         return;
-    
-    if(eventID == kPerformDistortionCorrection)
-    {
+    }
+
+    if (eventID == kPerformDistortionCorrection) {
         iosvr::CardboardUnity::Instance().renderUndistortedTexture();
     }
-    
-    
+
+
 }

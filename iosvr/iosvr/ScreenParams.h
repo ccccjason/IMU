@@ -11,43 +11,46 @@
 
 namespace iosvr
 {
-    class UIScreenExt;
-    
-    class ScreenParams
+class UIScreenExt;
+
+class ScreenParams
+{
+public:
+
+    ScreenParams(UIScreenExt* screen);
+    ScreenParams(const ScreenParams& other);
+
+    virtual ~ScreenParams();
+
+    ScreenParams& operator=(const ScreenParams& other);
+
+    bool operator==(const ScreenParams& other) const;
+    bool operator!=(const ScreenParams& other) const;
+
+    GLint getWidth();
+    GLint getHeight();
+
+    GLfloat getWidthInMeters();
+    GLfloat getHeightInMeters();
+
+    void setBorderSizeInMeters(GLfloat screenBorderSize);
+    GLfloat getBorderSizeInMeters();
+
+    UIScreenExt* getScreenDevice()
     {
-    public:
-        
-        ScreenParams(UIScreenExt *screen);
-        ScreenParams(const ScreenParams &other);
-        
-        virtual ~ScreenParams();
-        
-        ScreenParams& operator=(const ScreenParams &other);
-        
-        bool operator==(const ScreenParams &other) const;
-        bool operator!=(const ScreenParams &other) const;
-        
-        GLint getWidth();
-        GLint getHeight();
+        return this->screen;
+    }
 
-        GLfloat getWidthInMeters();
-        GLfloat getHeightInMeters();
+private:
 
-        void setBorderSizeInMeters(GLfloat screenBorderSize);
-        GLfloat getBorderSizeInMeters();
-        
-        UIScreenExt* getScreenDevice() { return this->screen; }
-    
-    private:
-        
-        UIScreenExt* screen;
-        GLfloat scale;
-        GLfloat xMetersPerPixel;
-        GLfloat yMetersPerPixel;
-        GLfloat borderSizeMeters;
+    UIScreenExt* screen;
+    GLfloat scale;
+    GLfloat xMetersPerPixel;
+    GLfloat yMetersPerPixel;
+    GLfloat borderSizeMeters;
 
-        GLfloat pixelsPerInch(UIScreenExt *screen);
-    };
+    GLfloat pixelsPerInch(UIScreenExt* screen);
+};
 
 }
 

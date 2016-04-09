@@ -25,7 +25,7 @@
 //  staslock@gmail.com (www.clickdrive.io)
 
 #ifndef _RTIMULIBDEFS_H
-#define	_RTIMULIBDEFS_H
+#define _RTIMULIBDEFS_H
 
 #include "RTMath.h"
 #include "utility/RTIMUDefs.h"
@@ -40,8 +40,7 @@
 
 //  This is a convenience structure that can be used to pass IMU data around
 
-typedef struct
-{
+typedef struct {
     uint64_t timestamp;
     bool fusionPoseValid;
     RTVector3 fusionPose;

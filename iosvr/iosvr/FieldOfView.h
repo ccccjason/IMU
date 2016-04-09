@@ -11,45 +11,45 @@
 
 namespace iosvr
 {
-    class FieldOfView
-    {
-      public:
-        
-        FieldOfView();
-        FieldOfView(GLfloat _left, GLfloat _right, GLfloat _bottom, GLfloat _top);
-        FieldOfView(const FieldOfView &other);
-        
-        virtual ~FieldOfView();
-        
-        FieldOfView& operator=(const FieldOfView &other);
-        
-        bool operator==(const FieldOfView &other) const;
-        bool operator!=(const FieldOfView &other) const;
+class FieldOfView
+{
+public:
 
-        void setLeft(GLfloat _left);
-        GLfloat getLeft();
+    FieldOfView();
+    FieldOfView(GLfloat _left, GLfloat _right, GLfloat _bottom, GLfloat _top);
+    FieldOfView(const FieldOfView& other);
 
-        void setRight(GLfloat _right);
-        GLfloat getRight();
+    virtual ~FieldOfView();
 
-        void setBottom(GLfloat _bottom);
-        GLfloat getBottom();
+    FieldOfView& operator=(const FieldOfView& other);
 
-        void setTop(GLfloat _top);
-        GLfloat getTop();
-        
-        GLKMatrix4 toPerspectiveMatrix(GLfloat near, GLfloat far);
+    bool operator==(const FieldOfView& other) const;
+    bool operator!=(const FieldOfView& other) const;
 
-      private:
-        
-        static GLfloat DefaultViewAngle;
+    void setLeft(GLfloat _left);
+    GLfloat getLeft();
 
-        GLfloat left;
-        GLfloat right;
-        GLfloat bottom;
-        GLfloat top;
-    };
-    
+    void setRight(GLfloat _right);
+    GLfloat getRight();
+
+    void setBottom(GLfloat _bottom);
+    GLfloat getBottom();
+
+    void setTop(GLfloat _top);
+    GLfloat getTop();
+
+    GLKMatrix4 toPerspectiveMatrix(GLfloat near, GLfloat far);
+
+private:
+
+    static GLfloat DefaultViewAngle;
+
+    GLfloat left;
+    GLfloat right;
+    GLfloat bottom;
+    GLfloat top;
+};
+
 };
 
 #endif //__IOSVR__FIELD_OF_VIEW_H__

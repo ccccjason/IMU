@@ -23,18 +23,24 @@
 
 
 #ifndef _RTIMUBNO055_H
-#define	_RTIMUBNO055_H
+#define _RTIMUBNO055_H
 
 #include "RTIMU.h"
 
 class RTIMUBNO055 : public RTIMU
 {
 public:
-    RTIMUBNO055(RTIMUSettings *settings);
+    RTIMUBNO055(RTIMUSettings* settings);
     ~RTIMUBNO055();
 
-    virtual const char *IMUName() { return "BNO055"; }
-    virtual int IMUType() { return RTIMU_TYPE_BNO055; }
+    virtual const char* IMUName()
+    {
+        return "BNO055";
+    }
+    virtual int IMUType()
+    {
+        return RTIMU_TYPE_BNO055;
+    }
     virtual bool IMUInit();
     virtual int IMUGetPollInterval();
     virtual bool IMURead();

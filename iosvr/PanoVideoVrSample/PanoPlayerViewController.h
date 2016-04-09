@@ -8,6 +8,7 @@
 #import <iosvr/CardboardViewController.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface PanoPlayerViewController : CardboardViewController <AVPlayerItemOutputPullDelegate>
+@interface PanoPlayerViewController : CardboardViewController
+    <AVPlayerItemOutputPullDelegate>
 
 @end

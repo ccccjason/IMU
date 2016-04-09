@@ -12,13 +12,13 @@
 
 @interface PanoPlayerRender : NSObject
 {
-    
+
 }
 
-- (void)setupRendererWithView:(GLKView *)glView;
-- (void)shutdownRendererWithView:(GLKView *)glView;
+- (void)setupRendererWithView:(GLKView*)glView;
+- (void)shutdownRendererWithView:(GLKView*)glView;
 - (void)renderViewDidChangeSize:(CGSize)size;
-- (void)drawEyeWithEye:(CBDEye *)eye;
+- (void)drawEyeWithEye:(CBDEye*)eye;
 - (void)finishFrameWithViewportRect:(CGRect)viewPort;
 - (void)prepareNewFrameWithHeadViewMatrix:(GLKMatrix4)headViewMatrix;
 

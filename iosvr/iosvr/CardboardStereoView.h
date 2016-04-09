@@ -12,10 +12,10 @@
 @interface CardboardStereoView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame
-                      context:(EAGLContext *)glContext;
+    context:(EAGLContext*)glContext;
 - (instancetype)initWithFrame:(CGRect)frame
-                      context:(EAGLContext *)glContext
-                         lock:(NSRecursiveLock *)lock;
+    context:(EAGLContext*)glContext
+    lock:(NSRecursiveLock*)lock;
 
 - (void)updateGLTextureForEye:(CBDEyeType)eyeType;
 - (void)renderTextureForEye:(CBDEyeType)eyeType;

@@ -14,20 +14,20 @@
 
 namespace iosvr
 {
-    class DistortionProgramHolder
-    {
-    public:
-        DistortionProgramHolder();
-        
-        GLint program;
-        GLint positionLocation;
-        GLint vignetteLocation;
-        GLint redTextureCoordLocation;
-        GLint greenTextureCoordLocation;
-        GLint blueTextureCoordLocation;
-        GLint uTextureCoordScaleLocation;
-        GLint uTextureSamplerLocation;
-    };
+class DistortionProgramHolder
+{
+public:
+    DistortionProgramHolder();
+
+    GLint program;
+    GLint positionLocation;
+    GLint vignetteLocation;
+    GLint redTextureCoordLocation;
+    GLint greenTextureCoordLocation;
+    GLint blueTextureCoordLocation;
+    GLint uTextureCoordScaleLocation;
+    GLint uTextureSamplerLocation;
+};
 };
 
 #endif /* defined(__iosvr__DistortionProgramHolder__) */

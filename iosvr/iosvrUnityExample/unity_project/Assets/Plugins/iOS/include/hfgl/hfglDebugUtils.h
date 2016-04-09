@@ -12,9 +12,9 @@
 
 namespace hfgl
 {
-    void CheckGlErrors();
-    void ClearGLErrors();
-    
+void CheckGlErrors();
+void ClearGLErrors();
+
 };
 
 #endif //__HFGL_DEBUG_UTILS_H__

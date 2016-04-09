@@ -23,7 +23,7 @@
 
 
 #ifndef _RTIMUMAGCAL_H
-#define	_RTIMUMAGCAL_H
+#define _RTIMUMAGCAL_H
 
 #include "RTIMUCalDefs.h"
 #include "RTIMULib.h"
@@ -32,7 +32,7 @@ class RTIMUMagCal
 {
 
 public:
-    RTIMUMagCal(RTIMUSettings *settings);
+    RTIMUMagCal(RTIMUSettings* settings);
     virtual ~RTIMUMagCal();
 
     void magCalInit();                                      // inits everything
@@ -49,10 +49,10 @@ public:
 
     // these vars used during the calibration process
 
-   	RTVector3 m_magMin;                                     // the min values
-	RTVector3 m_magMax;                                     // the max values
+    RTVector3 m_magMin;                                     // the min values
+    RTVector3 m_magMax;                                     // the max values
 
-    RTIMUSettings *m_settings;
+    RTIMUSettings* m_settings;
 
 private:
     RTVector3 m_minMaxOffset;                               // the min/max calibration offset

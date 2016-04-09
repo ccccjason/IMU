@@ -13,34 +13,34 @@
 
 namespace iosvr
 {
-    class Distortion
-    {
-      public:
-        
-        Distortion();
-        Distortion(const Distortion &other);
-        
-        Distortion& operator=(const Distortion &other);
-        
-        bool operator==(const Distortion &other) const;
-        bool operator!=(const Distortion &other) const;
-        
-        virtual ~Distortion();
-        
-        void setCoefficients(GLfloat *coefficients);
-        GLfloat *getCoefficients();
-        
-        GLfloat getDistortionFactor(GLfloat radius);
-        GLfloat distort(GLfloat radius);
-        GLfloat distortInverse(GLfloat radius);
-        
-        Distortion* getApproximateInverseDistortion(GLfloat maxRadius);
-        
-      private:
-        
-        static GLfloat DefaultCoefficients[NUM_COEFFICIENTS];
-        GLfloat coefficients[NUM_COEFFICIENTS];
-    };
+class Distortion
+{
+public:
+
+    Distortion();
+    Distortion(const Distortion& other);
+
+    Distortion& operator=(const Distortion& other);
+
+    bool operator==(const Distortion& other) const;
+    bool operator!=(const Distortion& other) const;
+
+    virtual ~Distortion();
+
+    void setCoefficients(GLfloat* coefficients);
+    GLfloat* getCoefficients();
+
+    GLfloat getDistortionFactor(GLfloat radius);
+    GLfloat distort(GLfloat radius);
+    GLfloat distortInverse(GLfloat radius);
+
+    Distortion* getApproximateInverseDistortion(GLfloat maxRadius);
+
+private:
+
+    static GLfloat DefaultCoefficients[NUM_COEFFICIENTS];
+    GLfloat coefficients[NUM_COEFFICIENTS];
+};
 
 };
 

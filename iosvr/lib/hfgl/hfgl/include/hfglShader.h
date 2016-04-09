@@ -16,21 +16,21 @@
 
 namespace hfgl
 {
-    class Shader
-    {
-    public:
-        static bool CompileShader(GLuint *shader, GLenum type, const GLchar *source);
-        static bool LinkProgram(GLuint program);
-        static bool ValidateProgram(GLuint program);
-        static GLuint BuildProgram(const char* verSource, const char* fragSource);
-        static void TeardownProgram(GLuint program);
-        
-    protected:
-        Shader();
-        virtual ~Shader();
-        
-    };
-    
+class Shader
+{
+public:
+    static bool CompileShader(GLuint* shader, GLenum type, const GLchar* source);
+    static bool LinkProgram(GLuint program);
+    static bool ValidateProgram(GLuint program);
+    static GLuint BuildProgram(const char* verSource, const char* fragSource);
+    static void TeardownProgram(GLuint program);
+
+protected:
+    Shader();
+    virtual ~Shader();
+
+};
+
 };
 
 #endif //__HFGL_SHADER_H__

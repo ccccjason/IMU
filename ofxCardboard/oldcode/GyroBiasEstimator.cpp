@@ -7,12 +7,14 @@
 
 #include "GyroBiasEstimator.h"
 
-GyroBiasEstimator::GyroBiasEstimator() {
-	// TODO Auto-generated constructor stub
+GyroBiasEstimator::GyroBiasEstimator()
+{
+    // TODO Auto-generated constructor stub
 
 }
 
-GyroBiasEstimator::~GyroBiasEstimator() {
-	// TODO Auto-generated destructor stub
+GyroBiasEstimator::~GyroBiasEstimator()
+{
+    // TODO Auto-generated destructor stub
 }
 

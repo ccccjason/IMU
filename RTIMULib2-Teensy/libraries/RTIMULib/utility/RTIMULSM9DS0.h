@@ -23,7 +23,7 @@
 
 
 #ifndef _RTIMULSM9DS0_H
-#define	_RTIMULSM9DS0_H
+#define _RTIMULSM9DS0_H
 
 #include "RTIMU.h"
 
@@ -39,13 +39,14 @@
 #define LSM9DS0_FIFO_THRESH        16                      // threshold point in fifo
 #define LSM9DS0_CACHE_BLOCK_COUNT  16                      // number of cache blocks
 
-typedef struct
-{
+typedef struct {
     unsigned char data[LSM9DS0_FIFO_THRESH * LSM9DS0_FIFO_CHUNK_SIZE];
     int count;                                              // number of chunks in the cache block
     int index;                                              // current index into the cache
-    unsigned char accel[6];                                 // the raw accel readings for the block
-    unsigned char compass[6];                               // the raw compass readings for the block
+    unsigned char
+    accel[6];                                 // the raw accel readings for the block
+    unsigned char
+    compass[6];                               // the raw compass readings for the block
 
 } LSM9DS0_CACHE_BLOCK;
 
@@ -54,11 +55,17 @@ typedef struct
 class RTIMULSM9DS0 : public RTIMU
 {
 public:
-    RTIMULSM9DS0(RTIMUSettings *settings);
+    RTIMULSM9DS0(RTIMUSettings* settings);
     ~RTIMULSM9DS0();
 
-    virtual const char *IMUName() { return "LSM9DS0"; }
-    virtual int IMUType() { return RTIMU_TYPE_LSM9DS0; }
+    virtual const char* IMUName()
+    {
+        return "LSM9DS0";
+    }
+    virtual int IMUType()
+    {
+        return RTIMU_TYPE_LSM9DS0;
+    }
     virtual bool IMUInit();
     virtual int IMUGetPollInterval();
     virtual bool IMURead();
@@ -75,7 +82,8 @@ private:
     bool setCompassCTRL7();
 
     unsigned char m_gyroSlaveAddr;                          // I2C address of gyro
-    unsigned char m_accelCompassSlaveAddr;                  // I2C address of accel and mag
+    unsigned char
+    m_accelCompassSlaveAddr;                  // I2C address of accel and mag
 
     RTFLOAT m_gyroScale;
     RTFLOAT m_accelScale;

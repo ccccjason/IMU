@@ -12,46 +12,46 @@
 
 namespace iosvr
 {
-    class OrientationEKF;
-    
-    class HeadTracker
-    {
-    public:
-        
-        HeadTracker();
-        virtual ~HeadTracker();
-        
-        void startTracking(); //UIInterfaceOrientation
-        void stopTracking();
-        GLKMatrix4 lastHeadView();
-        
-        void resetHeadTracker() {}
-        
-        void updateDeviceOrientation(); //UIInterfaceOrientation
+class OrientationEKF;
 
-        bool neckModelEnabled();
-        void setNeckModelEnabled(bool enabled);
-        
-        bool isReady();
-    
-    private:
-        
-        void* _motionManager;
-        size_t _sampleCount;
-        OrientationEKF* _tracker;
-        GLKMatrix4 _displayFromDevice;
-        GLKMatrix4 _inertialReferenceFrameFromWorld;
-        GLKMatrix4 _correctedInertialReferenceFrameFromWorld;
-        GLKMatrix4 _lastHeadView;
-        double _lastGyroEventTimestamp;
-        bool _headingCorrectionComputed;
-        bool _neckModelEnabled;
-        GLKMatrix4 _neckModelTranslation;
-        GLfloat _orientationCorrectionAngle;
+class HeadTracker
+{
+public:
 
-        const GLfloat _defaultNeckHorizontalOffset = 0.08f;
-        const GLfloat _defaultNeckVerticalOffset = 0.075f;
-    };
+    HeadTracker();
+    virtual ~HeadTracker();
+
+    void startTracking(); //UIInterfaceOrientation
+    void stopTracking();
+    GLKMatrix4 lastHeadView();
+
+    void resetHeadTracker() {}
+
+    void updateDeviceOrientation(); //UIInterfaceOrientation
+
+    bool neckModelEnabled();
+    void setNeckModelEnabled(bool enabled);
+
+    bool isReady();
+
+private:
+
+    void* _motionManager;
+    size_t _sampleCount;
+    OrientationEKF* _tracker;
+    GLKMatrix4 _displayFromDevice;
+    GLKMatrix4 _inertialReferenceFrameFromWorld;
+    GLKMatrix4 _correctedInertialReferenceFrameFromWorld;
+    GLKMatrix4 _lastHeadView;
+    double _lastGyroEventTimestamp;
+    bool _headingCorrectionComputed;
+    bool _neckModelEnabled;
+    GLKMatrix4 _neckModelTranslation;
+    GLfloat _orientationCorrectionAngle;
+
+    const GLfloat _defaultNeckHorizontalOffset = 0.08f;
+    const GLfloat _defaultNeckVerticalOffset = 0.075f;
+};
 
 }
 

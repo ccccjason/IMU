@@ -22,7 +22,7 @@
 //  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #ifndef _RTPRESSURE_H
-#define	_RTPRESSURE_H
+#define _RTPRESSURE_H
 
 #include "RTIMUSettings.h"
 #include "RTIMULibDefs.h"
@@ -33,22 +33,26 @@ class RTPressure
 public:
     //  Pressure sensor objects should always be created with the following call
 
-    static RTPressure *createPressure(RTIMUSettings *settings);
+    static RTPressure* createPressure(RTIMUSettings* settings);
 
     //  Constructor/destructor
 
-    RTPressure(RTIMUSettings *settings);
+    RTPressure(RTIMUSettings* settings);
     virtual ~RTPressure();
 
     //  These functions must be provided by sub classes
 
-    virtual const char *pressureName() = 0;                 // the name of the pressure sensor
-    virtual int pressureType() = 0;                         // the type code of the pressure sensor
-    virtual bool pressureInit() = 0;                        // set up the pressure sensor
+    virtual const char* pressureName() =
+        0;                 // the name of the pressure sensor
+    virtual int pressureType() =
+        0;                         // the type code of the pressure sensor
+    virtual bool pressureInit() =
+        0;                        // set up the pressure sensor
     virtual bool pressureRead(RTIMU_DATA& data) = 0;        // get latest value
 
 protected:
-    RTIMUSettings *m_settings;                              // the settings object pointer
+    RTIMUSettings*
+    m_settings;                              // the settings object pointer
 
 };
 

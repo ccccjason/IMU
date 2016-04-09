@@ -11,42 +11,42 @@
 
 namespace iosvr
 {
-    class Distortion;
-    class FieldOfView;
+class Distortion;
+class FieldOfView;
 
-    class CardboardDeviceParams
-    {
-      public:
-        CardboardDeviceParams();
-        CardboardDeviceParams(const CardboardDeviceParams& other);
-        
-        virtual ~CardboardDeviceParams();
-        
-        CardboardDeviceParams& operator=(const CardboardDeviceParams &other);
-        
-        bool operator==(const CardboardDeviceParams &other) const;
-        bool operator!=(const CardboardDeviceParams &other) const;
-        
-        GLfloat getInterLensDistance();
-        GLfloat getVerticalDistanceToLensCenter();
-        GLfloat getScreenToLensDistance();
-        
-        FieldOfView* getMaximumLeftEyeFOV();
-        Distortion* getDistortion();
-        
-    private:
+class CardboardDeviceParams
+{
+public:
+    CardboardDeviceParams();
+    CardboardDeviceParams(const CardboardDeviceParams& other);
 
-        static GLfloat DefaultInterLensDistance;
-        static GLfloat DefaultVerticalDistanceToLensCenter;
-        static GLfloat DefaultScreenToLensDistance;
-        
-        GLfloat interLensDistance;
-        GLfloat verticalDistanceToLensCenter;
-        GLfloat screenToLensDistance;
+    virtual ~CardboardDeviceParams();
 
-        FieldOfView* maximumLeftEyeFOV;
-        Distortion* distortion;
-    };
+    CardboardDeviceParams& operator=(const CardboardDeviceParams& other);
+
+    bool operator==(const CardboardDeviceParams& other) const;
+    bool operator!=(const CardboardDeviceParams& other) const;
+
+    GLfloat getInterLensDistance();
+    GLfloat getVerticalDistanceToLensCenter();
+    GLfloat getScreenToLensDistance();
+
+    FieldOfView* getMaximumLeftEyeFOV();
+    Distortion* getDistortion();
+
+private:
+
+    static GLfloat DefaultInterLensDistance;
+    static GLfloat DefaultVerticalDistanceToLensCenter;
+    static GLfloat DefaultScreenToLensDistance;
+
+    GLfloat interLensDistance;
+    GLfloat verticalDistanceToLensCenter;
+    GLfloat screenToLensDistance;
+
+    FieldOfView* maximumLeftEyeFOV;
+    Distortion* distortion;
+};
 
 };
 

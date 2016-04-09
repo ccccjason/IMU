@@ -8,34 +8,34 @@
 
 namespace iosvr
 {
-    class CardboardDeviceParams;
-    class ScreenParams;
-    class UIScreenExt;
+class CardboardDeviceParams;
+class ScreenParams;
+class UIScreenExt;
 
-    class HeadMountedDisplay
-    {
-    public:
-        HeadMountedDisplay(UIScreenExt* _screen);
-        
-        HeadMountedDisplay(const HeadMountedDisplay &other);
-        
-        HeadMountedDisplay& operator=(const HeadMountedDisplay &other);
-        
-        bool operator==(const HeadMountedDisplay &other) const;
-        bool operator!=(const HeadMountedDisplay &other) const;
-        
-        virtual ~HeadMountedDisplay();
-        
-        void setScreen(ScreenParams* _screen);
-        ScreenParams *getScreen();
-        
-        void setCardboard(CardboardDeviceParams *_cardboard);
-        CardboardDeviceParams *getCardboard();
-        
-    private:
-        ScreenParams* screen;
-        CardboardDeviceParams* cardboard;
-    };
+class HeadMountedDisplay
+{
+public:
+    HeadMountedDisplay(UIScreenExt* _screen);
+
+    HeadMountedDisplay(const HeadMountedDisplay& other);
+
+    HeadMountedDisplay& operator=(const HeadMountedDisplay& other);
+
+    bool operator==(const HeadMountedDisplay& other) const;
+    bool operator!=(const HeadMountedDisplay& other) const;
+
+    virtual ~HeadMountedDisplay();
+
+    void setScreen(ScreenParams* _screen);
+    ScreenParams* getScreen();
+
+    void setCardboard(CardboardDeviceParams* _cardboard);
+    CardboardDeviceParams* getCardboard();
+
+private:
+    ScreenParams* screen;
+    CardboardDeviceParams* cardboard;
+};
 
 }
 

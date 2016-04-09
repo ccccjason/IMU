@@ -45,11 +45,17 @@ class RTIMUSettings;
 class RTPressureBMP180 : public RTPressure
 {
 public:
-    RTPressureBMP180(RTIMUSettings *settings);
+    RTPressureBMP180(RTIMUSettings* settings);
     ~RTPressureBMP180();
 
-    virtual const char *pressureName() { return "BMP180"; }
-    virtual int pressureType() { return RTPRESSURE_TYPE_BMP180; }
+    virtual const char* pressureName()
+    {
+        return "BMP180";
+    }
+    virtual int pressureType()
+    {
+        return RTPRESSURE_TYPE_BMP180;
+    }
     virtual bool pressureInit();
     virtual bool pressureRead(RTIMU_DATA& data);
 

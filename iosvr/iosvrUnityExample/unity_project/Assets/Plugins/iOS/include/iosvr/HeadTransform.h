@@ -13,25 +13,25 @@
 
 namespace iosvr
 {
-    class HeadTransform
-    {
-      public:
-        HeadTransform();
-        virtual ~HeadTransform();
+class HeadTransform
+{
+public:
+    HeadTransform();
+    virtual ~HeadTransform();
 
-        void setHeadView(GLKMatrix4 headView);
-        GLKMatrix4 getHeadView();
+    void setHeadView(GLKMatrix4 headView);
+    GLKMatrix4 getHeadView();
 
-        GLKVector3 translation();
-        GLKVector3 forwardVector();
-        GLKVector3 upVector();
-        GLKVector3 rightVector();
-        GLKQuaternion quaternion();
-        GLKVector3 eulerAngles();
+    GLKVector3 translation();
+    GLKVector3 forwardVector();
+    GLKVector3 upVector();
+    GLKVector3 rightVector();
+    GLKQuaternion quaternion();
+    GLKVector3 eulerAngles();
 
-      private:
-        GLKMatrix4 headView;
-    };
+private:
+    GLKMatrix4 headView;
+};
 
 };
 

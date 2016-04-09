@@ -18,9 +18,10 @@
 
 namespace hfgl
 {
-    float clampf(float lhs, float lowerbound = 0.0f, float upperbound = 0.0f);
-    double* simpleLeastSquaresSolver(double* vecX, double** matA, double* vecY, size_t dim, size_t numSamples);
-    
+float clampf(float lhs, float lowerbound = 0.0f, float upperbound = 0.0f);
+double* simpleLeastSquaresSolver(double* vecX, double** matA, double* vecY,
+                                 size_t dim, size_t numSamples);
+
 };
 
 #endif //__HFGL_MATH_UTILS_H__

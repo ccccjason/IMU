@@ -31,11 +31,17 @@ class RTIMUSettings;
 class RTPressureLPS25H : public RTPressure
 {
 public:
-    RTPressureLPS25H(RTIMUSettings *settings);
+    RTPressureLPS25H(RTIMUSettings* settings);
     ~RTPressureLPS25H();
 
-    virtual const char *pressureName() { return "LPS25H"; }
-    virtual int pressureType() { return RTPRESSURE_TYPE_LPS25H; }
+    virtual const char* pressureName()
+    {
+        return "LPS25H";
+    }
+    virtual int pressureType()
+    {
+        return RTPRESSURE_TYPE_LPS25H;
+    }
     virtual bool pressureInit();
     virtual bool pressureRead(RTIMU_DATA& data);
 
