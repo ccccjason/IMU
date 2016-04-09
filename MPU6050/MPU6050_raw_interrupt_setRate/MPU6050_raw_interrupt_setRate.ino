@@ -104,7 +104,7 @@ void setup()
     Fastwire::setup(400, true);
 #endif
 
-    Serial.begin(38400);
+    Serial.begin(115200);
 
     // initialize device
     Serial.println("Initializing I2C devices...");
@@ -120,12 +120,12 @@ void setup()
 
     filter.begin(SAMPLERATE); // add
 
-    accelgyro.setXAccelOffset(-4379);
-    accelgyro.setYAccelOffset(-572);
-    accelgyro.setZAccelOffset(1851);
-    accelgyro.setXGyroOffset(89);
-    accelgyro.setYGyroOffset(23);
-    accelgyro.setZGyroOffset(0);
+    accelgyro.setXAccelOffset(-2239);
+    accelgyro.setYAccelOffset(698);
+    accelgyro.setZAccelOffset(1554);
+    accelgyro.setXGyroOffset(28);
+    accelgyro.setYGyroOffset(-79);
+    accelgyro.setZGyroOffset(-4);
 
     attachInterrupt(interruptNumber, buttonStateChanged, RISING);
 }
@@ -143,7 +143,26 @@ void loop()
       Serial.println("count: ");
       count_int = 0;
      */
-
+#if 1
+    if (int_state) {
+        accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+        
+        Serial.print(": Accel/Gyro Raw Data:\t");
+        Serial.print(ax);
+        Serial.print("\t");
+        Serial.print(ay);
+        Serial.print("\t");
+        Serial.print(az);
+        Serial.print("\t");
+        Serial.print(gx);
+        Serial.print("\t");
+        Serial.print(gy);
+        Serial.print("\t");
+        Serial.println(gz);
+        
+        int_state = 0;
+    }
+#else
     float roll, pitch, heading;
     float aax, aay, aaz;
     float ggx, ggy, ggz;
@@ -175,4 +194,5 @@ void loop()
         Serial.println(roll);
         int_state = 0;
     }
+    #endif
 }
