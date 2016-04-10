@@ -62,9 +62,9 @@ void updateOrientation()
             ASensorEventQueue_getEvents(mSensorEventQueue, &e, 1);
             //LOGI("Sensor: %f %f %f %f", e.data[3], e.data[0], e.data[1], e.data[2]);
             quat_data.quat_w = e.data[3];
-            quat_data.quat_x = e.data[2];
+            quat_data.quat_x = e.data[0];
             quat_data.quat_y = e.data[1];
-            quat_data.quat_z = e.data[0];
+            quat_data.quat_z = e.data[2];
             QuaternionToEuler(pose_ypr, &quat_data);
 
             printf("pose_yaw=%f, pose_pitch=%f, pose_roll=%f\n",
