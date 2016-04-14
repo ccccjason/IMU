@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/home/jason_yao/github/bitbucket_imu/cardboard/cardboard-java-test/CardboardSample/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_launcher.png",
+        "source": "/home/jason_yao/github/bitbucket_imu/cardboard/cardboard-java-test/CardboardSample/src/main/res/drawable-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/media/shihyu/Toshiba/codebase/cardboard-java-test/CardboardSample/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_launcher.png",
+        "source": "/media/shihyu/Toshiba/codebase/cardboard-java-test/CardboardSample/src/main/res/drawable-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/shihyu/github/IMU/cardboard-java-test/CardboardSample/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_launcher.png",
+        "source": "/home/shihyu/github/IMU/cardboard-java-test/CardboardSample/src/main/res/drawable-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/jason_yao/github/cardboard-java/CardboardSample/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_launcher.png",
+        "source": "/home/jason_yao/github/cardboard-java/CardboardSample/src/main/res/drawable-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/jason_yao/cardboard/cardboard-java-test/CardboardSample/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_launcher.png",
+        "source": "/home/jason_yao/cardboard/cardboard-java-test/CardboardSample/src/main/res/drawable-mdpi/ic_launcher.png"
+    }
+]

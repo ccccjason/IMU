@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/media/shihyu/Toshiba/codebase/cardboard-java-test/CardboardSample/src/main/assets"><file name="cube_sound.wav" path="/media/shihyu/Toshiba/codebase/cardboard-java-test/CardboardSample/src/main/assets/cube_sound.wav"/></source></dataSet><dataSet config="debug"><source path="/media/shihyu/Toshiba/codebase/cardboard-java-test/CardboardSample/src/debug/assets"/></dataSet></merger>
